@@ -5,6 +5,19 @@ VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoLWay", "LoLWay\LoLWay.csproj", "{F999CD9A-CA68-4741-83FD-01B19AD1618B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PublishScripts", "PublishScripts", "{A35D7AEA-7098-4B84-BBD2-49399DFDFB2B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{64DE8073-8BA5-48F9-9809-B8880B3A52C2}"
+	ProjectSection(SolutionItems) = preProject
+		PublishScripts\Scripts\Deploy-AzureResourceGroup.ps1 = PublishScripts\Scripts\Deploy-AzureResourceGroup.ps1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{92E8EAF6-8590-471F-B50A-A7DF34726A23}"
+	ProjectSection(SolutionItems) = preProject
+		PublishScripts\Templates\LoLWay.json = PublishScripts\Templates\LoLWay.json
+		PublishScripts\Templates\LoLWay.param.dev.json = PublishScripts\Templates\LoLWay.param.dev.json
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +31,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{64DE8073-8BA5-48F9-9809-B8880B3A52C2} = {A35D7AEA-7098-4B84-BBD2-49399DFDFB2B}
+		{92E8EAF6-8590-471F-B50A-A7DF34726A23} = {A35D7AEA-7098-4B84-BBD2-49399DFDFB2B}
 	EndGlobalSection
 EndGlobal

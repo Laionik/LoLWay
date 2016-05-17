@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using LoLWay.Migrations;
 
 namespace LoLWay.Models
 {
@@ -23,6 +24,7 @@ namespace LoLWay.Models
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
+            Database.SetInitializer(new MySqlInitializer());
         }
 
         public static ApplicationDbContext Create()
