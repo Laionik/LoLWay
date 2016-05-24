@@ -1,17 +1,56 @@
-﻿@{
-    ViewBag.Title = "Contact";
-}
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+﻿<head>
+    <title>Kontakt | LoLWay</title>
+</head>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+<section id="title" class="emerald">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <h1>Kontakt</h1>
+                <p>Jeśli masz pytania nie krępuj się. Odpiszemy jak tylko zdamy egzaminy ^^</p>
+            </div>
+            <div class="col-sm-6">
+                <ul class="breadcrumb pull-right">
+                    <li>@Html.ActionLink("Strona główna", "Index", "Home")</li>
+                    <li class="active">Kontakt</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section id="contact-page" class="container">
+    <div class="row">
+        <div class="col-sm-8">
+            <h4>Formularz kontaktowy</h4>
+            <div class="status alert alert-success" style="display: none"></div>
+            <form id="main-contact-form" class="contact-form" name="contact-form" method="post" action="sendemail.php" role="form">
+                <div class="row">
+                    <div class="col-sm-5">
+                        <div class="form-group">
+                            <input type="text" class="form-control" required="required" placeholder="Imie">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" required="required" placeholder="Nazwisko">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" required="required" placeholder="Adres e-mail">
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-lg">Wyślij wiadomość</button>
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <textarea name="message" id="message" required="required" class="form-control" rows="8" placeholder="Wiadomość"></textarea>
+                    </div>
+                </div>
+            </form>
+        </div><!--/.col-sm-8-->
+        @*<div class="col-sm-4">
+            <h4>Our Location</h4>
+            <iframe width="100%" height="215" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com.au/maps?f=q&source=s_q&hl=en&geocode=&q=Dhaka,+Dhaka+Division,+Bangladesh&aq=0&oq=dhaka+ban&sll=40.714353,-74.005973&sspn=0.836898,1.815491&ie=UTF8&hq=&hnear=Dhaka+Division,+Bangladesh&t=m&ll=24.542126,90.293884&spn=0.124922,0.411301&z=8&output=embed"></iframe>
+        </div>*@<!--/.col-sm-4-->
+    </div>
+</section>

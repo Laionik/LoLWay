@@ -1,8 +1,8 @@
-﻿@{
-    ViewBag.Title = "Login Failure";
-}
-
-<hgroup>
-    <h2>@ViewBag.Title.</h2>
-    <h3 class="text-danger">Unsuccessful login with service.</h3>
-</hgroup>
+﻿<head>
+    <title>Błąd | LoLWay</title>
+</head>
+<section id="error" class="container">
+    <h1>Rejestracja się nie udała!</h1>
+    <p>Niestety nie udało się nam utworzyć Twojego konta przy pomocy serwisu społecznościowego, który wybrałeś :(</p>
+    <a class="btn btn-success" href="@Url.Action("index", "home")">Powróć do strony głównej</a>
+</section>

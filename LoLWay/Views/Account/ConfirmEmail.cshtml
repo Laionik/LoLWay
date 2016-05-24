@@ -1,10 +1,25 @@
-﻿@{
-    ViewBag.Title = "Confirm Email";
-}
+﻿<head>
+    <title>Rejestracja | LoLWay</title>
+</head>
+<!--Title-->
+<section id="title" class="emerald">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <h1>Potwierdzenie adresu e-mail</h1>
+                <p>Udało się utworzyć nowe konto i potwierdzić adres e-mail</p>
+            </div>
+        </div>
+    </div>
+</section>
+<!--/Title-->
 
-<h2>@ViewBag.Title.</h2>
-<div>
-    <p>
-        Thank you for confirming your email. Please @Html.ActionLink("Click here to Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
-    </p>
-</div>
+<section id="contact-page" class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <p>
+                Dziękujemy za potwierdzenie Twojego adresu e-mail. Proszę @Html.ActionLink("kliknij tutaj by sie zalogować.", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
+            </p>
+        </div>
+    </div>
+</section>

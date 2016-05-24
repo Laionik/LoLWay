@@ -46,23 +46,23 @@ namespace LoLWay
             app.UseTwoFactorRememberBrowserCookie(DefaultAuthenticationTypes.TwoFactorRememberBrowserCookie);
 
             // Uncomment the following lines to enable logging in with third party login providers
-            //app.UseMicrosoftAccountAuthentication(
-            //    clientId: "",
-            //    clientSecret: "");
+            app.UseMicrosoftAccountAuthentication(
+                clientId: "048fa336-afa7-4ee4-9086-46849080617c",
+                clientSecret: "AO0oYPLqgpjrjbSBqDoJ8eF");
 
-            //app.UseTwitterAuthentication(
-            //   consumerKey: "",
-            //   consumerSecret: "");
+            app.UseTwitterAuthentication(
+               consumerKey: "	9fzgJrAF0GYJDkojknzPydxJE",
+               consumerSecret: "9KaBO3lRuFXZ4cM21pkbSI7JiRHiaAP0ZFVDuIbNU9K8ILKu9");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "1760553390831603",
+               appSecret: "3ccaddb6a907c005a185fae0a4a51954");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "202328785230-gn3qeagf3u4bsb7942rjae3fed0jmh86.apps.googleusercontent.com",
+                ClientSecret = "emohYF2xMMj2duQIlWlQimCi"
+            });
         }
     }
 }
