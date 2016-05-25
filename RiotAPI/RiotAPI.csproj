@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BA529964-0774-41BA-86EE-D9C5F26B7D6C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RiotAPI</RootNamespace>
+    <AssemblyName>RiotAPI</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Champion.cs" />
+    <Compile Include="CurrentGame.cs" />
+    <Compile Include="Match.cs" />
+    <Compile Include="Models\CurrentGame\BannedChampionModel.cs" />
+    <Compile Include="Models\Champion\ChampionModel.cs" />
+    <Compile Include="Models\CurrentGame\MasteryModel.cs" />
+    <Compile Include="Models\CurrentGame\RuneModel.cs" />
+    <Compile Include="Models\CurrentGame\CurrentMatchModel.cs" />
+    <Compile Include="Models\Match\MatchDetails\BanModel.cs" />
+    <Compile Include="Models\Match\MatchDetails\CreepsPerMinDeltasModel.cs" />
+    <Compile Include="Models\Match\MatchDetails\CsDiffPerMinDeltasModel.cs" />
+    <Compile Include="Models\Match\MatchDetails\DamageTakenDiffPerMinDeltasModel.cs" />
+    <Compile Include="Models\Match\MatchDetails\DamageTakenPerMinDeltasModel.cs" />
+    <Compile Include="Models\Match\MatchDetails\GoldPerMinDeltasModel.cs" />
+    <Compile Include="Models\Match\MatchDetails\MasteryModel.cs" />
+    <Compile Include="Models\Match\MatchDetails\MatchDetailsModel.cs" />
+    <Compile Include="Models\Match\MatchDetails\ParticipantIdentityModel.cs" />
+    <Compile Include="Models\Match\MatchDetails\ParticipantModel.cs" />
+    <Compile Include="Models\Match\MatchDetails\PlayerModel.cs" />
+    <Compile Include="Models\Match\MatchDetails\RuneModel.cs" />
+    <Compile Include="Models\Match\MatchDetails\StatsModel.cs" />
+    <Compile Include="Models\Match\MatchDetails\TeamModel.cs" />
+    <Compile Include="Models\Match\MatchDetails\TimelineModel.cs" />
+    <Compile Include="Models\Match\MatchDetails\XpDiffPerMinDeltasModel.cs" />
+    <Compile Include="Models\Match\MatchDetails\XpPerMinDeltasModel.cs" />
+    <Compile Include="Models\Match\MatchModel.cs" />
+    <Compile Include="Models\Match\SummonerMatchListModel.cs" />
+    <Compile Include="Models\Summoner\ChempionStatsModel.cs" />
+    <Compile Include="Models\Summoner\MasteryModel.cs" />
+    <Compile Include="Models\Summoner\MasteryPageModel.cs" />
+    <Compile Include="Models\CurrentGame\ObserversModel.cs" />
+    <Compile Include="Models\CurrentGame\ParticipantModel.cs" />
+    <Compile Include="Models\Summoner\RuneModel.cs" />
+    <Compile Include="Models\Summoner\RunePageModel.cs" />
+    <Compile Include="Models\Summoner\StatsModel.cs" />
+    <Compile Include="Models\Summoner\SummonerModel.cs" />
+    <Compile Include="Models\Summoner\SummonerMysteryPagesModel.cs" />
+    <Compile Include="Models\Summoner\SummonerRunesPagesModel.cs" />
+    <Compile Include="Models\Summoner\SummonerStatsModel.cs" />
+    <Compile Include="Summoner.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Types\ApiStrings.cs" />
+    <Compile Include="Types\PlatformIds.cs" />
+    <Compile Include="Types\Servers.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
