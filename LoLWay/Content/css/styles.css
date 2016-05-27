@@ -1,0 +1,40 @@
+﻿/* Tabela
+=================================*/
+.table_container {
+	overflow-x:auto
+}
+
+table, th, td{
+	border-bottom: 1px solid #ddd;
+	border-collapse: collapse;
+	margin-top: 20px;
+	margin-bottom: 10px;
+	text-align: center;
+	padding: 5px;
+}
+
+.game_tab{
+	width: 100%
+}
+
+th {
+	color: #f5f5f5;
+}
+
+.default{
+	background: #34495e;
+}
+
+tr.notfirst:hover{
+	background-color:#fff48a;
+}
+tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+
+tr.bans{
+    background-color:#34495e;
+}
+td.bans{
+    color: #f5f5f5;
+}

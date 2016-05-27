@@ -26,6 +26,7 @@ namespace LoLWay
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/css/bootstrap.css",
                       "~/Content/css/main.css",
+                      "~/Content/css/styles.css",
                       "~/Content/css/prettyPhoto.css",
                       "~/Content/css/font-awesome.min.css"));
         }

@@ -11,9 +11,10 @@ namespace RiotAPI
 {
     static public class CurrentGame
     {
-        static public Models.CurrentGame.CurrentMatchModel GetCurrentGame(String apiKey, int summonerID, String server, String platformID)
+        static public Models.CurrentGame.CurrentMatchModel GetCurrentGame(String apiKey, int summonerID, String server)
         {
             #region request part
+            String platformID = Helpers.ServerHelper.GetPlatformId(server);
             var httpRequest = new StringBuilder();
             
             httpRequest.Append("https://").Append(server).Append(".api.pvp.net/observer-mode/rest/consumer/getSpectatorGameInfo/");
@@ -26,8 +27,6 @@ namespace RiotAPI
 
             #region deserialize region
             var responseModel = JsonConvert.DeserializeObject<Models.CurrentGame.CurrentMatchModel>(new StreamReader(response.GetResponseStream(), Encoding.UTF8).ReadToEnd());
-
-
             #endregion
             return responseModel;
         }

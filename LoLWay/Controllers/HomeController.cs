@@ -1,8 +1,6 @@
-﻿using System;
+﻿using System.Web.Mvc;
+using RiotAPI;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
 
 namespace LoLWay.Controllers
 {
@@ -10,7 +8,28 @@ namespace LoLWay.Controllers
     {
         public ActionResult Index()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                IndexLogged();
+            }
+
             return View();
+        }
+
+        public ActionResult IndexLogged()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public ActionResult Index(string nickname, string region)
+        {
+            string apiKey = "09e2ba8a-34b8-44d4-9445-262ed673da5d";
+            var summonersList = Summoner.GetSummonersByName(apiKey, new List<string>() { nickname }, region);
+            var currentGame = CurrentGame.GetCurrentGame(apiKey, summonersList[0].id, region);
+            // wyciągnij informacje o graczach
+            return View(currentGame);
         }
 
         public ActionResult About()
