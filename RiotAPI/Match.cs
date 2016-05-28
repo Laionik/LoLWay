@@ -39,6 +39,20 @@ namespace RiotAPI
             }
         }
 
+        static public Models.Match.SummonerMatchListModel GetMatchListBySummonerName(String apiKey, String summonerName, String server)
+        {
+            try
+            {
+                var summoner = Summoner.GetSummonerByName(apiKey, summonerName, server);
+
+                return GetMatchList(apiKey, summoner.id.ToString(), server);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
         static public Models.Match.MatchDetails.MatchDetailsModel GetMatchById(String apiKey, String matchId, String server)
         {
             try

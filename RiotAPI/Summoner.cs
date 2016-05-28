@@ -36,6 +36,18 @@ namespace RiotAPI
             }
         }
 
+        static public SummonerModel GetSummonerByName(String apiKey, String summonerName, String server)
+        {
+            try
+            {
+                return GetSummonersByName(apiKey, new List<String> { summonerName }, server)[0];
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
         static public List<SummonerModel> GetSummonersByID(String apiKey, List<String> summonersIDs, String server)
         {
             try
@@ -59,6 +71,11 @@ namespace RiotAPI
             {
                 throw e;
             }
+        }
+
+        static public SummonerModel GetSummonerByID(String apiKey, String summonerID, String server)
+        {
+            return GetSummonersByID(apiKey, new List<String> { summonerID }, server)[0];
         }
 
         static public List<SummonerMysteryPagesModel> GetSummonersMasteryPages(String apiKey, List<String> summonersIds, String server)
@@ -101,6 +118,18 @@ namespace RiotAPI
             }
         }
 
+        static public SummonerMysteryPagesModel GetSummonerMysteryPages(String apiKey, String summonerId, String server)
+        {
+            try
+            {
+                return GetSummonersMasteryPages(apiKey, new List<String> { summonerId }, server)[0];
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
         static public List<SummonerRunesPagesModel> GetSummonersRunesPages(String apiKey, List<String> summonersIds, String server)
         {
             try
@@ -134,6 +163,18 @@ namespace RiotAPI
                 }
                 #endregion
                 return summonersList;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        static public SummonerRunesPagesModel GetSummonerRunesPages(String apiKey, String SummonerId, String server)
+        {
+            try
+            {
+                return GetSummonersRunesPages(apiKey, new List<String> { SummonerId }, server)[0];
             }
             catch (Exception e)
             {
