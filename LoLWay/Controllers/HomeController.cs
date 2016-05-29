@@ -2,6 +2,7 @@
 using RiotAPI;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace LoLWay.Controllers
 {
@@ -27,10 +28,27 @@ namespace LoLWay.Controllers
         [HttpPost]
         public ActionResult Index(string nickname, string region)
         {
-            var summonersList = Summoner.GetSummonerByName(apiKey, nickname, region);
-            var currentGame = CurrentGame.GetCurrentGame(apiKey, summonersList.id, region);
-            // wyciągnij informacje o graczach
-            return View(currentGame);
+            try
+            {
+                var currentGame = CurrentGame.GetCurrentGame(apiKey, Summoner.GetSummonerByName(apiKey, nickname, region).id, region);
+                var summonerId = currentGame.participants.Select(x => x.summonerId.ToString()).ToList();
+                List<RiotAPI.Models.Summoner.SummonerStatsModel> summonerList = new List<RiotAPI.Models.Summoner.SummonerStatsModel>();
+                foreach (var summoner in summonerId)
+                {
+                    summonerList.Add(Summoner.GetSummonerStats(apiKey, summoner, region));
+                }
+
+                ViewBag.Participants = summonerList;
+                // wyciągnij informacje o graczach
+                return View(currentGame);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Title = "Nieoczekiwany błąd :(";
+                ViewBag.Message = "Skontaktuj się z administracją! Proszę podaj sytuację kiedy wystąpił błąd i załącz poniższą treść";
+                ViewBag.errorMessage = ex.Message;
+                return View("Error");
+            }
         }
 
         public ActionResult About()

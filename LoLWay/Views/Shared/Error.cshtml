@@ -1,9 +1,9 @@
-﻿@model System.Web.Mvc.HandleErrorInfo
-<head>
+﻿<head>
     <title>Błąd | LoLWay</title>
 </head>
 <section id="error" class="container">
-    <h1>404, nie znaleziono strony</h1>
-    <p>Niestety stronę, na którą chcesz się dostać wcięło o.O</p>
+    <h1>@ViewBag.Title</h1>
+    <p>@ViewBag.Message</p>
+    <p>@ViewBag.errorMessage</p>
     <a class="btn btn-success" href="@Url.Action("index", "home")">Powróć do strony głównej</a>
 </section>

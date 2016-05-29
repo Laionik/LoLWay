@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using LoLWay.Models;
+using Postal;
 
 namespace LoLWay.Controllers
 {
@@ -71,6 +72,18 @@ namespace LoLWay.Controllers
             if (!ModelState.IsValid)
             {
                 return View(model);
+            }
+
+            // Require the user to have a confirmed email before they can log on.
+            var user = await UserManager.FindByNameAsync(model.Email);
+            if (user != null)
+            {
+                if (!await UserManager.IsEmailConfirmedAsync(user.Id))
+                {
+                    ViewBag.Title = "Nie potwierdzony adres e-mail!";
+                    ViewBag.message = "Musisz potwierdzić swój adres e-mail by się zalogować";
+                    return View("Error");
+                }
             }
 
             // This doesn't count login failures towards account lockout
@@ -155,15 +168,19 @@ namespace LoLWay.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                    //await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
-                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    dynamic email = new Email("RegEmail");
+                    email.To = model.Email;
+                    email.ConfirmationLink = callbackUrl;
+                    email.Send();
 
-                    return RedirectToAction("Index", "Home");
+                   // await UserManager.SendEmailAsync(user.Id, "Potwierdź rejestrację", "Proszę potwierdź swoją rejestrację na portalu LoLWay klikająć <a href=\"" + callbackUrl + "\">tutaj</a>");
+
+                    return View("RegisterInfo");
+                    //return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
             }
@@ -211,10 +228,15 @@ namespace LoLWay.Controllers
 
                 // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                dynamic email = new Email("PasswordReset");
+                email.To = model.Email;
+                email.ResetLink = callbackUrl;
+                email.Send();
+
+                //await UserManager.SendEmailAsync(user.Id, "Resetowanie hasła", "W celu zresetowania hasła proszę kliknij <a href=\"" + callbackUrl + "\">tutaj</a>");
+                return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
             // If we got this far, something failed, redisplay form

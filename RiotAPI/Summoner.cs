@@ -208,8 +208,7 @@ namespace RiotAPI
                 var httpRequest = new StringBuilder();
                 //server part
                 httpRequest.Append("https://").Append(server).Append(".api.pvp.net/api/lol/").Append(server).Append("/v1.3/stats/by-summoner/");
-                httpRequest.Append(summonerId).Append("/ranked?api_key=").Append(apiKey);
-
+                httpRequest.Append(summonerId).Append("/ranked?season=SEASON2016&api_key=").Append(apiKey);
 
                 var request = WebRequest.Create(httpRequest.ToString()) as WebRequest;
                 request.Method = "GET";
@@ -223,8 +222,14 @@ namespace RiotAPI
                 #endregion
                 return responseModel;
             }
-            catch (Exception e)
+            catch (Exception  e)
             {
+                if(e.Message.Contains("404"))
+                {
+                    var summoner = new SummonerStatsModel();
+                    summoner.summonerId = int.Parse(summonerId);
+                    return summoner;
+                }
                 throw e;
             }
         }
