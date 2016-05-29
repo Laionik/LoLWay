@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RiotAPI.Models.Summoner
 {
-    public class ChempionStatsModel
+    public class ChampionStatsModel
     {
         public int id { get; set; }
         public StatsModel stats { get; set; }

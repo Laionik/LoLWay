@@ -38,3 +38,45 @@ tr.bans{
 td.bans{
     color: #f5f5f5;
 }
+
+.summonerName{
+    width: 15%
+}
+
+.champSpell{
+    width: 20%;
+}
+
+.rank{
+    width: 15%
+}
+
+.kda{
+    width: 15%
+}
+
+.runes{
+    width: 10%
+}
+
+.masteries{
+    width: 5%
+}
+
+/* Img
+=================================*/
+
+.champ_live{
+    width: 20%;
+    height: auto;
+}
+
+.spell_live{
+    width: 20%;
+    height: auto;
+}
+
+.ban_live{
+    width: 15%;
+    height: auto;
+}

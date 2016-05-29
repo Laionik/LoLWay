@@ -75,7 +75,7 @@
     <Compile Include="Models\Match\SummonerMatchListModel.cs" />
     <Compile Include="Models\StaticData\Champion.cs" />
     <Compile Include="Models\StaticData\ChampionList.cs" />
-    <Compile Include="Models\Summoner\ChempionStatsModel.cs" />
+    <Compile Include="Models\Summoner\ChampionStatsModel.cs" />
     <Compile Include="Models\Summoner\MasteryModel.cs" />
     <Compile Include="Models\Summoner\MasteryPageModel.cs" />
     <Compile Include="Models\CurrentGame\ObserversModel.cs" />

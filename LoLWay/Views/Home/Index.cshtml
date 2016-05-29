@@ -54,6 +54,8 @@ else
 {
     var gameStartTime = new DateTime(1970, 1, 1, 0, 0, 0).AddMilliseconds(Convert.ToDouble(Model.gameStartTime)).ToLocalTime().ToShortTimeString();
     var gameLength = TimeSpan.FromSeconds(Model.gameLength).ToString(@"hh\:mm\:ss");
+    List<LoLWay.Models.SummonerStats> summonerList = ViewBag.Participants;
+    List<LoLWay.Models.CurrentGameBan> banList = ViewBag.BanList;
 
     <section id="live-game-stats" class="container">
         <!--Main table-->
@@ -86,81 +88,89 @@ else
                 <table class="game_tab">
                     <thead>
                         <tr class="default">
-                            <th>Przywoływacz</th>
-                            <th>Czary</th>
-                            <th>Ranga</th>
-                            <th>Bohater</th>
-                            <th>KDA</th>
-                            <th>Runy</th>
-                            <th>Maestrie</th>
+                            <th class="summonerName">Przywoływacz</th>
+                            <th class="champSpell">Bohater</th>
+                            <th class="champSpell">Czary</th>
+                            <th class="rank">Ranga</th>
+                            <th class="kda">KDA</th>
+                            <th class="runes">Runy</th>
+                            <th class="masteries">Maestrie</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var player in Model.participants.Where(x => x.teamId == 100))
                         {
+                            var summoner = summonerList.FirstOrDefault(x => x.summonerId == player.summonerId);
                             <tr class="notfirst">
-                                <td>@player.summonerName</td>
-                                <td>@player.spell1Id @player.spell2Id</td>
-                                <td>GOLD V</td>
-                                <td>@player.championId</td>
-                                <td>KDA</td>
-                                <td>@player.runes.Count</td>
-                                <td>@player.masteries.Count</td>
+                                <td class="summonerName">@player.summonerName</td>
+                                <td class="champSpell"><img src="~/Content/images/champs/@summoner.champion" class="champ_live" /></td>
+                                <td class="champSpell"><img src="~/Content/images/spells/@summoner.spell1" class="spell_live" /> <img src="~/Content/images/spells/@summoner.spell2" class="spell_live" /></td>
+                                <td class="rank"></td>
+                                <td class="kda">@summoner.averageKills / @summoner.averageDeaths / @summoner.averageAssists</td>
+                                <td class="runes">@player.runes.Count</td>
+                                <td class="masteries">@player.masteries.Count</td>
                             </tr>
                         }
+                        @if (banList.Count() > 0)
+                        {
                         <tr class="bans">
                             <td class="bans">Bany</td>
                             <td class="bans">
-                                @foreach (var ban in Model.bannedChampions.Where(x => x.teamId == 100))
+                                @foreach (var ban in banList.Where(x => x.team == 100))
                                 {
-                                    @ban.championId 
+                                    <img src="~/Content/images/champs/@ban.banName" class="ban_live" />
                                 }
                             </td>
                         </tr>
+                        }
                     </tbody>
                 </table>
             </div>
         </div>
-        <div class="gap"></div> 
-          
-            
-         <!--Team 2-->
+        <div class="gap"></div>
+
+
+        <!--Team 2-->
         <div class="row">
             <div class="col-sm-12 table_container">
                 <table class="game_tab">
                     <thead>
                         <tr class="default">
-                            <th>Przywoływacz</th>
-                            <th>Czary</th>
-                            <th>Ranga</th>
-                            <th>Bohater</th>
-                            <th>KDA</th>
-                            <th>Runy</th>
-                            <th>Maestrie</th>
+                            <th class="summonerName">Przywoływacz</th>
+                            <th class="champSpell">Bohater</th>
+                            <th class="champSpell">Czary</th>
+                            <th class="rank">Ranga</th>
+                            <th class="kda">KDA</th>
+                            <th class="runes">Runy</th>
+                            <th class="masteries">Maestrie</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var player in Model.participants.Where(x => x.teamId == 200))
                         {
+                            var summoner = summonerList.FirstOrDefault(x => x.summonerId == player.summonerId);
                             <tr class="notfirst">
-                                <td>@player.summonerName</td>
-                                <td>@player.spell1Id @player.spell2Id</td>
-                                <td>GOLD V</td>
-                                <td>@player.championId</td>
-                                <td>KDA</td>
-                                <td>@player.runes.Count</td>
-                                <td>@player.masteries.Count</td>
+                                <td class="summonerName">@player.summonerName</td>
+                                <td class="champSpell"><img src="~/Content/images/champs/@summoner.champion" class="champ_live" /></td>
+                                <td class="champSpell"><img src="~/Content/images/spells/@summoner.spell1" class="spell_live" /> <img src="~/Content/images/spells/@summoner.spell2" class="spell_live" /></td>
+                                <td class="rank"></td>
+                                <td class="kda">@summoner.averageKills / @summoner.averageDeaths / @summoner.averageAssists</td>
+                                <td class="runes">@player.runes.Count</td>
+                                <td class="masteries">@player.masteries.Count</td>
                             </tr>
                         }
-                        <tr class="bans">
-                            <td class="bans">Bany</td>
-                            <td class="bans">
-                                @foreach (var ban in Model.bannedChampions.Where(x => x.teamId == 200))
-                                {
-                                    @ban.championId 
-                                }
-                            </td>
-                        </tr>
+                        @if (banList.Count() > 0)
+                        {
+                            <tr class="bans">
+                                <td class="bans">Bany</td>
+                                <td class="bans">
+                                    @foreach (var ban in banList.Where(x => x.team == 200))
+                                    {
+                                        <img src="~/Content/images/champs/@ban.banName" class="ban_live" />
+                                    }
+                                </td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
             </div>

@@ -10,6 +10,6 @@ namespace RiotAPI.Models.Summoner
     {
         public int summonerId { get; set; }
         public long modifyDate { get; set; }
-        public List<ChempionStatsModel> champions { get; set; }
+        public List<ChampionStatsModel> champions { get; set; }
     }
 }

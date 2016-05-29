@@ -78,6 +78,8 @@
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -192,6 +194,37 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\MySqlHistoryContext.cs" />
+    <Compile Include="Models\champion.cs">
+      <DependentUpon>LoLWayModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\item.cs">
+      <DependentUpon>LoLWayModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LoLWayModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LoLWayModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LoLWayModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LoLWayModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LoLWayModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LoLWayModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\mastery.cs">
+      <DependentUpon>LoLWayModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\rune.cs">
+      <DependentUpon>LoLWayModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\spell.cs">
+      <DependentUpon>LoLWayModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SummonerStats.cs" />
     <Compile Include="MySqlInitializer.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -418,10 +451,34 @@
     <Content Include="Content\images\slider\bg1.jpg" />
     <Content Include="Content\images\slider\bg2.jpg" />
     <Content Include="Content\images\slider\bg3.jpg" />
+    <Content Include="Content\images\spells\SummonerBarrier.png" />
+    <Content Include="Content\images\spells\SummonerClairvoyance.png" />
+    <Content Include="Content\images\spells\SummonerClarity.png" />
+    <Content Include="Content\images\spells\SummonerCleanse.png" />
+    <Content Include="Content\images\spells\SummonerExhaust.png" />
+    <Content Include="Content\images\spells\SummonerFlash.png" />
+    <Content Include="Content\images\spells\SummonerGhost.png" />
+    <Content Include="Content\images\spells\SummonerHeal.png" />
+    <Content Include="Content\images\spells\SummonerIgnite.png" />
+    <Content Include="Content\images\spells\SummonerPoroRecall.png" />
+    <Content Include="Content\images\spells\SummonerPoroToss.png" />
+    <Content Include="Content\images\spells\SummonerSmite.png" />
+    <Content Include="Content\images\spells\SummonerSnowball.png" />
+    <Content Include="Content\images\spells\SummonerTeleport.png" />
     <Content Include="Content\images\team-member.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Models\LoLWayModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>LoLWayModel.edmx</DependentUpon>
+      <LastGenOutput>LoLWayModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\LoLWayModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>LoLWayModel.edmx</DependentUpon>
+      <LastGenOutput>LoLWayModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\fonts\fontawesome-webfont.eot" />
     <Content Include="Content\fonts\fontawesome-webfont.ttf" />
@@ -430,6 +487,13 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <EntityDeploy Include="Models\LoLWayModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>LoLWayModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\LoLWayModel.edmx.diagram">
+      <DependentUpon>LoLWayModel.edmx</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\LoLWay.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\html5shiv.js" />
@@ -508,6 +572,9 @@
       <Project>{ba529964-0774-41ba-86ee-d9c5f26b7d6c}</Project>
       <Name>RiotAPI</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

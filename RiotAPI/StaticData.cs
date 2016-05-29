@@ -15,7 +15,7 @@ namespace RiotAPI
         {
             try
             {
-                var apiKey = Helpers.Helpers.KeyHelper.GetApiKey();
+                var apiKey = Helpers.KeyHelper.GetApiKey();
                 var stringRequest = new StringBuilder();
                 stringRequest.Append("https://global.api.pvp.net/api/lol/static-data/").Append(server).Append("/v1.2/champion?api_key=").Append(apiKey);
 
