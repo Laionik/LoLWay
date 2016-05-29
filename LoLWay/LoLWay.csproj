@@ -63,9 +63,25 @@
       <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="SendGrid, Version=6.3.4.0, Culture=neutral, PublicKeyToken=4f047e93159395ca, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sendgrid.6.3.4\lib\SendGrid.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SendGrid.SmtpApi, Version=1.3.1.0, Culture=neutral, PublicKeyToken=2ae73662c35d80e4, processorArchitecture=MSIL">
+      <HintPath>..\packages\SendGrid.SmtpApi.1.3.1\lib\net40\SendGrid.SmtpApi.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SendGridMail, Version=6.3.4.0, Culture=neutral, PublicKeyToken=4f047e93159395ca, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sendgrid.6.3.4\lib\SendGridMail.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -211,6 +227,137 @@
     <Content Include="Content\images\blog\thumb1.jpg" />
     <Content Include="Content\images\blog\thumb2.jpg" />
     <Content Include="Content\images\blog\thumb3.jpg" />
+    <Content Include="Content\images\champs\Aatrox.png" />
+    <Content Include="Content\images\champs\Ahri.png" />
+    <Content Include="Content\images\champs\Akali.png" />
+    <Content Include="Content\images\champs\Alistar.png" />
+    <Content Include="Content\images\champs\Amumu.png" />
+    <Content Include="Content\images\champs\Anivia.png" />
+    <Content Include="Content\images\champs\Annie.png" />
+    <Content Include="Content\images\champs\Ashe.png" />
+    <Content Include="Content\images\champs\AurelionSol.png" />
+    <Content Include="Content\images\champs\Azir.png" />
+    <Content Include="Content\images\champs\Bard.png" />
+    <Content Include="Content\images\champs\Blitzcrank.png" />
+    <Content Include="Content\images\champs\Brand.png" />
+    <Content Include="Content\images\champs\Braum.png" />
+    <Content Include="Content\images\champs\Caitlyn.png" />
+    <Content Include="Content\images\champs\Cassiopeia.png" />
+    <Content Include="Content\images\champs\Chogath.png" />
+    <Content Include="Content\images\champs\Corki.png" />
+    <Content Include="Content\images\champs\Darius.png" />
+    <Content Include="Content\images\champs\Diana.png" />
+    <Content Include="Content\images\champs\Draven.png" />
+    <Content Include="Content\images\champs\DrMundo.png" />
+    <Content Include="Content\images\champs\Ekko.png" />
+    <Content Include="Content\images\champs\Elise.png" />
+    <Content Include="Content\images\champs\Evelynn.png" />
+    <Content Include="Content\images\champs\Ezreal.png" />
+    <Content Include="Content\images\champs\Fiddlesticks.png" />
+    <Content Include="Content\images\champs\Fiora.png" />
+    <Content Include="Content\images\champs\Fizz.png" />
+    <Content Include="Content\images\champs\Galio.png" />
+    <Content Include="Content\images\champs\Gangplank.png" />
+    <Content Include="Content\images\champs\Garen.png" />
+    <Content Include="Content\images\champs\Gnar.png" />
+    <Content Include="Content\images\champs\Gragas.png" />
+    <Content Include="Content\images\champs\Graves.png" />
+    <Content Include="Content\images\champs\Hecarim.png" />
+    <Content Include="Content\images\champs\Heimerdinger.png" />
+    <Content Include="Content\images\champs\Illaoi.png" />
+    <Content Include="Content\images\champs\Irelia.png" />
+    <Content Include="Content\images\champs\Janna.png" />
+    <Content Include="Content\images\champs\JarvanIV.png" />
+    <Content Include="Content\images\champs\Jax.png" />
+    <Content Include="Content\images\champs\Jayce.png" />
+    <Content Include="Content\images\champs\Jhin.png" />
+    <Content Include="Content\images\champs\Jinx.png" />
+    <Content Include="Content\images\champs\Kalista.png" />
+    <Content Include="Content\images\champs\Karma.png" />
+    <Content Include="Content\images\champs\Karthus.png" />
+    <Content Include="Content\images\champs\Kassadin.png" />
+    <Content Include="Content\images\champs\Katarina.png" />
+    <Content Include="Content\images\champs\Kayle.png" />
+    <Content Include="Content\images\champs\Kennen.png" />
+    <Content Include="Content\images\champs\Khazix.png" />
+    <Content Include="Content\images\champs\Kindred.png" />
+    <Content Include="Content\images\champs\KogMaw.png" />
+    <Content Include="Content\images\champs\Leblanc.png" />
+    <Content Include="Content\images\champs\LeeSin.png" />
+    <Content Include="Content\images\champs\Leona.png" />
+    <Content Include="Content\images\champs\Lissandra.png" />
+    <Content Include="Content\images\champs\Lucian.png" />
+    <Content Include="Content\images\champs\Lulu.png" />
+    <Content Include="Content\images\champs\Lux.png" />
+    <Content Include="Content\images\champs\Malphite.png" />
+    <Content Include="Content\images\champs\Malzahar.png" />
+    <Content Include="Content\images\champs\Maokai.png" />
+    <Content Include="Content\images\champs\MasterYi.png" />
+    <Content Include="Content\images\champs\MissFortune.png" />
+    <Content Include="Content\images\champs\MonkeyKing.png" />
+    <Content Include="Content\images\champs\Mordekaiser.png" />
+    <Content Include="Content\images\champs\Morgana.png" />
+    <Content Include="Content\images\champs\Nami.png" />
+    <Content Include="Content\images\champs\Nasus.png" />
+    <Content Include="Content\images\champs\Nautilus.png" />
+    <Content Include="Content\images\champs\Nidalee.png" />
+    <Content Include="Content\images\champs\Nocturne.png" />
+    <Content Include="Content\images\champs\Nunu.png" />
+    <Content Include="Content\images\champs\Olaf.png" />
+    <Content Include="Content\images\champs\Orianna.png" />
+    <Content Include="Content\images\champs\Pantheon.png" />
+    <Content Include="Content\images\champs\Poppy.png" />
+    <Content Include="Content\images\champs\Quinn.png" />
+    <Content Include="Content\images\champs\Rammus.png" />
+    <Content Include="Content\images\champs\RekSai.png" />
+    <Content Include="Content\images\champs\Renekton.png" />
+    <Content Include="Content\images\champs\Rengar.png" />
+    <Content Include="Content\images\champs\Riven.png" />
+    <Content Include="Content\images\champs\Rumble.png" />
+    <Content Include="Content\images\champs\Ryze.png" />
+    <Content Include="Content\images\champs\Sejuani.png" />
+    <Content Include="Content\images\champs\Shaco.png" />
+    <Content Include="Content\images\champs\Shen.png" />
+    <Content Include="Content\images\champs\Shyvana.png" />
+    <Content Include="Content\images\champs\Singed.png" />
+    <Content Include="Content\images\champs\Sion.png" />
+    <Content Include="Content\images\champs\Sivir.png" />
+    <Content Include="Content\images\champs\Skarner.png" />
+    <Content Include="Content\images\champs\Sona.png" />
+    <Content Include="Content\images\champs\Soraka.png" />
+    <Content Include="Content\images\champs\Swain.png" />
+    <Content Include="Content\images\champs\Syndra.png" />
+    <Content Include="Content\images\champs\TahmKench.png" />
+    <Content Include="Content\images\champs\Taliyah.png" />
+    <Content Include="Content\images\champs\Talon.png" />
+    <Content Include="Content\images\champs\Taric.png" />
+    <Content Include="Content\images\champs\Teemo.png" />
+    <Content Include="Content\images\champs\Thresh.png" />
+    <Content Include="Content\images\champs\Tristana.png" />
+    <Content Include="Content\images\champs\Trundle.png" />
+    <Content Include="Content\images\champs\Tryndamere.png" />
+    <Content Include="Content\images\champs\TwistedFate.png" />
+    <Content Include="Content\images\champs\Twitch.png" />
+    <Content Include="Content\images\champs\Udyr.png" />
+    <Content Include="Content\images\champs\Urgot.png" />
+    <Content Include="Content\images\champs\Varus.png" />
+    <Content Include="Content\images\champs\Vayne.png" />
+    <Content Include="Content\images\champs\Veigar.png" />
+    <Content Include="Content\images\champs\VelKoz.png" />
+    <Content Include="Content\images\champs\Vi.png" />
+    <Content Include="Content\images\champs\Viktor.png" />
+    <Content Include="Content\images\champs\Vladimir.png" />
+    <Content Include="Content\images\champs\Volibear.png" />
+    <Content Include="Content\images\champs\Warwick.png" />
+    <Content Include="Content\images\champs\Xerath.png" />
+    <Content Include="Content\images\champs\XinZhao.png" />
+    <Content Include="Content\images\champs\Yasuo.png" />
+    <Content Include="Content\images\champs\Yorick.png" />
+    <Content Include="Content\images\champs\Zac.png" />
+    <Content Include="Content\images\champs\Zed.png" />
+    <Content Include="Content\images\champs\Ziggs.png" />
+    <Content Include="Content\images\champs\Zilean.png" />
+    <Content Include="Content\images\champs\Zyra.png" />
     <Content Include="Content\images\ico\apple-touch-icon-114-precomposed.png" />
     <Content Include="Content\images\ico\apple-touch-icon-144-precomposed.png" />
     <Content Include="Content\images\ico\apple-touch-icon-57-precomposed.png" />
