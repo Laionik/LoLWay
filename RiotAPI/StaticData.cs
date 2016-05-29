@@ -11,6 +11,7 @@ namespace RiotAPI
 {
     static public class StaticData
     {
+        static private readonly Random rnd = new Random();
         static public Models.StaticData.ChampionList GetAllChampionData(String apiKey, String server)
         {
             try
@@ -34,5 +35,16 @@ namespace RiotAPI
             }
         }
 
+        static public String GetApiKey()
+        {
+            try
+            {
+                return Types.ApiStrings.apiKeys[rnd.Next(0, Types.ApiStrings.apiKeys.Count - 1)];
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }
