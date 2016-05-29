@@ -11,11 +11,12 @@ namespace RiotAPI
 {
     static public class Match
     {
-        static public Models.Match.SummonerMatchListModel GetMatchList(String apiKey, String summonerID, String server)
+        static public Models.Match.SummonerMatchListModel GetMatchList(String summonerID, String server)
         {
             try
             {
                 #region request part
+                var apiKey = Helpers.KeyHelper.GetApiKey();
                 var httpRequest = new StringBuilder();
 
                 httpRequest.Append("https://").Append(server).Append(".api.pvp.net/api/lol/").Append(server).Append("/v2.2/matchlist/by-summoner/");
@@ -39,13 +40,13 @@ namespace RiotAPI
             }
         }
 
-        static public Models.Match.SummonerMatchListModel GetMatchListBySummonerName(String apiKey, String summonerName, String server)
+        static public Models.Match.SummonerMatchListModel GetMatchListBySummonerName(String summonerName, String server)
         {
             try
             {
-                var summoner = Summoner.GetSummonerByName(apiKey, summonerName, server);
+                var summoner = Summoner.GetSummonerByName(summonerName, server);
 
-                return GetMatchList(apiKey, summoner.id.ToString(), server);
+                return GetMatchList(summoner.id.ToString(), server);
             }
             catch (Exception e)
             {
@@ -53,11 +54,12 @@ namespace RiotAPI
             }
         }
 
-        static public Models.Match.MatchDetails.MatchDetailsModel GetMatchById(String apiKey, String matchId, String server)
+        static public Models.Match.MatchDetails.MatchDetailsModel GetMatchById(String matchId, String server)
         {
             try
             {
                 #region request part
+                var apiKey = Helpers.KeyHelper.GetApiKey();
                 var httpRequest = new StringBuilder();
 
                 httpRequest.Append("https://").Append(server).Append(".api.pvp.net/api/lol/").Append(server).Append("/v2.2/match/");

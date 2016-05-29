@@ -30,12 +30,12 @@ namespace LoLWay.Controllers
         {
             try
             {
-                var currentGame = CurrentGame.GetCurrentGame(apiKey, Summoner.GetSummonerByName(apiKey, nickname, region).id, region);
+                var currentGame = CurrentGame.GetCurrentGame(Summoner.GetSummonerByName(nickname, region).id, region);
                 var summonerId = currentGame.participants.Select(x => x.summonerId.ToString()).ToList();
                 List<RiotAPI.Models.Summoner.SummonerStatsModel> summonerList = new List<RiotAPI.Models.Summoner.SummonerStatsModel>();
                 foreach (var summoner in summonerId)
                 {
-                    summonerList.Add(Summoner.GetSummonerStats(apiKey, summoner, region));
+                    summonerList.Add(Summoner.GetSummonerStats(summoner, region));
                 }
 
                 ViewBag.Participants = summonerList;

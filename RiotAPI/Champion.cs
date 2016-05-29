@@ -11,11 +11,12 @@ namespace RiotAPI
 {
     static public class Champion
     {
-        static public List<Models.Champion.ChampionModel> GetChempionList(String apiKey, String server, bool? freeToPlay)
+        static public List<Models.Champion.ChampionModel> GetChempionList(String server, bool? freeToPlay)
         {
             try
             {
                 #region request part
+                var apiKey = Helpers.KeyHelper.GetApiKey();
                 var httpRequest = new StringBuilder();
                 //server part
                 httpRequest.Append("https://").Append(server).Append(".api.pvp.net/api/lol/").Append(server);
@@ -41,11 +42,12 @@ namespace RiotAPI
 
         }
 
-        static public Models.Champion.ChampionModel GetChampion(String apiKey, String server, int id)
+        static public Models.Champion.ChampionModel GetChampion(String server, int id)
         {
             try
             {
                 #region request part
+                var apiKey = Helpers.KeyHelper.GetApiKey();
                 var httpRequest = new StringBuilder();
                 //server part
                 httpRequest.Append("https://").Append(server).Append(".api.pvp.net/api/lol/").Append(server);

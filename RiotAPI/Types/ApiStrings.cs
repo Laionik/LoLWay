@@ -21,7 +21,8 @@ namespace RiotAPI.Types
            "76d626dc-5500-4202-b88c-9f2d875eb3b9", //mail: pijbecrz@sharklasers.com
            "9bec93b3-48ff-40cc-947c-21951e608d76", // mail: pihytcrz@sharklasers.com
            "e7f5e085-4c2f-463f-b7c9-5944d8c54c1b", //mail: pihytbgz@sharklasers.com
-           "60d81102-841b-4dce-811c-daac945bd670" //mail: pihytbre@sharklasers.com
+           "60d81102-841b-4dce-811c-daac945bd670", //mail: pihytbre@sharklasers.com
+           "09e2ba8a-34b8-44d4-9445-262ed673da5d" //mail: lukasz.sosinski4@gmail.com
         };
     }
 }

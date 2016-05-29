@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Champion.cs" />
     <Compile Include="CurrentGame.cs" />
+    <Compile Include="Helpers\KeyHelper.cs" />
     <Compile Include="Helpers\ServerHelper.cs" />
     <Compile Include="Match.cs" />
     <Compile Include="Models\CurrentGame\BannedChampionModel.cs" />

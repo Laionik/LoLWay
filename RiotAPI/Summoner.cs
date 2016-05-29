@@ -6,17 +6,18 @@ using System.Net;
 using System.Text;
 using RiotAPI.Types;
 using RiotAPI.Models.Summoner;
+using RiotAPI.Helpers;
 
 namespace RiotAPI
 {
     public class Summoner
     {
-        static public List<SummonerModel> GetSummonersByName(String apiKey, List<String> summonersName, String server)
+        static public List<SummonerModel> GetSummonersByName(List<String> summonersName, String server)
         {
             try
             {
                 //request part
-                var request = WebRequest.Create(CreateHttpRequest(apiKey, summonersName, server, ApiStrings.GetSummonerByName)) as WebRequest;
+                var request = WebRequest.Create(CreateHttpRequest(summonersName, server, ApiStrings.GetSummonerByName)) as WebRequest;
                 request.Method = "GET";
                 var response = request.GetResponse() as HttpWebResponse;
 
@@ -36,11 +37,11 @@ namespace RiotAPI
             }
         }
 
-        static public SummonerModel GetSummonerByName(String apiKey, String summonerName, String server)
+        static public SummonerModel GetSummonerByName(String summonerName, String server)
         {
             try
             {
-                return GetSummonersByName(apiKey, new List<String> { summonerName }, server)[0];
+                return GetSummonersByName(new List<String> { summonerName }, server)[0];
             }
             catch (Exception e)
             {
@@ -48,12 +49,12 @@ namespace RiotAPI
             }
         }
 
-        static public List<SummonerModel> GetSummonersByID(String apiKey, List<String> summonersIDs, String server)
+        static public List<SummonerModel> GetSummonersByID(List<String> summonersIDs, String server)
         {
             try
             {
                 //request part
-                var request = WebRequest.Create(CreateHttpRequest(apiKey, summonersIDs, server, ApiStrings.GetSummonerByID)) as WebRequest;
+                var request = WebRequest.Create(CreateHttpRequest(summonersIDs, server, ApiStrings.GetSummonerByID)) as WebRequest;
                 request.Method = "GET";
                 var response = request.GetResponse() as HttpWebResponse;
 
@@ -73,15 +74,16 @@ namespace RiotAPI
             }
         }
 
-        static public SummonerModel GetSummonerByID(String apiKey, String summonerID, String server)
+        static public SummonerModel GetSummonerByID(String summonerID, String server)
         {
-            return GetSummonersByID(apiKey, new List<String> { summonerID }, server)[0];
+            return GetSummonersByID(new List<String> { summonerID }, server)[0];
         }
 
-        static public List<SummonerMysteryPagesModel> GetSummonersMasteryPages(String apiKey, List<String> summonersIds, String server)
+        static public List<SummonerMysteryPagesModel> GetSummonersMasteryPages(List<String> summonersIds, String server)
         {
             try
             {
+                var apiKey = Helpers.KeyHelper.GetApiKey();
                 #region request region
                 var httpRequest = new StringBuilder();
                 //server part
@@ -118,11 +120,11 @@ namespace RiotAPI
             }
         }
 
-        static public SummonerMysteryPagesModel GetSummonerMysteryPages(String apiKey, String summonerId, String server)
+        static public SummonerMysteryPagesModel GetSummonerMysteryPages(String summonerId, String server)
         {
             try
             {
-                return GetSummonersMasteryPages(apiKey, new List<String> { summonerId }, server)[0];
+                return GetSummonersMasteryPages(new List<String> { summonerId }, server)[0];
             }
             catch (Exception e)
             {
@@ -130,10 +132,11 @@ namespace RiotAPI
             }
         }
 
-        static public List<SummonerRunesPagesModel> GetSummonersRunesPages(String apiKey, List<String> summonersIds, String server)
+        static public List<SummonerRunesPagesModel> GetSummonersRunesPages(List<String> summonersIds, String server)
         {
             try
             {
+                var apiKey = Helpers.KeyHelper.GetApiKey();
                 #region request part
                 var httpRequest = new StringBuilder();
                 //server part
@@ -170,11 +173,11 @@ namespace RiotAPI
             }
         }
 
-        static public SummonerRunesPagesModel GetSummonerRunesPages(String apiKey, String SummonerId, String server)
+        static public SummonerRunesPagesModel GetSummonerRunesPages(String SummonerId, String server)
         {
             try
             {
-                return GetSummonersRunesPages(apiKey, new List<String> { SummonerId }, server)[0];
+                return GetSummonersRunesPages(new List<String> { SummonerId }, server)[0];
             }
             catch (Exception e)
             {
@@ -182,8 +185,9 @@ namespace RiotAPI
             }
         }
 
-        static private String CreateHttpRequest(String apiKey, List<String> parameters, String server, String methodPart)
+        static private String CreateHttpRequest(List<String> parameters, String server, String methodPart)
         {
+            var apiKey = Helpers.KeyHelper.GetApiKey();
             var httpRequest = new StringBuilder();
             //server part
             httpRequest.Append("https://").Append(server).Append(".api.pvp.net/api/lol/").Append(server);
@@ -200,10 +204,11 @@ namespace RiotAPI
             return httpRequest.ToString();
         }
 
-        static public Models.Summoner.SummonerStatsModel GetSummonerStats(String apiKey, String summonerId, String server)
+        static public Models.Summoner.SummonerStatsModel GetSummonerStats(String summonerId, String server)
         {
             try
             {
+                var apiKey = Helpers.KeyHelper.GetApiKey();
                 #region request part
                 var httpRequest = new StringBuilder();
                 //server part

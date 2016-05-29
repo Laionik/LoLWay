@@ -11,9 +11,10 @@ namespace RiotAPI
 {
     static public class CurrentGame
     {
-        static public Models.CurrentGame.CurrentMatchModel GetCurrentGame(String apiKey, int summonerID, String server)
+        static public Models.CurrentGame.CurrentMatchModel GetCurrentGame(int summonerID, String server)
         {
             #region request part
+            var apiKey = Helpers.KeyHelper.GetApiKey();
             String platformID = Helpers.ServerHelper.GetPlatformId(server);
             var httpRequest = new StringBuilder();
 
@@ -31,12 +32,12 @@ namespace RiotAPI
             return responseModel;
         }
 
-        static public Models.CurrentGame.CurrentMatchModel GetCurrentGameBySummonerName(String apiKey, String summonerName, String server)
+        static public Models.CurrentGame.CurrentMatchModel GetCurrentGameBySummonerName(String summonerName, String server)
         {
             try
             {
-                var summoner = Summoner.GetSummonerByName(apiKey, summonerName, server);
-                return GetCurrentGame(apiKey, summoner.id, server);
+                var summoner = Summoner.GetSummonerByName(summonerName, server);
+                return GetCurrentGame(summoner.id, server);
             }
             catch (Exception e)
             {
