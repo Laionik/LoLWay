@@ -13,9 +13,9 @@ namespace LoLWay.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class LoLWayDB : DbContext
+    public partial class lolwayEntities : DbContext
     {
-        public LoLWayDB()
+        public lolwayEntities()
             : base("name=lolwayEntities")
         {
         }
@@ -30,5 +30,10 @@ namespace LoLWay.Models
         public virtual DbSet<mastery> mastery { get; set; }
         public virtual DbSet<rune> rune { get; set; }
         public virtual DbSet<spell> spell { get; set; }
+        public virtual DbSet<whishlist> whishlist { get; set; }
+        public virtual DbSet<aspnetroles> aspnetroles { get; set; }
+        public virtual DbSet<aspnetuserclaims> aspnetuserclaims { get; set; }
+        public virtual DbSet<aspnetuserlogins> aspnetuserlogins { get; set; }
+        public virtual DbSet<aspnetusers> aspnetusers { get; set; }
     }
 }

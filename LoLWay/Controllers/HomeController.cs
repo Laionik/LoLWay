@@ -12,21 +12,10 @@ namespace LoLWay.Controllers
     {
         public ActionResult Index()
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                IndexLogged();
-            }
-
             return View();
         }
 
-        public ActionResult IndexLogged()
-        {
-            return View();
-        }
-
-
-        public List<CurrentGameBan> GetBanList(List<RiotAPI.Models.CurrentGame.BannedChampionModel> bans, LoLWayDB db)
+        public List<CurrentGameBan> GetBanList(List<RiotAPI.Models.CurrentGame.BannedChampionModel> bans, lolwayEntities db)
         {
             List<CurrentGameBan> gameBanList = new List<CurrentGameBan>();
             foreach(var championBan in bans)
@@ -41,7 +30,7 @@ namespace LoLWay.Controllers
         {
             try
             {
-                LoLWayDB db = new LoLWayDB();
+                lolwayEntities db = new lolwayEntities();
                 var currentGame = CurrentGame.GetCurrentGame(Summoner.GetSummonerByName(nickname, region).id, region);
                 var summonerIds = currentGame.participants.Select(x => x.summonerId.ToString()).ToList();
                 List<CurrentGameBan> gameBanList = new List<CurrentGameBan>();
@@ -88,10 +77,10 @@ namespace LoLWay.Controllers
             }
             catch (Exception ex)
             {
-                ViewBag.Title = "Nieoczekiwany błąd :(";
-                ViewBag.Message = "Skontaktuj się z administracją! Proszę podaj sytuację kiedy wystąpił błąd i załącz poniższą treść";
-                ViewBag.errorMessage = ex.Message;
-                return View("Error");
+                var title = "Nieoczekiwany błąd :(";
+                var message = "Skontaktuj się z administracją! Proszę podaj sytuację kiedy wystąpił błąd i załącz poniższą treść";
+                var errorMessage = ex.Message;
+                return RedirectToAction("Error", new { messageTitle = title, messageMain = message, messageError = errorMessage });
             }
         }
 
@@ -106,6 +95,15 @@ namespace LoLWay.Controllers
         {
             ViewBag.Message = "Your contact page.";
 
+            return View();
+        }
+
+        public ActionResult Error(string messageTitle, string messageMain, string messageError)
+        {
+
+            ViewBag.Title = messageTitle;
+            ViewBag.Message = messageMain;
+            ViewBag.errorMessage = messageError;
             return View();
         }
     }

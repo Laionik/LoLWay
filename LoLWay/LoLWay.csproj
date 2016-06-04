@@ -187,13 +187,27 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\championsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\WhishlistController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\MySqlHistoryContext.cs" />
+    <Compile Include="Models\aspnetroles.cs">
+      <DependentUpon>LoLWayModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\aspnetuserclaims.cs">
+      <DependentUpon>LoLWayModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\aspnetuserlogins.cs">
+      <DependentUpon>LoLWayModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\aspnetusers.cs">
+      <DependentUpon>LoLWayModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\champion.cs">
       <DependentUpon>LoLWayModel.tt</DependentUpon>
     </Compile>
@@ -225,6 +239,9 @@
       <DependentUpon>LoLWayModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SummonerStats.cs" />
+    <Compile Include="Models\whishlist.cs">
+      <DependentUpon>LoLWayModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="MySqlInitializer.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -503,11 +520,15 @@
     <Content Include="Scripts\jquery.isotope.min.js" />
     <Content Include="Scripts\jquery.js" />
     <Content Include="Scripts\jquery.prettyPhoto.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\main.js" />
+    <Content Include="Scripts\MicrosoftAjax.debug.js" />
+    <Content Include="Scripts\MicrosoftAjax.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
@@ -548,12 +569,19 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\sendemail.php" />
-    <Content Include="Views\Home\IndexLogged.cshtml" />
     <Content Include="Views\Emails\_ViewStart.cshtml" />
     <Content Include="Views\Emails\Web.config" />
     <Content Include="Views\Account\RegisterInfo.cshtml" />
     <Content Include="Views\Emails\RegEmail.cshtml" />
     <Content Include="Views\Emails\PasswordReset.cshtml" />
+    <Content Include="Views\Whishlist\Whishlist.cshtml" />
+    <Content Include="Views\Whishlist\_Whishlist.cshtml" />
+    <Content Include="Views\champions\Create.cshtml" />
+    <Content Include="Views\champions\Delete.cshtml" />
+    <Content Include="Views\champions\Details.cshtml" />
+    <Content Include="Views\champions\Edit.cshtml" />
+    <Content Include="Views\champions\Index.cshtml" />
+    <Content Include="Views\Whishlist\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

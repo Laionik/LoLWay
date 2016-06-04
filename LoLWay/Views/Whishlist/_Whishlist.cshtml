@@ -1,0 +1,33 @@
+﻿@model IEnumerable<LoLWay.Models.whishlist>
+<table class="game_tab">
+    <thead>
+        <tr class="default">
+            <th>Bohater</th>
+            <th></th>
+            <th>Status</th>
+            <th>Ocena</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.OrderBy(x => x.champion.name))
+            {
+            <tr class="notfirst">
+                <td>
+                   @Html.ActionLink(@item.champion.name, "Edit", new { id = item.championId })
+                </td>
+                <td><img src="~/Content/images/champs/@item.champion.image" class="champ_live" /></td>
+                <td>
+                    @if (item.owned == 1)
+                    {
+                        <span>Posiadasz</span>
+                    }
+                    else
+                    {
+                        <span>Wciąż na Ciebie czeka</span>
+                    }
+                </td>
+                <td>@item.rank</td>
+            </tr>
+        }
+    </tbody>
+</table>

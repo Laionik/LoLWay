@@ -5,11 +5,21 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="664c8572201b4bd2b7745154737b0283" Name="Diagram1">
-        <EntityTypeShape EntityType="lolwayModel.champion" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="lolwayModel.item" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="lolwayModel.mastery" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="lolwayModel.rune" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="lolwayModel.spell" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="lolwayModel.champion" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="lolwayModel.item" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="lolwayModel.mastery" Width="1.5" PointX="5.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="lolwayModel.rune" Width="1.5" PointX="5.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="lolwayModel.spell" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="lolwayModel.whishlist" Width="1.5" PointX="3" PointY="2.125" />
+        <AssociationConnector Association="lolwayModel.champion1" />
+        <EntityTypeShape EntityType="lolwayModel.aspnetroles" Width="1.5" PointX="3" PointY="8.75" />
+        <EntityTypeShape EntityType="lolwayModel.aspnetuserclaims" Width="1.5" PointX="3" PointY="6" />
+        <EntityTypeShape EntityType="lolwayModel.aspnetuserlogins" Width="1.5" PointX="3" PointY="11.125" />
+        <EntityTypeShape EntityType="lolwayModel.aspnetusers" Width="1.5" PointX="0.75" PointY="4.25" />
+        <AssociationConnector Association="lolwayModel.ApplicationUser_Claims" />
+        <AssociationConnector Association="lolwayModel.ApplicationUser_Logins" />
+        <AssociationConnector Association="lolwayModel.aspnetusers1" />
+        <AssociationConnector Association="lolwayModel.aspnetuserroles" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
