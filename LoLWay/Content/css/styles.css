@@ -1,86 +1,123 @@
 ﻿/* Tabela
 =================================*/
 .table_container {
-	overflow-x:auto
+    overflow-x: auto;
 }
 
-table, th, td{
-	border-bottom: 1px solid #ddd;
-	border-collapse: collapse;
-	margin-top: 20px;
-	margin-bottom: 10px;
-	text-align: center;
-	padding: 5px;
+table, th, td {
+    border-bottom: 1px solid #ddd;
+    border-collapse: collapse;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    text-align: center;
+    padding: 5px;
 }
 
-.game_tab{
-	width: 100%
+.game_tab {
+    width: 100%;
 }
 
 th {
-	color: #f5f5f5;
-}
-
-.default{
-	background: #34495e;
-}
-
-tr.notfirst:hover{
-	background-color:#fff48a;
-}
-tr:nth-child(even) {
-	background-color: #f2f2f2;
-}
-
-tr.bans{
-    background-color:#34495e;
-}
-td.bans{
     color: #f5f5f5;
 }
 
-.summonerName{
-    width: 15%
+.thead {
+    color: #f5f5f5;
 }
 
-.champSpell{
+.default {
+    background: #34495e;
+}
+
+tr.notfirst:hover {
+    background-color: #fff48a;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr.bans {
+    background-color: #34495e;
+}
+
+td.bans {
+    color: #f5f5f5;
+}
+
+.summonerName {
+    width: 15%;
+}
+
+.champSpell {
     width: 20%;
 }
 
-.rank{
-    width: 15%
+.rank {
+    width: 15%;
 }
 
-.kda{
-    width: 15%
+.kda {
+    width: 15%;
 }
 
-.runes{
-    width: 10%
+.runes {
+    width: 10%;
 }
 
-.masteries{
-    width: 5%
+.masteries {
+    width: 5%;
 }
 
 /* Img
 =================================*/
 
-.champ_live{
+.champ_live {
+    width: 20% !important;
+    height: auto !important;
+}
+
+.spell_live {
     width: 20%;
     height: auto;
 }
 
-.spell_live{
-    width: 20%;
-    height: auto;
-}
-
-.ban_live{
+.ban_live {
     width: 15%;
     height: auto;
 }
 
-.whishlist{
+.whishlist {
     width: 33% !important;
+}
+
+.mastery_live {
+    width: 70%;
+    height: auto;
+}
+
+/* WhishList
+=================================*/
+
+.championWhish {
+    width: 30%;
+    height: auto;
+    text-align: left;
+}
+
+.statusWhish {
+    width: 40%;
+    height: auto;
+    text-align: left;
+}
+
+.rankWhish {
+    width: 15%;
+    height: auto;
+    text-align: left;
+}
+
+.rankImg{
+    height: 50% !important;
+    width: auto;
 }

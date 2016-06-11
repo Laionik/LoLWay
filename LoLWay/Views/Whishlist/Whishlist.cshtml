@@ -7,14 +7,9 @@
     <div class="row">
         <div class="col-md-12">
             @Ajax.ActionLink("Wszyscy", "WhishlistTable", "Whishlist", new AjaxOptions { UpdateTargetId = "whishTable", InsertionMode = InsertionMode.Replace }, new { @class = "btn btn-primary whishlist" })
-            @Ajax.ActionLink("Posiadane", "WhishlistTable", "Whishlist", new { owned = 1 } ,new AjaxOptions { UpdateTargetId = "whishTable", InsertionMode = InsertionMode.Replace}, new { @class = "btn btn-danger whishlist" })
-            @Ajax.ActionLink("Oczekujące", "WhishlistTable", "Whishlist", new { owned = 0 }, new AjaxOptions { UpdateTargetId = "whishTable", InsertionMode = InsertionMode.Replace }, new { @class = "btn btn-warning whishlist" })
+            @Ajax.ActionLink("Posiadane", "WhishlistTable", "Whishlist", new { owned = 1 }, new AjaxOptions { UpdateTargetId = "whishTable", InsertionMode = InsertionMode.Replace }, new { @class = "btn btn-danger whishlist" })
+            @Ajax.ActionLink("Do kupienia", "WhishlistTable", "Whishlist", new { owned = 0 }, new AjaxOptions { UpdateTargetId = "whishTable", InsertionMode = InsertionMode.Replace }, new { @class = "btn btn-warning whishlist" })
         </div>
     </div>
-
-    <div class="row">
-        <div class="col-md-12" id="whishTable">
-            @Html.Partial("_Whishlist", Model)
-        </div>
-    </div>
+    @Html.Partial("_Whishlist", Model)
 </section>

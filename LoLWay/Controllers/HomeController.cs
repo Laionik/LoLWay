@@ -18,7 +18,7 @@ namespace LoLWay.Controllers
         public List<CurrentGameBan> GetBanList(List<RiotAPI.Models.CurrentGame.BannedChampionModel> bans, lolwayEntities db)
         {
             List<CurrentGameBan> gameBanList = new List<CurrentGameBan>();
-            foreach(var championBan in bans)
+            foreach (var championBan in bans)
             {
                 gameBanList.Add(new CurrentGameBan(championBan.teamId, db.champion.FirstOrDefault(x => x.id == championBan.championId).image));
             }
@@ -34,25 +34,28 @@ namespace LoLWay.Controllers
                 var currentGame = CurrentGame.GetCurrentGame(Summoner.GetSummonerByName(nickname, region).id, region);
                 var summonerIds = currentGame.participants.Select(x => x.summonerId.ToString()).ToList();
                 List<CurrentGameBan> gameBanList = new List<CurrentGameBan>();
-
+                var masteriesList = db.mastery.Select(x => x.id).ToList();
                 new Thread(() =>
                 {
                     Thread.CurrentThread.IsBackground = true;
                     gameBanList = GetBanList(currentGame.bannedChampions, db);
                 }).Start();
-                
+
                 List<SummonerStats> summonerList = new List<SummonerStats>();
                 foreach (var summonerId in summonerIds)
                 {
                     var summonerStats = Summoner.GetSummonerStats(summonerId, region);
                     var summoner = currentGame.participants.FirstOrDefault(p => p.summonerId == summonerStats.summonerId);
-                    
+
                     string spell1Img = db.spell.FirstOrDefault(x => x.id == summoner.spell1Id).image;
                     string spell2Img = db.spell.FirstOrDefault(x => x.id == summoner.spell2Id).image;
                     string championImg = db.champion.FirstOrDefault(x => x.id == summoner.championId).image;
                     string division = "BRAK";
+                    var summonerMasteries = summoner.masteries.Select(x => x.masteryId).ToList();
+                    int? mastery = masteriesList.FirstOrDefault(x => summonerMasteries.Contains(x));
+                    string masteryImg = mastery != null ? mastery.ToString() + ".png" : "0.png";
 
-                    SummonerStats cls = new SummonerStats(summonerStats.summonerId, summoner.summonerName, spell1Img, spell2Img, championImg, division);
+                    SummonerStats cls = new SummonerStats(summonerStats.summonerId, summoner.summonerName, spell1Img, spell2Img, championImg, division, masteryImg);
                     if (summonerStats.champions == null || summonerStats.champions.FirstOrDefault(x => x.id == summoner.championId) == null)
                     {
                         cls.averageKills = 0;

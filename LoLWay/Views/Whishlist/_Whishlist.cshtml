@@ -1,33 +1,66 @@
 ﻿@model IEnumerable<LoLWay.Models.whishlist>
-<table class="game_tab">
-    <thead>
-        <tr class="default">
-            <th>Bohater</th>
-            <th></th>
-            <th>Status</th>
-            <th>Ocena</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.OrderBy(x => x.champion.name))
-            {
-            <tr class="notfirst">
-                <td>
-                   @Html.ActionLink(@item.champion.name, "Edit", new { id = item.championId })
-                </td>
-                <td><img src="~/Content/images/champs/@item.champion.image" class="champ_live" /></td>
-                <td>
-                    @if (item.owned == 1)
-                    {
-                        <span>Posiadasz</span>
+<div class="row">
+    <div class="col-md-12" id="whishTable">
+        <table class="game_tab">
+            <thead>
+                <tr class="default">
+                    @{
+                        if (ViewBag.championSort != null)
+                        {
+                            <th>@Ajax.ActionLink("Bohater", "WhishlistTable", "Whishlist", new { owned = ViewBag.owned, championSort = !ViewBag.championSort }, new AjaxOptions { UpdateTargetId = "whishTable", InsertionMode = InsertionMode.Replace }, new { @class = "thead" })</th>
+                        }
+                        else
+                        {
+                            <th>@Ajax.ActionLink("Bohater", "WhishlistTable", "Whishlist", new { owned = ViewBag.owned, championSort = true }, new AjaxOptions { UpdateTargetId = "whishTable", InsertionMode = InsertionMode.Replace }, new { @class = "thead" })</th>
+                        }
+
+                        if (ViewBag.statusSort != null)
+                        {
+                            <th>@Ajax.ActionLink("Status", "WhishlistTable", "Whishlist", new { owned = ViewBag.owned, statusSort = !ViewBag.statusSort }, new AjaxOptions { UpdateTargetId = "whishTable", InsertionMode = InsertionMode.Replace }, new { @class = "thead" })</th>
+                        }
+                        else
+                        {
+                            <th>@Ajax.ActionLink("Status", "WhishlistTable", "Whishlist", new { owned = ViewBag.owned, statusSort = true }, new AjaxOptions { UpdateTargetId = "whishTable", InsertionMode = InsertionMode.Replace }, new { @class = "thead" })</th>
+                        }
+
+                        if (ViewBag.rankSort != null)
+                        {
+                            <th>@Ajax.ActionLink("Ocena", "WhishlistTable", "Whishlist", new { owned = ViewBag.owned, rankSort = !ViewBag.rankSort }, new AjaxOptions { UpdateTargetId = "whishTable", InsertionMode = InsertionMode.Replace }, new { @class = "thead" })</th>
+                        }
+                        else
+                        {
+                            <th>@Ajax.ActionLink("Ocena", "WhishlistTable", "Whishlist", new { owned = ViewBag.owned, rankSort = true }, new AjaxOptions { UpdateTargetId = "whishTable", InsertionMode = InsertionMode.Replace }, new { @class = "thead" })</th>
+                        }
                     }
-                    else
-                    {
-                        <span>Wciąż na Ciebie czeka</span>
-                    }
-                </td>
-                <td>@item.rank</td>
-            </tr>
-        }
-    </tbody>
-</table>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="notfirst">
+                        <td class="championWhish">
+                            <a href='@Url.Action("Edit", "Whishlist", new { id = item.championId })'>
+                                <img src="~/Content/images/champs/@item.champion.image" class="champ_live" />
+                            </a>
+                            @Html.ActionLink(@item.champion.name, "Edit", new { id = item.championId })
+                        </td>
+                        <td class="statusWhish">
+                            @if (item.owned == 1)
+                            {
+                                <span>Posiadasz</span>
+                            }
+                            else
+                            {
+                                <span>Wciąż na Ciebie czeka</span>
+                            }
+                        </td>
+                        @{
+                            var rank = item.rank.ToString() + ".png";
+                        }
+                        <td class="rankWhish"><img src="~/Content/images/rate/@rank" class="rankImg"></td>
+                    </tr>
+                            }
+            </tbody>
+        </table>
+    </div>
+</div>

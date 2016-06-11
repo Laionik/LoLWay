@@ -13,12 +13,12 @@ namespace LoLWay.Models
         public string spell2 { get; set; }
         public string champion { get; set; }
         public List<string> runes{ get; set; }
-        public List<string> masteries { get; set; }
+        public string mastery { get; set; }
         public double averageKills { get; set; }
         public double averageAssists { get; set; }
         public double averageDeaths { get; set; }
         public string division { get; set; }
-        public SummonerStats(int summonerId, string summonerName, string spell1, string spell2, string champion, string division)
+        public SummonerStats(int summonerId, string summonerName, string spell1, string spell2, string champion, string division, string mastery)
         {
             this.summonerId = summonerId;
             this.summonerName = summonerName;
@@ -26,6 +26,7 @@ namespace LoLWay.Models
             this.spell2 = spell2;
             this.champion = champion;
             this.division = division;
+            this.mastery = mastery;
         }
     }
 

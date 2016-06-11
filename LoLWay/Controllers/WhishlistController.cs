@@ -50,19 +50,62 @@ namespace LoLWay.Controllers
                 RedirectToAction("Error", "Home", new { messageTitle = title, messageMain = message, messageError = errorMessage });
             }
         }
+
         [Authorize]
-        public ActionResult WhishlistTable(int? owned)
+        public ActionResult WhishlistTable(int? owned, bool? championSort, bool? statusSort, bool? rankSort)
         {
-            List<whishlist> whishList = new List<whishlist>();
+            var championList = db.whishlist.Include(w => w.champion).Include(w => w.aspnetusers) as IQueryable<whishlist>;
+
+            // building a query
             if (owned.HasValue)
             {
-                whishList = db.whishlist.Where(x => x.owned == owned).Include(w => w.champion).Include(w => w.aspnetusers).ToList();
+                championList = championList.Where(x => x.owned == owned);
+                ViewBag.owned = owned;
             }
-            else
+
+            if(championSort.HasValue)
             {
-                whishList = db.whishlist.Include(w => w.champion).Include(w => w.aspnetusers).ToList();
+                ViewBag.championSort = championSort;
+                if ((bool) championSort)
+                {
+                    championList = championList.OrderBy(x => x.champion.name);
+                }
+                else
+                {
+                    championList = championList.OrderByDescending(x => x.champion.name);
+                }
             }
-            return PartialView("~/Views/Whishlist/_Whishlist.cshtml", whishList);
+
+
+            if (statusSort.HasValue)
+            {
+                ViewBag.statusSort = statusSort;
+                if ((bool)statusSort)
+                {
+                    championList = championList.OrderBy(x => x.owned);
+                }
+                else
+                {
+                    championList = championList.OrderByDescending(x => x.owned);
+                }
+            }
+
+
+            if (rankSort.HasValue)
+            {
+                ViewBag.rankSort = rankSort;
+                if ((bool)rankSort)
+                {
+                    championList = championList.OrderBy(x => x.rank);
+                }
+                else
+                {
+                    championList = championList.OrderByDescending(x => x.rank);
+                }
+            }
+
+            var test = championList.ToList();
+            return PartialView("~/Views/Whishlist/_Whishlist.cshtml", championList.ToList());
         }
 
         // GET: whishlists/Edit/5

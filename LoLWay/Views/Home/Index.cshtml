@@ -8,8 +8,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <h1>LoLWay</h1>
-                    <p>Witamy na stronie projektu LoLWay!</p>
+                    <h1>Gra na żywo</h1>
+                    <p>Podaj nick, wybierz serwer i szukaj statystyk gry na żywo!</p>
                 </div>
             </div>
         </div>
@@ -108,7 +108,7 @@ else
                                 <td class="rank"></td>
                                 <td class="kda">@summoner.averageKills / @summoner.averageDeaths / @summoner.averageAssists</td>
                                 <td class="runes">@player.runes.Count</td>
-                                <td class="masteries">@player.masteries.Count</td>
+                                <td class="masteries"><img src="~/Content/images/mastery/@summoner.mastery" class="mastery_live" /></td>
                             </tr>
                         }
                         @if (banList.Count() > 0)
@@ -156,7 +156,7 @@ else
                                 <td class="rank"></td>
                                 <td class="kda">@summoner.averageKills / @summoner.averageDeaths / @summoner.averageAssists</td>
                                 <td class="runes">@player.runes.Count</td>
-                                <td class="masteries">@player.masteries.Count</td>
+                                <td class="masteries"><img src="~/Content/images/mastery/@summoner.mastery" class="mastery_live" /></td>
                             </tr>
                         }
                         @if (banList.Count() > 0)
