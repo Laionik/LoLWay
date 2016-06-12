@@ -35,5 +35,6 @@ namespace LoLWay.Models
         public virtual DbSet<aspnetuserclaims> aspnetuserclaims { get; set; }
         public virtual DbSet<aspnetuserlogins> aspnetuserlogins { get; set; }
         public virtual DbSet<aspnetusers> aspnetusers { get; set; }
+        public virtual DbSet<builds> builds { get; set; }
     }
 }

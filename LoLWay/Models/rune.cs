@@ -14,11 +14,20 @@ namespace LoLWay.Models
     
     public partial class rune
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public rune()
+        {
+            this.builds = new HashSet<builds>();
+        }
+    
         public int id { get; set; }
         public string name { get; set; }
         public string description { get; set; }
         public string image { get; set; }
         public string tier { get; set; }
         public string type { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<builds> builds { get; set; }
     }
 }

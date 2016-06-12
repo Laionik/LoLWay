@@ -94,7 +94,7 @@ else
                             <th class="rank">Ranga</th>
                             <th class="kda">KDA</th>
                             <th class="runes">Runy</th>
-                            <th class="masteries">Maestrie</th>
+                            <th class="masteries">Specjalizacja</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -103,12 +103,12 @@ else
                             var summoner = summonerList.FirstOrDefault(x => x.summonerId == player.summonerId);
                             <tr class="notfirst">
                                 <td class="summonerName">@player.summonerName</td>
-                                <td class="champSpell"><img src="~/Content/images/champs/@summoner.champion" class="champ_live" /></td>
-                                <td class="champSpell"><img src="~/Content/images/spells/@summoner.spell1" class="spell_live" /> <img src="~/Content/images/spells/@summoner.spell2" class="spell_live" /></td>
+                                <td class="champSpell"><img src="@summoner.champion" class="champ_live" /></td>
+                                <td class="champSpell"><img src="@summoner.spell1" class="spell_live" /> <img src="@summoner.spell2" class="spell_live" /></td>
                                 <td class="rank"></td>
                                 <td class="kda">@summoner.averageKills / @summoner.averageDeaths / @summoner.averageAssists</td>
                                 <td class="runes">@player.runes.Count</td>
-                                <td class="masteries"><img src="~/Content/images/mastery/@summoner.mastery" class="mastery_live" /></td>
+                                <td class="masteries"><img src="@summoner.mastery" class="mastery_live" /></td>
                             </tr>
                         }
                         @if (banList.Count() > 0)
@@ -118,7 +118,7 @@ else
                             <td class="bans">
                                 @foreach (var ban in banList.Where(x => x.team == 100))
                                 {
-                                    <img src="~/Content/images/champs/@ban.banName" class="ban_live" />
+                                    <img src="@ban.banName" class="ban_live" />
                                 }
                             </td>
                         </tr>
@@ -142,7 +142,7 @@ else
                             <th class="rank">Ranga</th>
                             <th class="kda">KDA</th>
                             <th class="runes">Runy</th>
-                            <th class="masteries">Maestrie</th>
+                            <th class="masteries">Specjalizacja</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -151,12 +151,12 @@ else
                             var summoner = summonerList.FirstOrDefault(x => x.summonerId == player.summonerId);
                             <tr class="notfirst">
                                 <td class="summonerName">@player.summonerName</td>
-                                <td class="champSpell"><img src="~/Content/images/champs/@summoner.champion" class="champ_live" /></td>
-                                <td class="champSpell"><img src="~/Content/images/spells/@summoner.spell1" class="spell_live" /> <img src="~/Content/images/spells/@summoner.spell2" class="spell_live" /></td>
+                                <td class="champSpell"><img src="@summoner.champion" class="champ_live" /></td>
+                                <td class="champSpell"><img src="@summoner.spell1" class="spell_live" /> <img src="@summoner.spell2" class="spell_live" /></td>
                                 <td class="rank"></td>
                                 <td class="kda">@summoner.averageKills / @summoner.averageDeaths / @summoner.averageAssists</td>
                                 <td class="runes">@player.runes.Count</td>
-                                <td class="masteries"><img src="~/Content/images/mastery/@summoner.mastery" class="mastery_live" /></td>
+                                <td class="masteries"><img src="@summoner.mastery" class="mastery_live" /></td>
                             </tr>
                         }
                         @if (banList.Count() > 0)
@@ -166,7 +166,7 @@ else
                                 <td class="bans">
                                     @foreach (var ban in banList.Where(x => x.team == 200))
                                     {
-                                        <img src="~/Content/images/champs/@ban.banName" class="ban_live" />
+                                        <img src="@ban.banName" class="ban_live" />
                                     }
                                 </td>
                             </tr>

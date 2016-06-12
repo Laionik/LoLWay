@@ -36,7 +36,7 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.owned, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @Html.EditorFor(model => model.owned, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.owned })
                             @Html.ValidationMessageFor(model => model.owned, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -52,13 +52,11 @@
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
                             <input type="submit" value="Zapisz" class="btn btn-default" />
+                            @Html.ActionLink("Powrót", "Whishlist", null, new { @class = "btn btn-default btn-return" })
                         </div>
                     </div>
                 </div>
             }
-            <div>
-                @Html.ActionLink("Powrót", "Whishlist", "Whishlist")
-            </div>
         </div>
     </div>
 </section>

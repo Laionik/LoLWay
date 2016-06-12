@@ -57,6 +57,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MoreLinq, Version=1.4.18916.0, Culture=neutral, PublicKeyToken=384d532d7e88985d, processorArchitecture=MSIL">
+      <HintPath>..\packages\morelinq.1.4.0\lib\net35\MoreLinq.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="MySql.Data, Version=6.9.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="MySql.Data.Entity.EF6, Version=6.9.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -187,13 +191,17 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\championsController.cs" />
+    <Compile Include="Controllers\BuildController.cs" />
+    <Compile Include="Controllers\ChampionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\WhishlistController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\BuildHelper.cs" />
+    <Compile Include="Helpers\LiveStatsHelper.cs" />
+    <Compile Include="Helpers\RiotImageHelper.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\MySqlHistoryContext.cs" />
     <Compile Include="Models\aspnetroles.cs">
@@ -206,6 +214,10 @@
       <DependentUpon>LoLWayModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\aspnetusers.cs">
+      <DependentUpon>LoLWayModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BuildModels.cs" />
+    <Compile Include="Models\builds.cs">
       <DependentUpon>LoLWayModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\champion.cs">
@@ -260,148 +272,8 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\images\about\sosinski.jpg" />
     <Content Include="Content\images\about\sycz.jpg" />
-    <Content Include="Content\images\champs\Aatrox.png" />
-    <Content Include="Content\images\champs\Ahri.png" />
-    <Content Include="Content\images\champs\Akali.png" />
-    <Content Include="Content\images\champs\Alistar.png" />
-    <Content Include="Content\images\champs\Amumu.png" />
-    <Content Include="Content\images\champs\Anivia.png" />
-    <Content Include="Content\images\champs\Annie.png" />
-    <Content Include="Content\images\champs\Ashe.png" />
-    <Content Include="Content\images\champs\AurelionSol.png" />
-    <Content Include="Content\images\champs\Azir.png" />
-    <Content Include="Content\images\champs\Bard.png" />
-    <Content Include="Content\images\champs\Blitzcrank.png" />
-    <Content Include="Content\images\champs\Brand.png" />
-    <Content Include="Content\images\champs\Braum.png" />
-    <Content Include="Content\images\champs\Caitlyn.png" />
-    <Content Include="Content\images\champs\Cassiopeia.png" />
-    <Content Include="Content\images\champs\Chogath.png" />
-    <Content Include="Content\images\champs\Corki.png" />
-    <Content Include="Content\images\champs\Darius.png" />
-    <Content Include="Content\images\champs\Diana.png" />
-    <Content Include="Content\images\champs\Draven.png" />
-    <Content Include="Content\images\champs\DrMundo.png" />
-    <Content Include="Content\images\champs\Ekko.png" />
-    <Content Include="Content\images\champs\Elise.png" />
-    <Content Include="Content\images\champs\Evelynn.png" />
-    <Content Include="Content\images\champs\Ezreal.png" />
-    <Content Include="Content\images\champs\Fiddlesticks.png" />
-    <Content Include="Content\images\champs\Fiora.png" />
-    <Content Include="Content\images\champs\Fizz.png" />
-    <Content Include="Content\images\champs\Galio.png" />
-    <Content Include="Content\images\champs\Gangplank.png" />
-    <Content Include="Content\images\champs\Garen.png" />
-    <Content Include="Content\images\champs\Gnar.png" />
-    <Content Include="Content\images\champs\Gragas.png" />
-    <Content Include="Content\images\champs\Graves.png" />
-    <Content Include="Content\images\champs\Hecarim.png" />
-    <Content Include="Content\images\champs\Heimerdinger.png" />
-    <Content Include="Content\images\champs\Illaoi.png" />
-    <Content Include="Content\images\champs\Irelia.png" />
-    <Content Include="Content\images\champs\Janna.png" />
-    <Content Include="Content\images\champs\JarvanIV.png" />
-    <Content Include="Content\images\champs\Jax.png" />
-    <Content Include="Content\images\champs\Jayce.png" />
-    <Content Include="Content\images\champs\Jhin.png" />
-    <Content Include="Content\images\champs\Jinx.png" />
-    <Content Include="Content\images\champs\Kalista.png" />
-    <Content Include="Content\images\champs\Karma.png" />
-    <Content Include="Content\images\champs\Karthus.png" />
-    <Content Include="Content\images\champs\Kassadin.png" />
-    <Content Include="Content\images\champs\Katarina.png" />
-    <Content Include="Content\images\champs\Kayle.png" />
-    <Content Include="Content\images\champs\Kennen.png" />
-    <Content Include="Content\images\champs\Khazix.png" />
-    <Content Include="Content\images\champs\Kindred.png" />
-    <Content Include="Content\images\champs\KogMaw.png" />
-    <Content Include="Content\images\champs\Leblanc.png" />
-    <Content Include="Content\images\champs\LeeSin.png" />
-    <Content Include="Content\images\champs\Leona.png" />
-    <Content Include="Content\images\champs\Lissandra.png" />
-    <Content Include="Content\images\champs\Lucian.png" />
-    <Content Include="Content\images\champs\Lulu.png" />
-    <Content Include="Content\images\champs\Lux.png" />
-    <Content Include="Content\images\champs\Malphite.png" />
-    <Content Include="Content\images\champs\Malzahar.png" />
-    <Content Include="Content\images\champs\Maokai.png" />
-    <Content Include="Content\images\champs\MasterYi.png" />
-    <Content Include="Content\images\champs\MissFortune.png" />
-    <Content Include="Content\images\champs\MonkeyKing.png" />
-    <Content Include="Content\images\champs\Mordekaiser.png" />
-    <Content Include="Content\images\champs\Morgana.png" />
-    <Content Include="Content\images\champs\Nami.png" />
-    <Content Include="Content\images\champs\Nasus.png" />
-    <Content Include="Content\images\champs\Nautilus.png" />
-    <Content Include="Content\images\champs\Nidalee.png" />
-    <Content Include="Content\images\champs\Nocturne.png" />
-    <Content Include="Content\images\champs\Nunu.png" />
-    <Content Include="Content\images\champs\Olaf.png" />
-    <Content Include="Content\images\champs\Orianna.png" />
-    <Content Include="Content\images\champs\Pantheon.png" />
-    <Content Include="Content\images\champs\Poppy.png" />
-    <Content Include="Content\images\champs\Quinn.png" />
-    <Content Include="Content\images\champs\Rammus.png" />
-    <Content Include="Content\images\champs\RekSai.png" />
-    <Content Include="Content\images\champs\Renekton.png" />
-    <Content Include="Content\images\champs\Rengar.png" />
-    <Content Include="Content\images\champs\Riven.png" />
-    <Content Include="Content\images\champs\Rumble.png" />
-    <Content Include="Content\images\champs\Ryze.png" />
-    <Content Include="Content\images\champs\Sejuani.png" />
-    <Content Include="Content\images\champs\Shaco.png" />
-    <Content Include="Content\images\champs\Shen.png" />
-    <Content Include="Content\images\champs\Shyvana.png" />
-    <Content Include="Content\images\champs\Singed.png" />
-    <Content Include="Content\images\champs\Sion.png" />
-    <Content Include="Content\images\champs\Sivir.png" />
-    <Content Include="Content\images\champs\Skarner.png" />
-    <Content Include="Content\images\champs\Sona.png" />
-    <Content Include="Content\images\champs\Soraka.png" />
-    <Content Include="Content\images\champs\Swain.png" />
-    <Content Include="Content\images\champs\Syndra.png" />
-    <Content Include="Content\images\champs\TahmKench.png" />
-    <Content Include="Content\images\champs\Taliyah.png" />
-    <Content Include="Content\images\champs\Talon.png" />
-    <Content Include="Content\images\champs\Taric.png" />
-    <Content Include="Content\images\champs\Teemo.png" />
-    <Content Include="Content\images\champs\Thresh.png" />
-    <Content Include="Content\images\champs\Tristana.png" />
-    <Content Include="Content\images\champs\Trundle.png" />
-    <Content Include="Content\images\champs\Tryndamere.png" />
-    <Content Include="Content\images\champs\TwistedFate.png" />
-    <Content Include="Content\images\champs\Twitch.png" />
-    <Content Include="Content\images\champs\Udyr.png" />
-    <Content Include="Content\images\champs\Urgot.png" />
-    <Content Include="Content\images\champs\Varus.png" />
-    <Content Include="Content\images\champs\Vayne.png" />
-    <Content Include="Content\images\champs\Veigar.png" />
-    <Content Include="Content\images\champs\VelKoz.png" />
-    <Content Include="Content\images\champs\Vi.png" />
-    <Content Include="Content\images\champs\Viktor.png" />
-    <Content Include="Content\images\champs\Vladimir.png" />
-    <Content Include="Content\images\champs\Volibear.png" />
-    <Content Include="Content\images\champs\Warwick.png" />
-    <Content Include="Content\images\champs\Xerath.png" />
-    <Content Include="Content\images\champs\XinZhao.png" />
-    <Content Include="Content\images\champs\Yasuo.png" />
-    <Content Include="Content\images\champs\Yorick.png" />
-    <Content Include="Content\images\champs\Zac.png" />
-    <Content Include="Content\images\champs\Zed.png" />
-    <Content Include="Content\images\champs\Ziggs.png" />
-    <Content Include="Content\images\champs\Zilean.png" />
-    <Content Include="Content\images\champs\Zyra.png" />
+    <Content Include="Content\images\build\add.png" />
     <Content Include="Content\images\logo.png" />
-    <Content Include="Content\images\mastery\0.png" />
-    <Content Include="Content\images\mastery\6161.png" />
-    <Content Include="Content\images\mastery\6162.png" />
-    <Content Include="Content\images\mastery\6164.png" />
-    <Content Include="Content\images\mastery\6261.png" />
-    <Content Include="Content\images\mastery\6262.png" />
-    <Content Include="Content\images\mastery\6263.png" />
-    <Content Include="Content\images\mastery\6361.png" />
-    <Content Include="Content\images\mastery\6362.png" />
-    <Content Include="Content\images\mastery\6363.png" />
     <Content Include="Content\images\prettyPhoto\dark_rounded\btnNext.png" />
     <Content Include="Content\images\prettyPhoto\dark_rounded\btnPrevious.png" />
     <Content Include="Content\images\prettyPhoto\dark_rounded\contentPattern.png" />
@@ -451,20 +323,23 @@
     <Content Include="Content\images\rate\7.png" />
     <Content Include="Content\images\rate\8.png" />
     <Content Include="Content\images\rate\9.png" />
-    <Content Include="Content\images\spells\SummonerBarrier.png" />
-    <Content Include="Content\images\spells\SummonerClairvoyance.png" />
-    <Content Include="Content\images\spells\SummonerClarity.png" />
-    <Content Include="Content\images\spells\SummonerCleanse.png" />
-    <Content Include="Content\images\spells\SummonerExhaust.png" />
-    <Content Include="Content\images\spells\SummonerFlash.png" />
-    <Content Include="Content\images\spells\SummonerGhost.png" />
-    <Content Include="Content\images\spells\SummonerHeal.png" />
-    <Content Include="Content\images\spells\SummonerIgnite.png" />
-    <Content Include="Content\images\spells\SummonerPoroRecall.png" />
-    <Content Include="Content\images\spells\SummonerPoroToss.png" />
-    <Content Include="Content\images\spells\SummonerSmite.png" />
-    <Content Include="Content\images\spells\SummonerSnowball.png" />
-    <Content Include="Content\images\spells\SummonerTeleport.png" />
+    <Content Include="Content\images\portfolio\full\item1.jpg" />
+    <Content Include="Content\images\portfolio\full\item2.jpg" />
+    <Content Include="Content\images\portfolio\full\item3.jpg" />
+    <Content Include="Content\images\portfolio\full\item4.jpg" />
+    <Content Include="Content\images\portfolio\full\item5.jpg" />
+    <Content Include="Content\images\portfolio\full\item6.jpg" />
+    <Content Include="Content\images\portfolio\full\item7.jpg" />
+    <Content Include="Content\images\portfolio\recent\item1.png" />
+    <Content Include="Content\images\portfolio\recent\item2.png" />
+    <Content Include="Content\images\portfolio\recent\item3.png" />
+    <Content Include="Content\images\portfolio\thumb\item1.jpg" />
+    <Content Include="Content\images\portfolio\thumb\item2.jpg" />
+    <Content Include="Content\images\portfolio\thumb\item3.jpg" />
+    <Content Include="Content\images\portfolio\thumb\item4.jpg" />
+    <Content Include="Content\images\portfolio\thumb\item5.jpg" />
+    <Content Include="Content\images\portfolio\thumb\item6.jpg" />
+    <Content Include="Content\images\portfolio\thumb\item7.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -495,6 +370,7 @@
     </Content>
     <None Include="Properties\PublishProfiles\LoLWay.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\customFunctions.js" />
     <Content Include="Scripts\html5shiv.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -558,12 +434,17 @@
     <Content Include="Views\Emails\PasswordReset.cshtml" />
     <Content Include="Views\Whishlist\Whishlist.cshtml" />
     <Content Include="Views\Whishlist\_Whishlist.cshtml" />
-    <Content Include="Views\champions\Create.cshtml" />
-    <Content Include="Views\champions\Delete.cshtml" />
-    <Content Include="Views\champions\Details.cshtml" />
-    <Content Include="Views\champions\Edit.cshtml" />
-    <Content Include="Views\champions\Index.cshtml" />
+    <Content Include="Views\Champion\Create.cshtml" />
+    <Content Include="Views\Champion\Delete.cshtml" />
+    <Content Include="Views\Champion\Details.cshtml" />
+    <Content Include="Views\Champion\Edit.cshtml" />
+    <Content Include="Views\Champion\Index.cshtml" />
     <Content Include="Views\Whishlist\Edit.cshtml" />
+    <Content Include="Views\Build\Create.cshtml" />
+    <Content Include="Views\Build\Delete.cshtml" />
+    <Content Include="Views\Build\Details.cshtml" />
+    <Content Include="Views\Build\Edit.cshtml" />
+    <Content Include="Views\Build\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -117,7 +117,20 @@ td.bans {
     text-align: left;
 }
 
-.rankImg{
+.rankImg {
     height: 50% !important;
+    width: auto;
+}
+
+/* build
+=================================*/
+
+.add {
+    height: auto;
+    width: 4% !important;
+}
+
+.buildList{
+    height: 15%;
     width: auto;
 }

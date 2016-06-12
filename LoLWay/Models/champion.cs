@@ -18,6 +18,7 @@ namespace LoLWay.Models
         public champion()
         {
             this.whishlist = new HashSet<whishlist>();
+            this.builds = new HashSet<builds>();
         }
     
         public int id { get; set; }
@@ -27,5 +28,7 @@ namespace LoLWay.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<whishlist> whishlist { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<builds> builds { get; set; }
     }
 }

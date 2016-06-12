@@ -1923,6 +1923,10 @@ textarea.input-lg {
         border-color: #357ebd;
     }
 
+.btn-return{
+    position: absolute;
+    right: 2%;
+}
 .btn-warning {
     color: #fff;
     background-color: #f0ad4e;

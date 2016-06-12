@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
@@ -7,6 +6,8 @@ using System.Web.Mvc;
 using LoLWay.Models;
 using Microsoft.AspNet.Identity;
 using System.Net;
+using System.Collections.Generic;
+using LoLWay.Helpers;
 
 namespace LoLWay.Controllers
 {
@@ -24,9 +25,14 @@ namespace LoLWay.Controllers
             {
                 WhisListInitialize(userId);
             }
+            whishList = RiotImageHelper.GetChampionImages(whishList);
             return View(whishList);
         }
 
+        /// <summary>
+        /// Initialize a whish list for a new user
+        /// </summary>
+        /// <param name="userId">User Id</param>
         private void WhisListInitialize(string userId)
         {
             try
@@ -36,7 +42,7 @@ namespace LoLWay.Controllers
                     whishlist temp = new whishlist();
                     temp.championId = champion.id;
                     temp.userId = userId;
-                    temp.owned = 0;
+                    temp.owned = false;
                     temp.rank = 0;
                     db.whishlist.Add(temp);
                 }
@@ -52,14 +58,14 @@ namespace LoLWay.Controllers
         }
 
         [Authorize]
-        public ActionResult WhishlistTable(int? owned, bool? championSort, bool? statusSort, bool? rankSort)
+        public ActionResult WhishlistTable(bool? owned, bool? championSort, bool? statusSort, bool? rankSort)
         {
-            var championList = db.whishlist.Include(w => w.champion).Include(w => w.aspnetusers) as IQueryable<whishlist>;
+            var query = db.whishlist.Include(w => w.champion).Include(w => w.aspnetusers) as IQueryable<whishlist>;
 
             // building a query
             if (owned.HasValue)
             {
-                championList = championList.Where(x => x.owned == owned);
+                query = query.Where(x => x.owned == owned);
                 ViewBag.owned = owned;
             }
 
@@ -68,44 +74,40 @@ namespace LoLWay.Controllers
                 ViewBag.championSort = championSort;
                 if ((bool) championSort)
                 {
-                    championList = championList.OrderBy(x => x.champion.name);
+                    query = query.OrderBy(x => x.champion.name);
                 }
                 else
                 {
-                    championList = championList.OrderByDescending(x => x.champion.name);
+                    query = query.OrderByDescending(x => x.champion.name);
                 }
             }
-
 
             if (statusSort.HasValue)
             {
                 ViewBag.statusSort = statusSort;
                 if ((bool)statusSort)
                 {
-                    championList = championList.OrderBy(x => x.owned);
+                    query = query.OrderBy(x => x.owned);
                 }
                 else
                 {
-                    championList = championList.OrderByDescending(x => x.owned);
+                    query = query.OrderByDescending(x => x.owned);
                 }
             }
-
 
             if (rankSort.HasValue)
             {
                 ViewBag.rankSort = rankSort;
                 if ((bool)rankSort)
                 {
-                    championList = championList.OrderBy(x => x.rank);
+                    query = query.OrderBy(x => x.rank);
                 }
                 else
                 {
-                    championList = championList.OrderByDescending(x => x.rank);
+                    query = query.OrderByDescending(x => x.rank);
                 }
             }
-
-            var test = championList.ToList();
-            return PartialView("~/Views/Whishlist/_Whishlist.cshtml", championList.ToList());
+            return PartialView("~/Views/Whishlist/_Whishlist.cshtml", RiotImageHelper.GetChampionImages(query.ToList()));
         }
 
         // GET: whishlists/Edit/5

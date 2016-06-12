@@ -11,15 +11,13 @@ namespace LoLWay.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
+    
     public partial class whishlist
     {
         public int id { get; set; }
         public string userId { get; set; }
         public int championId { get; set; }
-        [Range(0, 1)]
-        public int owned { get; set; }
-        [Range(0, 10)]
+        public bool owned { get; set; }
         public long rank { get; set; }
     
         public virtual champion champion { get; set; }
