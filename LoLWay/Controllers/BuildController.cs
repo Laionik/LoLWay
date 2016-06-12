@@ -20,7 +20,7 @@ namespace LoLWay.Controllers
         public ActionResult Index()
         {
             var userId = User.Identity.GetUserId();
-            var builds = db.builds.Where(x => x.aspnetusers.Id == userId).Include(b => b.aspnetusers).Include(b => b.champion).Include(b => b.mastery).ToList();
+            var builds = db.build.Where(x => x.aspnetusers.Id == userId).Include(b => b.aspnetusers).Include(b => b.champion).Include(b => b.mastery).ToList();
             ViewBag.championFilter = builds.DistinctBy(x => x.championId).ToList();
 
             builds = RiotImageHelper.GetChampionImages(builds);
@@ -35,7 +35,7 @@ namespace LoLWay.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            builds builds = db.builds.Find(id);
+            build builds = db.build.Find(id);
             if (builds == null)
             {
                 return HttpNotFound();
@@ -69,7 +69,7 @@ namespace LoLWay.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public ActionResult Create([Bind(Include = "id,userId,championId,masteryId,gameVersion,modificationDate,notes")] builds newBuild, IEnumerable<int> items, IEnumerable<int> quins, IEnumerable<int> marks, IEnumerable<int> seals, IEnumerable<int> glyphs)
+        public ActionResult Create([Bind(Include = "id,userId,championId,masteryId,gameVersion,modificationDate,notes")] build newBuild, IEnumerable<int> items, IEnumerable<int> quins, IEnumerable<int> marks, IEnumerable<int> seals, IEnumerable<int> glyphs)
         {
             if (ModelState.IsValid)
             {
@@ -78,10 +78,14 @@ namespace LoLWay.Controllers
                 if (glyphs != null) BuildHelper.runesAdd(ref newBuild, glyphs.Take(6), db);
                 if (seals != null) BuildHelper.runesAdd(ref newBuild, seals.Take(6), db);
                 if (quins != null) BuildHelper.runesAdd(ref newBuild, quins.Take(6), db);
-                
-                newBuild.userId = User.Identity.GetUserId();
+                var userId = User.Identity.GetUserId();
+                newBuild.userId = userId;
+                newBuild.aspnetusers = db.aspnetusers.FirstOrDefault(x => x.Id == userId);
+                newBuild.champion = db.champion.FirstOrDefault(x => x.id == newBuild.championId);
+                newBuild.mastery = db.mastery.FirstOrDefault(x => x.id == newBuild.masteryId);
+
                 newBuild.modificationDate = DateTime.Now;
-                db.builds.Add(newBuild);
+                db.build.Add(newBuild);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -100,7 +104,7 @@ namespace LoLWay.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            builds builds = db.builds.Find(id);
+            build builds = db.build.Find(id);
             if (builds == null)
             {
                 return HttpNotFound();
@@ -115,7 +119,7 @@ namespace LoLWay.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public ActionResult Edit([Bind(Include = "id,userId,championId,masteryId,gameVersion,modificationDate,notes")] builds builds)
+        public ActionResult Edit([Bind(Include = "id,userId,championId,masteryId,gameVersion,modificationDate,notes")] build builds)
         {
             if (ModelState.IsValid)
             {
@@ -137,7 +141,7 @@ namespace LoLWay.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            builds builds = db.builds.Find(id);
+            build builds = db.build.Find(id);
             if (builds == null)
             {
                 return HttpNotFound();
@@ -151,8 +155,8 @@ namespace LoLWay.Controllers
         [Authorize]
         public ActionResult DeleteConfirmed(int id)
         {
-            builds builds = db.builds.Find(id);
-            db.builds.Remove(builds);
+            build builds = db.build.Find(id);
+            db.build.Remove(builds);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

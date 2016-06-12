@@ -20,12 +20,12 @@
         <AssociationConnector Association="lolwayModel.ApplicationUser_Logins" />
         <AssociationConnector Association="lolwayModel.aspnetusers1" />
         <AssociationConnector Association="lolwayModel.aspnetuserroles" />
-        <EntityTypeShape EntityType="lolwayModel.builds" Width="1.5" PointX="9.875" PointY="3.875" />
-        <AssociationConnector Association="lolwayModel.users" />
-        <AssociationConnector Association="lolwayModel.champions" />
-        <AssociationConnector Association="lolwayModel.masteries" />
-        <AssociationConnector Association="lolwayModel.builditems" />
-        <AssociationConnector Association="lolwayModel.buildrunes" />
+        <EntityTypeShape EntityType="lolwayModel.build" Width="1.5" PointX="9.625" PointY="4.375" />
+        <AssociationConnector Association="lolwayModel.users1" />
+        <AssociationConnector Association="lolwayModel.champions1" />
+        <AssociationConnector Association="lolwayModel.masteries1" />
+        <AssociationConnector Association="lolwayModel.itembuild" />
+        <AssociationConnector Association="lolwayModel.runebuild" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

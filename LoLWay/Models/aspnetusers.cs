@@ -21,7 +21,7 @@ namespace LoLWay.Models
             this.aspnetuserlogins = new HashSet<aspnetuserlogins>();
             this.whishlist = new HashSet<whishlist>();
             this.aspnetroles = new HashSet<aspnetroles>();
-            this.builds = new HashSet<builds>();
+            this.build = new HashSet<build>();
         }
     
         public string Id { get; set; }
@@ -46,6 +46,6 @@ namespace LoLWay.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<aspnetroles> aspnetroles { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<builds> builds { get; set; }
+        public virtual ICollection<build> build { get; set; }
     }
 }

@@ -56,27 +56,7 @@
           <Property Name="AccessFailedCount" Type="int" Nullable="false" />
           <Property Name="UserName" Type="varchar" MaxLength="256" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'def.lolway.builditems' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="builditems">
-          <Key>
-            <PropertyRef Name="buildId" />
-            <PropertyRef Name="itemId" />
-          </Key>
-          <Property Name="buildId" Type="int" Nullable="false" />
-          <Property Name="itemId" Type="int" Nullable="false" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'def.lolway.buildrunes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="buildrunes">
-          <Key>
-            <PropertyRef Name="buidlId" />
-            <PropertyRef Name="runeId" />
-          </Key>
-          <Property Name="buidlId" Type="int" Nullable="false" />
-          <Property Name="runeId" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="builds">
+        <EntityType Name="build">
           <Key>
             <PropertyRef Name="id" />
           </Key>
@@ -105,6 +85,16 @@ warning 6002: The table/view 'def.lolway.buildrunes' does not have a primary key
           <Property Name="name" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="image" Type="varchar" MaxLength="45" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'def.lolway.itembuild' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="itembuild">
+          <Key>
+            <PropertyRef Name="itemNumber" />
+            <PropertyRef Name="buildNumber" />
+          </Key>
+          <Property Name="itemNumber" Type="int" Nullable="false" />
+          <Property Name="buildNumber" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="mastery">
           <Key>
             <PropertyRef Name="id" />
@@ -124,6 +114,16 @@ warning 6002: The table/view 'def.lolway.buildrunes' does not have a primary key
           <Property Name="image" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="tier" Type="varchar" MaxLength="45" />
           <Property Name="type" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'def.lolway.runebuild' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="runebuild">
+          <Key>
+            <PropertyRef Name="runeNumber" />
+            <PropertyRef Name="buildNumber" />
+          </Key>
+          <Property Name="runeNumber" Type="int" Nullable="false" />
+          <Property Name="buildNumber" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="spell">
           <Key>
@@ -199,31 +199,29 @@ warning 6002: The table/view 'def.lolway.buildrunes' does not have a primary key
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="buildsTable">
-          <End Role="builds" Type="Self.builds" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="builditems" Type="Self.builditems" Multiplicity="*" />
+        <Association Name="buildTable">
+          <End Role="build" Type="Self.build" Multiplicity="1" />
+          <End Role="itembuild" Type="Self.itembuild" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="builds">
+            <Principal Role="build">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="builditems">
-              <PropertyRef Name="buildId" />
+            <Dependent Role="itembuild">
+              <PropertyRef Name="buildNumber" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="buildTable">
-          <End Role="builds" Type="Self.builds" Multiplicity="1">
+        <Association Name="buildTable2">
+          <End Role="build" Type="Self.build" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="buildrunes" Type="Self.buildrunes" Multiplicity="*" />
+          <End Role="runebuild" Type="Self.runebuild" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="builds">
+            <Principal Role="build">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="buildrunes">
-              <PropertyRef Name="buidlId" />
+            <Dependent Role="runebuild">
+              <PropertyRef Name="buildNumber" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -241,12 +239,12 @@ warning 6002: The table/view 'def.lolway.buildrunes' does not have a primary key
         </Association>
         <Association Name="champions">
           <End Role="champion" Type="Self.champion" Multiplicity="1" />
-          <End Role="builds" Type="Self.builds" Multiplicity="*" />
+          <End Role="build" Type="Self.build" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="champion">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="builds">
+            <Dependent Role="build">
               <PropertyRef Name="championId" />
             </Dependent>
           </ReferentialConstraint>
@@ -265,28 +263,28 @@ warning 6002: The table/view 'def.lolway.buildrunes' does not have a primary key
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="itemsTable">
+        <Association Name="itemTable">
           <End Role="item" Type="Self.item" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="builditems" Type="Self.builditems" Multiplicity="*" />
+          <End Role="itembuild" Type="Self.itembuild" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="item">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="builditems">
-              <PropertyRef Name="itemId" />
+            <Dependent Role="itembuild">
+              <PropertyRef Name="itemNumber" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="masteries">
           <End Role="mastery" Type="Self.mastery" Multiplicity="1" />
-          <End Role="builds" Type="Self.builds" Multiplicity="*" />
+          <End Role="build" Type="Self.build" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="mastery">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="builds">
+            <Dependent Role="build">
               <PropertyRef Name="masteryId" />
             </Dependent>
           </ReferentialConstraint>
@@ -295,24 +293,24 @@ warning 6002: The table/view 'def.lolway.buildrunes' does not have a primary key
           <End Role="rune" Type="Self.rune" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="buildrunes" Type="Self.buildrunes" Multiplicity="*" />
+          <End Role="runebuild" Type="Self.runebuild" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="rune">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="buildrunes">
-              <PropertyRef Name="runeId" />
+            <Dependent Role="runebuild">
+              <PropertyRef Name="runeNumber" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="users">
           <End Role="aspnetusers" Type="Self.aspnetusers" Multiplicity="1" />
-          <End Role="builds" Type="Self.builds" Multiplicity="*" />
+          <End Role="build" Type="Self.build" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="aspnetusers">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="builds">
+            <Dependent Role="build">
               <PropertyRef Name="userId" />
             </Dependent>
           </ReferentialConstraint>
@@ -323,24 +321,24 @@ warning 6002: The table/view 'def.lolway.buildrunes' does not have a primary key
           <EntitySet Name="aspnetuserlogins" EntityType="Self.aspnetuserlogins" Schema="lolway" store:Type="Tables" />
           <EntitySet Name="aspnetuserroles" EntityType="Self.aspnetuserroles" Schema="lolway" store:Type="Tables" />
           <EntitySet Name="aspnetusers" EntityType="Self.aspnetusers" Schema="lolway" store:Type="Tables" />
-          <EntitySet Name="builds" EntityType="Self.builds" Schema="lolway" store:Type="Tables" />
+          <EntitySet Name="build" EntityType="Self.build" Schema="lolway" store:Type="Tables" />
           <EntitySet Name="champion" EntityType="Self.champion" Schema="lolway" store:Type="Tables" />
           <EntitySet Name="item" EntityType="Self.item" Schema="lolway" store:Type="Tables" />
           <EntitySet Name="mastery" EntityType="Self.mastery" Schema="lolway" store:Type="Tables" />
           <EntitySet Name="rune" EntityType="Self.rune" Schema="lolway" store:Type="Tables" />
           <EntitySet Name="spell" EntityType="Self.spell" Schema="lolway" store:Type="Tables" />
           <EntitySet Name="whishlist" EntityType="Self.whishlist" Schema="lolway" store:Type="Tables" />
-          <EntitySet Name="builditems" EntityType="Self.builditems" store:Type="Tables" store:Schema="lolway">
+          <EntitySet Name="itembuild" EntityType="Self.itembuild" store:Type="Tables" store:Schema="lolway">
             <DefiningQuery>SELECT
-`builditems`.`buildId`, 
-`builditems`.`itemId`
-FROM `builditems` AS `builditems`</DefiningQuery>
+`itembuild`.`itemNumber`, 
+`itembuild`.`buildNumber`
+FROM `itembuild` AS `itembuild`</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="buildrunes" EntityType="Self.buildrunes" store:Type="Tables" store:Schema="lolway">
+          <EntitySet Name="runebuild" EntityType="Self.runebuild" store:Type="Tables" store:Schema="lolway">
             <DefiningQuery>SELECT
-`buildrunes`.`buidlId`, 
-`buildrunes`.`runeId`
-FROM `buildrunes` AS `buildrunes`</DefiningQuery>
+`runebuild`.`runeNumber`, 
+`runebuild`.`buildNumber`
+FROM `runebuild` AS `runebuild`</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="ApplicationUser_Claims" Association="Self.ApplicationUser_Claims">
             <End Role="aspnetusers" EntitySet="aspnetusers" />
@@ -358,13 +356,13 @@ FROM `buildrunes` AS `buildrunes`</DefiningQuery>
             <End Role="aspnetusers" EntitySet="aspnetusers" />
             <End Role="whishlist" EntitySet="whishlist" />
           </AssociationSet>
-          <AssociationSet Name="buildsTable" Association="Self.buildsTable">
-            <End Role="builds" EntitySet="builds" />
-            <End Role="builditems" EntitySet="builditems" />
-          </AssociationSet>
           <AssociationSet Name="buildTable" Association="Self.buildTable">
-            <End Role="builds" EntitySet="builds" />
-            <End Role="buildrunes" EntitySet="buildrunes" />
+            <End Role="build" EntitySet="build" />
+            <End Role="itembuild" EntitySet="itembuild" />
+          </AssociationSet>
+          <AssociationSet Name="buildTable2" Association="Self.buildTable2">
+            <End Role="build" EntitySet="build" />
+            <End Role="runebuild" EntitySet="runebuild" />
           </AssociationSet>
           <AssociationSet Name="champion1" Association="Self.champion1">
             <End Role="champion" EntitySet="champion" />
@@ -372,27 +370,27 @@ FROM `buildrunes` AS `buildrunes`</DefiningQuery>
           </AssociationSet>
           <AssociationSet Name="champions" Association="Self.champions">
             <End Role="champion" EntitySet="champion" />
-            <End Role="builds" EntitySet="builds" />
+            <End Role="build" EntitySet="build" />
           </AssociationSet>
           <AssociationSet Name="IdentityRole_Users" Association="Self.IdentityRole_Users">
             <End Role="aspnetroles" EntitySet="aspnetroles" />
             <End Role="aspnetuserroles" EntitySet="aspnetuserroles" />
           </AssociationSet>
-          <AssociationSet Name="itemsTable" Association="Self.itemsTable">
+          <AssociationSet Name="itemTable" Association="Self.itemTable">
             <End Role="item" EntitySet="item" />
-            <End Role="builditems" EntitySet="builditems" />
+            <End Role="itembuild" EntitySet="itembuild" />
           </AssociationSet>
           <AssociationSet Name="masteries" Association="Self.masteries">
             <End Role="mastery" EntitySet="mastery" />
-            <End Role="builds" EntitySet="builds" />
+            <End Role="build" EntitySet="build" />
           </AssociationSet>
           <AssociationSet Name="runeTable" Association="Self.runeTable">
             <End Role="rune" EntitySet="rune" />
-            <End Role="buildrunes" EntitySet="buildrunes" />
+            <End Role="runebuild" EntitySet="runebuild" />
           </AssociationSet>
           <AssociationSet Name="users" Association="Self.users">
             <End Role="aspnetusers" EntitySet="aspnetusers" />
-            <End Role="builds" EntitySet="builds" />
+            <End Role="build" EntitySet="build" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -408,7 +406,7 @@ FROM `buildrunes` AS `buildrunes`</DefiningQuery>
           <Property Name="title" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="image" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="whishlist" Relationship="lolwayModel.champion1" FromRole="champion" ToRole="whishlist" />
-          <NavigationProperty Name="builds" Relationship="lolwayModel.champions" FromRole="champion" ToRole="builds" />
+          <NavigationProperty Name="build" Relationship="lolwayModel.champions1" FromRole="champion" ToRole="build" />
         </EntityType>
         <EntityType Name="item">
           <Key>
@@ -418,7 +416,7 @@ FROM `buildrunes` AS `buildrunes`</DefiningQuery>
           <Property Name="plaintext" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="image" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="builds" Relationship="lolwayModel.builditems" FromRole="item" ToRole="builds" />
+          <NavigationProperty Name="build" Relationship="lolwayModel.itembuild" FromRole="item" ToRole="build" />
         </EntityType>
         <EntityType Name="mastery">
           <Key>
@@ -428,7 +426,7 @@ FROM `buildrunes` AS `buildrunes`</DefiningQuery>
           <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="image" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="description" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="builds" Relationship="lolwayModel.masteries" FromRole="mastery" ToRole="builds" />
+          <NavigationProperty Name="build" Relationship="lolwayModel.masteries1" FromRole="mastery" ToRole="build" />
         </EntityType>
         <EntityType Name="rune">
           <Key>
@@ -440,7 +438,7 @@ FROM `buildrunes` AS `buildrunes`</DefiningQuery>
           <Property Name="image" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="tier" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="type" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="builds" Relationship="lolwayModel.buildrunes" FromRole="rune" ToRole="builds" />
+          <NavigationProperty Name="build" Relationship="lolwayModel.runebuild" FromRole="rune" ToRole="build" />
         </EntityType>
         <EntityType Name="spell">
           <Key>
@@ -483,25 +481,25 @@ FROM `buildrunes` AS `buildrunes`</DefiningQuery>
             <End Role="aspnetusers" EntitySet="aspnetusers" />
             <End Role="aspnetroles" EntitySet="aspnetroles" />
           </AssociationSet>
-          <EntitySet Name="builds" EntityType="lolwayModel.builds" />
-          <AssociationSet Name="users" Association="lolwayModel.users">
+          <EntitySet Name="build" EntityType="lolwayModel.build" />
+          <AssociationSet Name="users1" Association="lolwayModel.users1">
             <End Role="aspnetusers" EntitySet="aspnetusers" />
-            <End Role="builds" EntitySet="builds" />
+            <End Role="build" EntitySet="build" />
           </AssociationSet>
-          <AssociationSet Name="champions" Association="lolwayModel.champions">
+          <AssociationSet Name="champions1" Association="lolwayModel.champions1">
             <End Role="champion" EntitySet="champion" />
-            <End Role="builds" EntitySet="builds" />
+            <End Role="build" EntitySet="build" />
           </AssociationSet>
-          <AssociationSet Name="masteries" Association="lolwayModel.masteries">
+          <AssociationSet Name="masteries1" Association="lolwayModel.masteries1">
             <End Role="mastery" EntitySet="mastery" />
-            <End Role="builds" EntitySet="builds" />
+            <End Role="build" EntitySet="build" />
           </AssociationSet>
-          <AssociationSet Name="builditems" Association="lolwayModel.builditems">
-            <End Role="builds" EntitySet="builds" />
+          <AssociationSet Name="itembuild" Association="lolwayModel.itembuild">
+            <End Role="build" EntitySet="build" />
             <End Role="item" EntitySet="item" />
           </AssociationSet>
-          <AssociationSet Name="buildrunes" Association="lolwayModel.buildrunes">
-            <End Role="builds" EntitySet="builds" />
+          <AssociationSet Name="runebuild" Association="lolwayModel.runebuild">
+            <End Role="build" EntitySet="build" />
             <End Role="rune" EntitySet="rune" />
           </AssociationSet>
         </EntityContainer>
@@ -578,7 +576,7 @@ FROM `buildrunes` AS `buildrunes`</DefiningQuery>
           <NavigationProperty Name="aspnetuserlogins" Relationship="lolwayModel.ApplicationUser_Logins" FromRole="aspnetusers" ToRole="aspnetuserlogins" />
           <NavigationProperty Name="whishlist" Relationship="lolwayModel.aspnetusers1" FromRole="aspnetusers" ToRole="whishlist" />
           <NavigationProperty Name="aspnetroles" Relationship="lolwayModel.aspnetuserroles" FromRole="aspnetusers" ToRole="aspnetroles" />
-          <NavigationProperty Name="builds" Relationship="lolwayModel.users" FromRole="aspnetusers" ToRole="builds" />
+          <NavigationProperty Name="build" Relationship="lolwayModel.users1" FromRole="aspnetusers" ToRole="build" />
         </EntityType>
         <Association Name="ApplicationUser_Claims">
           <End Type="lolwayModel.aspnetusers" Role="aspnetusers" Multiplicity="1">
@@ -624,64 +622,64 @@ FROM `buildrunes` AS `buildrunes`</DefiningQuery>
           <End Type="lolwayModel.aspnetusers" Role="aspnetusers" Multiplicity="*" />
           <End Type="lolwayModel.aspnetroles" Role="aspnetroles" Multiplicity="*" />
         </Association>
-        <EntityType Name="builds">
+        <EntityType Name="build">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="userId" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="championId" Type="Int32" Nullable="false" />
           <Property Name="masteryId" Type="Int32" Nullable="false" />
           <Property Name="modificationDate" Type="DateTime" Nullable="false" />
           <Property Name="notes" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="aspnetusers" Relationship="lolwayModel.users" FromRole="builds" ToRole="aspnetusers" />
-          <NavigationProperty Name="champion" Relationship="lolwayModel.champions" FromRole="builds" ToRole="champion" />
-          <NavigationProperty Name="mastery" Relationship="lolwayModel.masteries" FromRole="builds" ToRole="mastery" />
-          <NavigationProperty Name="item" Relationship="lolwayModel.builditems" FromRole="builds" ToRole="item" />
-          <NavigationProperty Name="rune" Relationship="lolwayModel.buildrunes" FromRole="builds" ToRole="rune" />
+          <NavigationProperty Name="aspnetusers" Relationship="lolwayModel.users1" FromRole="build" ToRole="aspnetusers" />
+          <NavigationProperty Name="champion" Relationship="lolwayModel.champions1" FromRole="build" ToRole="champion" />
+          <NavigationProperty Name="mastery" Relationship="lolwayModel.masteries1" FromRole="build" ToRole="mastery" />
+          <NavigationProperty Name="item" Relationship="lolwayModel.itembuild" FromRole="build" ToRole="item" />
+          <NavigationProperty Name="rune" Relationship="lolwayModel.runebuild" FromRole="build" ToRole="rune" />
         </EntityType>
-        <Association Name="users">
+        <Association Name="users1">
           <End Type="lolwayModel.aspnetusers" Role="aspnetusers" Multiplicity="1" />
-          <End Type="lolwayModel.builds" Role="builds" Multiplicity="*" />
+          <End Type="lolwayModel.build" Role="build" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="aspnetusers">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="builds">
+            <Dependent Role="build">
               <PropertyRef Name="userId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="champions">
+        <Association Name="champions1">
           <End Type="lolwayModel.champion" Role="champion" Multiplicity="1" />
-          <End Type="lolwayModel.builds" Role="builds" Multiplicity="*" />
+          <End Type="lolwayModel.build" Role="build" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="champion">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="builds">
+            <Dependent Role="build">
               <PropertyRef Name="championId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="masteries">
+        <Association Name="masteries1">
           <End Type="lolwayModel.mastery" Role="mastery" Multiplicity="1" />
-          <End Type="lolwayModel.builds" Role="builds" Multiplicity="*" />
+          <End Type="lolwayModel.build" Role="build" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="mastery">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="builds">
+            <Dependent Role="build">
               <PropertyRef Name="masteryId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="builditems">
-          <End Type="lolwayModel.builds" Role="builds" Multiplicity="*" />
+        <Association Name="itembuild">
+          <End Type="lolwayModel.build" Role="build" Multiplicity="*" />
           <End Type="lolwayModel.item" Role="item" Multiplicity="*" />
         </Association>
-        <Association Name="buildrunes">
-          <End Type="lolwayModel.builds" Role="builds" Multiplicity="*" />
+        <Association Name="runebuild">
+          <End Type="lolwayModel.build" Role="build" Multiplicity="*" />
           <End Type="lolwayModel.rune" Role="rune" Multiplicity="*" />
         </Association>
       </Schema>
@@ -807,9 +805,9 @@ FROM `buildrunes` AS `buildrunes`</DefiningQuery>
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="builds">
-            <EntityTypeMapping TypeName="lolwayModel.builds">
-              <MappingFragment StoreEntitySet="builds">
+          <EntitySetMapping Name="build">
+            <EntityTypeMapping TypeName="lolwayModel.build">
+              <MappingFragment StoreEntitySet="build">
                 <ScalarProperty Name="notes" ColumnName="notes" />
                 <ScalarProperty Name="modificationDate" ColumnName="modificationDate" />
                 <ScalarProperty Name="masteryId" ColumnName="masteryId" />
@@ -819,23 +817,23 @@ FROM `buildrunes` AS `buildrunes`</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="builditems" TypeName="lolwayModel.builditems" StoreEntitySet="builditems">
+          <AssociationSetMapping Name="itembuild" TypeName="lolwayModel.itembuild" StoreEntitySet="itembuild">
             <EndProperty Name="item">
-              <ScalarProperty Name="id" ColumnName="itemId" />
+              <ScalarProperty Name="id" ColumnName="itemNumber" />
             </EndProperty>
-            <EndProperty Name="builds">
-              <ScalarProperty Name="id" ColumnName="buildId" />
+            <EndProperty Name="build">
+              <ScalarProperty Name="id" ColumnName="buildNumber" />
             </EndProperty>
           </AssociationSetMapping>
-          <AssociationSetMapping Name="buildrunes" TypeName="lolwayModel.buildrunes" StoreEntitySet="buildrunes">
+          <AssociationSetMapping Name="runebuild" TypeName="lolwayModel.runebuild" StoreEntitySet="runebuild">
             <EndProperty Name="rune">
-              <ScalarProperty Name="id" ColumnName="runeId" />
+              <ScalarProperty Name="id" ColumnName="runeNumber" />
             </EndProperty>
-            <EndProperty Name="builds">
-              <ScalarProperty Name="id" ColumnName="buidlId" />
+            <EndProperty Name="build">
+              <ScalarProperty Name="id" ColumnName="buildNumber" />
             </EndProperty>
           </AssociationSetMapping>
-        </EntityContainerMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

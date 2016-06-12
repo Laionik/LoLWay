@@ -216,10 +216,10 @@
     <Compile Include="Models\aspnetusers.cs">
       <DependentUpon>LoLWayModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\BuildModels.cs" />
-    <Compile Include="Models\builds.cs">
+    <Compile Include="Models\build.cs">
       <DependentUpon>LoLWayModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\BuildModels.cs" />
     <Compile Include="Models\champion.cs">
       <DependentUpon>LoLWayModel.tt</DependentUpon>
     </Compile>

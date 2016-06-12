@@ -8,7 +8,7 @@ namespace LoLWay.Helpers
 {
    static public class BuildHelper
     {
-        static public void itemsAdd(ref builds builds, IEnumerable<int> items, lolwayEntities db)
+        static public void itemsAdd(ref build builds, IEnumerable<int> items, lolwayEntities db)
         {
             foreach (var item in items)
             {
@@ -16,7 +16,7 @@ namespace LoLWay.Helpers
             }
         }
 
-        static public void runesAdd(ref builds builds, IEnumerable<int> runes, lolwayEntities db)
+        static public void runesAdd(ref build builds, IEnumerable<int> runes, lolwayEntities db)
         {
             foreach (var rune in runes)
             {

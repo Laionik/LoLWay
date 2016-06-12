@@ -54,7 +54,7 @@ namespace LoLWay.Helpers
         /// </summary>
         /// <param name="buildList">BuildList with included champions</param>
         /// <returns>Updated BuildList</returns>
-        public static List<builds> GetChampionImages(List<builds> buildList)
+        public static List<build> GetChampionImages(List<build> buildList)
         {
             foreach (var champion in buildList)
             {
