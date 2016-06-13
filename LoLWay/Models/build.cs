@@ -14,26 +14,17 @@ namespace LoLWay.Models
     
     public partial class build
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public build()
-        {
-            this.item = new HashSet<item>();
-            this.rune = new HashSet<rune>();
-        }
-    
         public int id { get; set; }
         public string userId { get; set; }
         public int championId { get; set; }
         public int masteryId { get; set; }
         public System.DateTime modificationDate { get; set; }
         public string notes { get; set; }
+        public string runes { get; set; }
+        public string items { get; set; }
     
         public virtual aspnetusers aspnetusers { get; set; }
         public virtual champion champion { get; set; }
         public virtual mastery mastery { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<item> item { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<rune> rune { get; set; }
     }
 }

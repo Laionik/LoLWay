@@ -38,7 +38,7 @@ namespace LoLWay.Helpers
         /// <summary>
         /// Update champions image link
         /// </summary>
-        /// <param name="whishList">WhishList with included champions</param>
+        /// <param name="whishList">List of whislist</param>
         /// <returns>Updated WhishList</returns>
         public static List<whishlist> GetChampionImages(List<whishlist> whishList)
         {
@@ -52,7 +52,18 @@ namespace LoLWay.Helpers
         /// <summary>
         /// Update champions image link
         /// </summary>
-        /// <param name="buildList">BuildList with included champions</param>
+        /// <param name="whishList">whishlist element</param>
+        /// <returns>Updated WhishList</returns>
+        public static whishlist GetChampionImages(whishlist whish)
+        {
+            whish.champion.image = GetImageUrl("champion", whish.champion.image);
+            return whish;
+        }
+
+        /// <summary>
+        /// Update champions image link
+        /// </summary>
+        /// <param name="buildList">List of builds</param>
         /// <returns>Updated BuildList</returns>
         public static List<build> GetChampionImages(List<build> buildList)
         {
@@ -64,9 +75,42 @@ namespace LoLWay.Helpers
         }
 
         /// <summary>
+        /// Update champions image link
+        /// </summary>
+        /// <param name="buildItem">Build</param>
+        /// <returns>Updated buildItem</returns>
+        public static build GetChampionImages(build buildItem)
+        {
+            buildItem.champion.image = GetImageUrl("champion", buildItem.champion.image);
+            return buildItem;
+        }
+
+        /// <summary>
+        /// Update champion image link
+        /// </summary>
+        /// <param name="championItem">Champion</param>
+        /// <returns>Updated championItem</returns>
+        public static champion GetChampionImages(champion championItem)
+        {
+            championItem.image = GetImageUrl("champion", championItem.image);
+            return championItem;
+        }
+
+        /// <summary>
+        /// Update mastery image link
+        /// </summary>
+        /// <param name="masteryItem">Mastery</param>
+        /// <returns>Updated buildItem</returns>
+        public static mastery GetMasteryImages(mastery masteryItem)
+        {
+            masteryItem.image = GetImageUrl("mastery", masteryItem.image);
+            return masteryItem;
+        }
+
+        /// <summary>
         /// Update items image link
         /// </summary>
-        /// <param name="itemList">itemList with included champions</param>
+        /// <param name="itemList">List of items</param>
         /// <returns>Updated itemList</returns>
         public static List<item> GetItemsImages(List<item> itemList)
         {
@@ -78,9 +122,20 @@ namespace LoLWay.Helpers
         }
 
         /// <summary>
+        /// Update item image link
+        /// </summary>
+        /// <param name="itemList">item</param>
+        /// <returns>Updated item</returns>
+        public static item GetItemsImages(item itemObject)
+        {
+            itemObject.image = GetImageUrl("item", itemObject.image);
+            return itemObject;
+        }
+
+        /// <summary>
         /// Update runes image link
         /// </summary>
-        /// <param name="runeList">runeList with included champions</param>
+        /// <param name="runeList">List of runes</param>
         /// <returns>Updated runeList</returns>
         public static List<rune> GetRunesImages(List<rune> runeList)
         {
@@ -89,6 +144,17 @@ namespace LoLWay.Helpers
                 runeObject.image = GetImageUrl("rune", runeObject.image);
             }
             return runeList;
+        }
+
+        /// <summary>
+        /// Update runes image link
+        /// </summary>
+        /// <param name="runeItem">runeItem</param>
+        /// <returns>Updated runeItem</returns>
+        public static rune GetRunesImages(rune runeItem)
+        {
+            runeItem.image = GetImageUrl("rune", runeItem.image);
+            return runeItem;
         }
     }
 }

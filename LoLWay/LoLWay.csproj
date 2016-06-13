@@ -192,7 +192,6 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BuildController.cs" />
-    <Compile Include="Controllers\ChampionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\WhishlistController.cs" />
@@ -273,7 +272,9 @@
     <Content Include="Content\images\about\sosinski.jpg" />
     <Content Include="Content\images\about\sycz.jpg" />
     <Content Include="Content\images\build\add.png" />
-    <Content Include="Content\images\logo.png" />
+    <Content Include="Content\images\build\edit.png" />
+    <Content Include="Content\images\build\back.png" />
+    <Content Include="Content\images\build\save.png" />
     <Content Include="Content\images\prettyPhoto\dark_rounded\btnNext.png" />
     <Content Include="Content\images\prettyPhoto\dark_rounded\btnPrevious.png" />
     <Content Include="Content\images\prettyPhoto\dark_rounded\contentPattern.png" />
@@ -323,23 +324,6 @@
     <Content Include="Content\images\rate\7.png" />
     <Content Include="Content\images\rate\8.png" />
     <Content Include="Content\images\rate\9.png" />
-    <Content Include="Content\images\portfolio\full\item1.jpg" />
-    <Content Include="Content\images\portfolio\full\item2.jpg" />
-    <Content Include="Content\images\portfolio\full\item3.jpg" />
-    <Content Include="Content\images\portfolio\full\item4.jpg" />
-    <Content Include="Content\images\portfolio\full\item5.jpg" />
-    <Content Include="Content\images\portfolio\full\item6.jpg" />
-    <Content Include="Content\images\portfolio\full\item7.jpg" />
-    <Content Include="Content\images\portfolio\recent\item1.png" />
-    <Content Include="Content\images\portfolio\recent\item2.png" />
-    <Content Include="Content\images\portfolio\recent\item3.png" />
-    <Content Include="Content\images\portfolio\thumb\item1.jpg" />
-    <Content Include="Content\images\portfolio\thumb\item2.jpg" />
-    <Content Include="Content\images\portfolio\thumb\item3.jpg" />
-    <Content Include="Content\images\portfolio\thumb\item4.jpg" />
-    <Content Include="Content\images\portfolio\thumb\item5.jpg" />
-    <Content Include="Content\images\portfolio\thumb\item6.jpg" />
-    <Content Include="Content\images\portfolio\thumb\item7.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -434,11 +418,6 @@
     <Content Include="Views\Emails\PasswordReset.cshtml" />
     <Content Include="Views\Whishlist\Whishlist.cshtml" />
     <Content Include="Views\Whishlist\_Whishlist.cshtml" />
-    <Content Include="Views\Champion\Create.cshtml" />
-    <Content Include="Views\Champion\Delete.cshtml" />
-    <Content Include="Views\Champion\Details.cshtml" />
-    <Content Include="Views\Champion\Edit.cshtml" />
-    <Content Include="Views\Champion\Index.cshtml" />
     <Content Include="Views\Whishlist\Edit.cshtml" />
     <Content Include="Views\Build\Create.cshtml" />
     <Content Include="Views\Build\Delete.cshtml" />
@@ -448,7 +427,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Email\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

@@ -36,11 +36,12 @@ namespace LoLWay.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             build builds = db.build.Find(id);
-            if (builds == null)
+            var buildDetails = new BuildDetails(builds);
+            if (buildDetails == null)
             {
                 return HttpNotFound();
             }
-            return View(builds);
+            return View(buildDetails);
         }
 
         // GET: builds/Create
@@ -57,11 +58,11 @@ namespace LoLWay.Controllers
             ViewBag.runes = runes;
             ViewBag.itemsDescription = items;
 
-            ViewBag.items = new BuildModels(new SelectList(items, "id", "image", "name", new object()));
-            ViewBag.marks = new BuildModels(new SelectList(runes.Where(x => x.type == "red"), "id", "image", "name"));
-            ViewBag.seals = new BuildModels(new SelectList(runes.Where(x => x.type == "yellow"), "id", "image", "name"));
-            ViewBag.quins = new BuildModels(new SelectList(runes.Where(x => x.type == "black"), "id", "image", "name"));
-            ViewBag.glyphs = new BuildModels(new SelectList(runes.Where(x => x.type == "blue"), "id", "image", "name"));
+            ViewBag.items = new BuildModels(new SelectList(items, "id", "image"));
+            ViewBag.marks = new BuildModels(new SelectList(runes.Where(x => x.type == "red"), "id", "image"));
+            ViewBag.seals = new BuildModels(new SelectList(runes.Where(x => x.type == "yellow"), "id", "image"));
+            ViewBag.quins = new BuildModels(new SelectList(runes.Where(x => x.type == "black"), "id", "image"));
+            ViewBag.glyphs = new BuildModels(new SelectList(runes.Where(x => x.type == "blue"), "id", "image"));
             return View();
         }
 
@@ -73,17 +74,13 @@ namespace LoLWay.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (items != null) BuildHelper.itemsAdd(ref newBuild, items.Take(6), db);
-                if (marks != null) BuildHelper.runesAdd(ref newBuild, marks.Take(6), db);
-                if (glyphs != null) BuildHelper.runesAdd(ref newBuild, glyphs.Take(6), db);
-                if (seals != null) BuildHelper.runesAdd(ref newBuild, seals.Take(6), db);
-                if (quins != null) BuildHelper.runesAdd(ref newBuild, quins.Take(6), db);
-                var userId = User.Identity.GetUserId();
-                newBuild.userId = userId;
-                newBuild.aspnetusers = db.aspnetusers.FirstOrDefault(x => x.Id == userId);
-                newBuild.champion = db.champion.FirstOrDefault(x => x.id == newBuild.championId);
-                newBuild.mastery = db.mastery.FirstOrDefault(x => x.id == newBuild.masteryId);
+                if (items != null) BuildHelper.itemsAdd(ref newBuild, items.Take(6));
+                if (marks != null) BuildHelper.runesAdd(ref newBuild, marks.Take(6));
+                if (glyphs != null) BuildHelper.runesAdd(ref newBuild, glyphs.Take(6));
+                if (seals != null) BuildHelper.runesAdd(ref newBuild, seals.Take(6));
+                if (quins != null) BuildHelper.runesAdd(ref newBuild, quins.Take(6));
 
+                newBuild.userId = User.Identity.GetUserId();
                 newBuild.modificationDate = DateTime.Now;
                 db.build.Add(newBuild);
                 db.SaveChanges();
@@ -93,6 +90,19 @@ namespace LoLWay.Controllers
             ViewBag.userId = new SelectList(db.aspnetusers, "Id", "Email", newBuild.userId);
             ViewBag.championId = new SelectList(db.champion, "id", "name", newBuild.championId);
             ViewBag.masteryId = new SelectList(db.mastery, "id", "name", newBuild.masteryId);
+
+            var itemsList = RiotImageHelper.GetItemsImages(db.item.ToList());
+            var runes = RiotImageHelper.GetRunesImages(db.rune.ToList());
+
+            ViewBag.runes = runes;
+            ViewBag.itemsDescription = itemsList;
+
+            ViewBag.items = new BuildModels(new SelectList(itemsList, "id", "image"));
+            ViewBag.marks = new BuildModels(new SelectList(runes.Where(x => x.type == "red"), "id", "image"));
+            ViewBag.seals = new BuildModels(new SelectList(runes.Where(x => x.type == "yellow"), "id", "image"));
+            ViewBag.quins = new BuildModels(new SelectList(runes.Where(x => x.type == "black"), "id", "image"));
+            ViewBag.glyphs = new BuildModels(new SelectList(runes.Where(x => x.type == "blue"), "id", "image"));
+
             return View(newBuild);
         }
 
@@ -112,6 +122,18 @@ namespace LoLWay.Controllers
             ViewBag.userId = new SelectList(db.aspnetusers, "Id", "Email", builds.userId);
             ViewBag.championId = new SelectList(db.champion, "id", "name", builds.championId);
             ViewBag.masteryId = new SelectList(db.mastery, "id", "name", builds.masteryId);
+
+
+            var items = RiotImageHelper.GetItemsImages(db.item.ToList());
+            var runes = RiotImageHelper.GetRunesImages(db.rune.ToList());
+
+            ViewBag.runes = runes;
+            ViewBag.itemsDescription = items;
+            ViewBag.items = new BuildModels(new SelectList(items, "id", "image"), builds.items.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries).Select(x => int.Parse(x)).ToList());
+            ViewBag.marks = new BuildModels(new SelectList(runes.Where(x => x.type == "red"), "id", "image"), builds.runes.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries).Select(x => int.Parse(x)).ToList());
+            ViewBag.seals = new BuildModels(new SelectList(runes.Where(x => x.type == "yellow"), "id", "image"), builds.runes.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries).Select(x => int.Parse(x)).ToList());
+            ViewBag.quins = new BuildModels(new SelectList(runes.Where(x => x.type == "black"), "id", "image"), builds.runes.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries).Select(x => int.Parse(x)).ToList());
+            ViewBag.glyphs = new BuildModels(new SelectList(runes.Where(x => x.type == "blue"), "id", "image"), builds.runes.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries).Select(x => int.Parse(x)).ToList());
             return View(builds);
         }
 
@@ -119,18 +141,37 @@ namespace LoLWay.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public ActionResult Edit([Bind(Include = "id,userId,championId,masteryId,gameVersion,modificationDate,notes")] build builds)
+        public ActionResult Edit([Bind(Include = "id,userId,championId,masteryId,gameVersion,modificationDate,notes")] build newBuild, IEnumerable<int> items, IEnumerable<int> quins, IEnumerable<int> marks, IEnumerable<int> seals, IEnumerable<int> glyphs)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(builds).State = EntityState.Modified;
+                if (items != null) BuildHelper.itemsAdd(ref newBuild, items.Take(6));
+                if (marks != null) BuildHelper.runesAdd(ref newBuild, marks.Take(6));
+                if (glyphs != null) BuildHelper.runesAdd(ref newBuild, glyphs.Take(6));
+                if (seals != null) BuildHelper.runesAdd(ref newBuild, seals.Take(6));
+                if (quins != null) BuildHelper.runesAdd(ref newBuild, quins.Take(6));
+                newBuild.userId = User.Identity.GetUserId();
+                newBuild.modificationDate = DateTime.Now;
+
+                db.Entry(newBuild).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.userId = new SelectList(db.aspnetusers, "Id", "Email", builds.userId);
-            ViewBag.championId = new SelectList(db.champion, "id", "name", builds.championId);
-            ViewBag.masteryId = new SelectList(db.mastery, "id", "name", builds.masteryId);
-            return View(builds);
+            ViewBag.userId = new SelectList(db.aspnetusers, "Id", "Email", newBuild.userId);
+            ViewBag.championId = new SelectList(db.champion, "id", "name", newBuild.championId);
+            ViewBag.masteryId = new SelectList(db.mastery, "id", "name", newBuild.masteryId);
+
+            var itemsList = RiotImageHelper.GetItemsImages(db.item.ToList());
+            var runes = RiotImageHelper.GetRunesImages(db.rune.ToList());
+
+            ViewBag.runes = runes;
+            ViewBag.itemsDescription = itemsList;
+            ViewBag.items = new BuildModels(new SelectList(itemsList, "id", "image"), newBuild.items.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries).Select(x => int.Parse(x)).ToList());
+            ViewBag.marks = new BuildModels(new SelectList(runes.Where(x => x.type == "red"), "id", "image"), newBuild.runes.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries).Select(x => int.Parse(x)).ToList());
+            ViewBag.seals = new BuildModels(new SelectList(runes.Where(x => x.type == "yellow"), "id", "image"), newBuild.runes.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries).Select(x => int.Parse(x)).ToList());
+            ViewBag.quins = new BuildModels(new SelectList(runes.Where(x => x.type == "black"), "id", "image"), newBuild.runes.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries).Select(x => int.Parse(x)).ToList());
+            ViewBag.glyphs = new BuildModels(new SelectList(runes.Where(x => x.type == "blue"), "id", "image"), newBuild.runes.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries).Select(x => int.Parse(x)).ToList());
+            return View(newBuild);
         }
 
         // GET: builds/Delete/5
@@ -142,11 +183,12 @@ namespace LoLWay.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             build builds = db.build.Find(id);
-            if (builds == null)
+            var buildDetails = new BuildDetails(builds);
+            if (buildDetails == null)
             {
                 return HttpNotFound();
             }
-            return View(builds);
+            return View(buildDetails);
         }
 
         // POST: builds/Delete/5

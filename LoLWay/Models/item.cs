@@ -14,18 +14,9 @@ namespace LoLWay.Models
     
     public partial class item
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public item()
-        {
-            this.build = new HashSet<build>();
-        }
-    
         public int id { get; set; }
         public string plaintext { get; set; }
         public string name { get; set; }
         public string image { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<build> build { get; set; }
     }
 }

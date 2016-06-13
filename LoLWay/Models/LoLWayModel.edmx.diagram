@@ -4,28 +4,26 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="664c8572201b4bd2b7745154737b0283" Name="Diagram1" ZoomLevel="109">
-        <EntityTypeShape EntityType="lolwayModel.champion" Width="1.5" PointX="4.625" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="lolwayModel.item" Width="1.5" PointX="12.125" PointY="3" IsExpanded="true" />
-        <EntityTypeShape EntityType="lolwayModel.mastery" Width="1.5" PointX="7.625" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="lolwayModel.rune" Width="1.5" PointX="12.125" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="lolwayModel.spell" Width="1.5" PointX="12.125" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="lolwayModel.whishlist" Width="1.5" PointX="6.875" PointY="4.375" />
-        <AssociationConnector Association="lolwayModel.champion1" />
-        <EntityTypeShape EntityType="lolwayModel.aspnetroles" Width="1.5" PointX="0.5" PointY="4.375" />
-        <EntityTypeShape EntityType="lolwayModel.aspnetuserclaims" Width="1.5" PointX="0.5" PointY="1.625" />
-        <EntityTypeShape EntityType="lolwayModel.aspnetuserlogins" Width="1.5" PointX="0.5" PointY="6.75" />
-        <EntityTypeShape EntityType="lolwayModel.aspnetusers" Width="1.5" PointX="4.625" PointY="3.375" />
-        <AssociationConnector Association="lolwayModel.ApplicationUser_Claims" />
-        <AssociationConnector Association="lolwayModel.ApplicationUser_Logins" />
-        <AssociationConnector Association="lolwayModel.aspnetusers1" />
-        <AssociationConnector Association="lolwayModel.aspnetuserroles" />
-        <EntityTypeShape EntityType="lolwayModel.build" Width="1.5" PointX="9.625" PointY="4.375" />
-        <AssociationConnector Association="lolwayModel.users1" />
-        <AssociationConnector Association="lolwayModel.champions1" />
-        <AssociationConnector Association="lolwayModel.masteries1" />
-        <AssociationConnector Association="lolwayModel.itembuild" />
-        <AssociationConnector Association="lolwayModel.runebuild" />
+      <Diagram DiagramId="cf8f9cf7e3a649b6baa670702ef11e8e" Name="Diagram1">
+        <EntityTypeShape EntityType="lolwayModel.aspnetroles" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="lolwayModel.aspnetuserclaims" Width="1.5" PointX="3" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="lolwayModel.aspnetuserlogins" Width="1.5" PointX="3" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="lolwayModel.aspnetusers" Width="1.5" PointX="0.75" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="lolwayModel.build" Width="1.5" PointX="6" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="lolwayModel.champion" Width="1.5" PointX="3.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="lolwayModel.item" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="lolwayModel.mastery" Width="1.5" PointX="3.75" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="lolwayModel.rune" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="lolwayModel.spell" Width="1.5" PointX="8.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="lolwayModel.whishlist" Width="1.5" PointX="6" PointY="3.25" IsExpanded="true" />
+        <AssociationConnector Association="lolwayModel.ApplicationUser_Claims" ManuallyRouted="false" />
+        <AssociationConnector Association="lolwayModel.ApplicationUser_Logins" ManuallyRouted="false" />
+        <AssociationConnector Association="lolwayModel.aspnetusers1" ManuallyRouted="false" />
+        <AssociationConnector Association="lolwayModel.users" ManuallyRouted="false" />
+        <AssociationConnector Association="lolwayModel.champions" ManuallyRouted="false" />
+        <AssociationConnector Association="lolwayModel.masteries" ManuallyRouted="false" />
+        <AssociationConnector Association="lolwayModel.champion1" ManuallyRouted="false" />
+        <AssociationConnector Association="lolwayModel.aspnetuserroles" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

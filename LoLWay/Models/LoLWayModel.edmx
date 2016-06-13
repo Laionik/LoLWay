@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="lolwayModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="lolwayModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="aspnetroles">
           <Key>
             <PropertyRef Name="Id" />
@@ -66,6 +66,8 @@
           <Property Name="masteryId" Type="int" Nullable="false" />
           <Property Name="modificationDate" Type="datetime" Precision="0" Nullable="false" />
           <Property Name="notes" Type="varchar" MaxLength="1000" />
+          <Property Name="runes" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="items" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="champion">
           <Key>
@@ -84,16 +86,6 @@
           <Property Name="plaintext" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="name" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="image" Type="varchar" MaxLength="45" Nullable="false" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'def.lolway.itembuild' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="itembuild">
-          <Key>
-            <PropertyRef Name="itemNumber" />
-            <PropertyRef Name="buildNumber" />
-          </Key>
-          <Property Name="itemNumber" Type="int" Nullable="false" />
-          <Property Name="buildNumber" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="mastery">
           <Key>
@@ -114,16 +106,6 @@ warning 6002: The table/view 'def.lolway.itembuild' does not have a primary key 
           <Property Name="image" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="tier" Type="varchar" MaxLength="45" />
           <Property Name="type" Type="varchar" MaxLength="45" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'def.lolway.runebuild' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="runebuild">
-          <Key>
-            <PropertyRef Name="runeNumber" />
-            <PropertyRef Name="buildNumber" />
-          </Key>
-          <Property Name="runeNumber" Type="int" Nullable="false" />
-          <Property Name="buildNumber" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="spell">
           <Key>
@@ -199,32 +181,6 @@ warning 6002: The table/view 'def.lolway.runebuild' does not have a primary key 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="buildTable">
-          <End Role="build" Type="Self.build" Multiplicity="1" />
-          <End Role="itembuild" Type="Self.itembuild" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="build">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="itembuild">
-              <PropertyRef Name="buildNumber" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="buildTable2">
-          <End Role="build" Type="Self.build" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="runebuild" Type="Self.runebuild" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="build">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="runebuild">
-              <PropertyRef Name="buildNumber" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="champion1">
           <End Role="champion" Type="Self.champion" Multiplicity="1" />
           <End Role="whishlist" Type="Self.whishlist" Multiplicity="*" />
@@ -263,20 +219,6 @@ warning 6002: The table/view 'def.lolway.runebuild' does not have a primary key 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="itemTable">
-          <End Role="item" Type="Self.item" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="itembuild" Type="Self.itembuild" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="item">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="itembuild">
-              <PropertyRef Name="itemNumber" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="masteries">
           <End Role="mastery" Type="Self.mastery" Multiplicity="1" />
           <End Role="build" Type="Self.build" Multiplicity="*" />
@@ -286,20 +228,6 @@ warning 6002: The table/view 'def.lolway.runebuild' does not have a primary key 
             </Principal>
             <Dependent Role="build">
               <PropertyRef Name="masteryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="runeTable">
-          <End Role="rune" Type="Self.rune" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="runebuild" Type="Self.runebuild" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="rune">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="runebuild">
-              <PropertyRef Name="runeNumber" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -328,18 +256,6 @@ warning 6002: The table/view 'def.lolway.runebuild' does not have a primary key 
           <EntitySet Name="rune" EntityType="Self.rune" Schema="lolway" store:Type="Tables" />
           <EntitySet Name="spell" EntityType="Self.spell" Schema="lolway" store:Type="Tables" />
           <EntitySet Name="whishlist" EntityType="Self.whishlist" Schema="lolway" store:Type="Tables" />
-          <EntitySet Name="itembuild" EntityType="Self.itembuild" store:Type="Tables" store:Schema="lolway">
-            <DefiningQuery>SELECT
-`itembuild`.`itemNumber`, 
-`itembuild`.`buildNumber`
-FROM `itembuild` AS `itembuild`</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="runebuild" EntityType="Self.runebuild" store:Type="Tables" store:Schema="lolway">
-            <DefiningQuery>SELECT
-`runebuild`.`runeNumber`, 
-`runebuild`.`buildNumber`
-FROM `runebuild` AS `runebuild`</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="ApplicationUser_Claims" Association="Self.ApplicationUser_Claims">
             <End Role="aspnetusers" EntitySet="aspnetusers" />
             <End Role="aspnetuserclaims" EntitySet="aspnetuserclaims" />
@@ -356,14 +272,6 @@ FROM `runebuild` AS `runebuild`</DefiningQuery>
             <End Role="aspnetusers" EntitySet="aspnetusers" />
             <End Role="whishlist" EntitySet="whishlist" />
           </AssociationSet>
-          <AssociationSet Name="buildTable" Association="Self.buildTable">
-            <End Role="build" EntitySet="build" />
-            <End Role="itembuild" EntitySet="itembuild" />
-          </AssociationSet>
-          <AssociationSet Name="buildTable2" Association="Self.buildTable2">
-            <End Role="build" EntitySet="build" />
-            <End Role="runebuild" EntitySet="runebuild" />
-          </AssociationSet>
           <AssociationSet Name="champion1" Association="Self.champion1">
             <End Role="champion" EntitySet="champion" />
             <End Role="whishlist" EntitySet="whishlist" />
@@ -376,27 +284,87 @@ FROM `runebuild` AS `runebuild`</DefiningQuery>
             <End Role="aspnetroles" EntitySet="aspnetroles" />
             <End Role="aspnetuserroles" EntitySet="aspnetuserroles" />
           </AssociationSet>
-          <AssociationSet Name="itemTable" Association="Self.itemTable">
-            <End Role="item" EntitySet="item" />
-            <End Role="itembuild" EntitySet="itembuild" />
-          </AssociationSet>
           <AssociationSet Name="masteries" Association="Self.masteries">
             <End Role="mastery" EntitySet="mastery" />
             <End Role="build" EntitySet="build" />
-          </AssociationSet>
-          <AssociationSet Name="runeTable" Association="Self.runeTable">
-            <End Role="rune" EntitySet="rune" />
-            <End Role="runebuild" EntitySet="runebuild" />
           </AssociationSet>
           <AssociationSet Name="users" Association="Self.users">
             <End Role="aspnetusers" EntitySet="aspnetusers" />
             <End Role="build" EntitySet="build" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="lolwayModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="aspnetroles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="aspnetusers" Relationship="Self.aspnetuserroles" FromRole="aspnetroles" ToRole="aspnetusers" />
+        </EntityType>
+        <EntityType Name="aspnetuserclaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ClaimType" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <Property Name="ClaimValue" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="aspnetusers" Relationship="Self.ApplicationUser_Claims" FromRole="aspnetuserclaims" ToRole="aspnetusers" />
+        </EntityType>
+        <EntityType Name="aspnetuserlogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="aspnetusers" Relationship="Self.ApplicationUser_Logins" FromRole="aspnetuserlogins" ToRole="aspnetusers" />
+        </EntityType>
+        <EntityType Name="aspnetusers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="aspnetuserclaims" Relationship="Self.ApplicationUser_Claims" FromRole="aspnetusers" ToRole="aspnetuserclaims" />
+          <NavigationProperty Name="aspnetuserlogins" Relationship="Self.ApplicationUser_Logins" FromRole="aspnetusers" ToRole="aspnetuserlogins" />
+          <NavigationProperty Name="whishlist" Relationship="Self.aspnetusers1" FromRole="aspnetusers" ToRole="whishlist" />
+          <NavigationProperty Name="build" Relationship="Self.users" FromRole="aspnetusers" ToRole="build" />
+          <NavigationProperty Name="aspnetroles" Relationship="Self.aspnetuserroles" FromRole="aspnetusers" ToRole="aspnetroles" />
+        </EntityType>
+        <EntityType Name="build">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="championId" Type="Int32" Nullable="false" />
+          <Property Name="masteryId" Type="Int32" Nullable="false" />
+          <Property Name="modificationDate" Type="DateTime" Nullable="false" />
+          <Property Name="notes" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="runes" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="items" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="aspnetusers" Relationship="Self.users" FromRole="build" ToRole="aspnetusers" />
+          <NavigationProperty Name="champion" Relationship="Self.champions" FromRole="build" ToRole="champion" />
+          <NavigationProperty Name="mastery" Relationship="Self.masteries" FromRole="build" ToRole="mastery" />
+        </EntityType>
         <EntityType Name="champion">
           <Key>
             <PropertyRef Name="id" />
@@ -405,8 +373,8 @@ FROM `runebuild` AS `runebuild`</DefiningQuery>
           <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="title" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="image" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="whishlist" Relationship="lolwayModel.champion1" FromRole="champion" ToRole="whishlist" />
-          <NavigationProperty Name="build" Relationship="lolwayModel.champions1" FromRole="champion" ToRole="build" />
+          <NavigationProperty Name="build" Relationship="Self.champions" FromRole="champion" ToRole="build" />
+          <NavigationProperty Name="whishlist" Relationship="Self.champion1" FromRole="champion" ToRole="whishlist" />
         </EntityType>
         <EntityType Name="item">
           <Key>
@@ -416,7 +384,6 @@ FROM `runebuild` AS `runebuild`</DefiningQuery>
           <Property Name="plaintext" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="image" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="build" Relationship="lolwayModel.itembuild" FromRole="item" ToRole="build" />
         </EntityType>
         <EntityType Name="mastery">
           <Key>
@@ -426,7 +393,7 @@ FROM `runebuild` AS `runebuild`</DefiningQuery>
           <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="image" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="description" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="build" Relationship="lolwayModel.masteries1" FromRole="mastery" ToRole="build" />
+          <NavigationProperty Name="build" Relationship="Self.masteries" FromRole="mastery" ToRole="build" />
         </EntityType>
         <EntityType Name="rune">
           <Key>
@@ -438,7 +405,6 @@ FROM `runebuild` AS `runebuild`</DefiningQuery>
           <Property Name="image" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="tier" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="type" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="build" Relationship="lolwayModel.runebuild" FromRole="rune" ToRole="build" />
         </EntityType>
         <EntityType Name="spell">
           <Key>
@@ -450,139 +416,23 @@ FROM `runebuild` AS `runebuild`</DefiningQuery>
           <Property Name="summonerLevel" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="image" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
-        <EntityContainer Name="lolwayEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="champion" EntityType="Self.champion" />
-          <EntitySet Name="item" EntityType="Self.item" />
-          <EntitySet Name="mastery" EntityType="Self.mastery" />
-          <EntitySet Name="rune" EntityType="Self.rune" />
-          <EntitySet Name="spell" EntityType="Self.spell" />
-          <EntitySet Name="whishlist" EntityType="lolwayModel.whishlist" />
-          <AssociationSet Name="champion1" Association="lolwayModel.champion1">
-            <End Role="champion" EntitySet="champion" />
-            <End Role="whishlist" EntitySet="whishlist" />
-          </AssociationSet>
-          <EntitySet Name="aspnetroles" EntityType="lolwayModel.aspnetroles" />
-          <EntitySet Name="aspnetuserclaims" EntityType="lolwayModel.aspnetuserclaims" />
-          <EntitySet Name="aspnetuserlogins" EntityType="lolwayModel.aspnetuserlogins" />
-          <EntitySet Name="aspnetusers" EntityType="lolwayModel.aspnetusers" />
-          <AssociationSet Name="ApplicationUser_Claims" Association="lolwayModel.ApplicationUser_Claims">
-            <End Role="aspnetusers" EntitySet="aspnetusers" />
-            <End Role="aspnetuserclaims" EntitySet="aspnetuserclaims" />
-          </AssociationSet>
-          <AssociationSet Name="ApplicationUser_Logins" Association="lolwayModel.ApplicationUser_Logins">
-            <End Role="aspnetusers" EntitySet="aspnetusers" />
-            <End Role="aspnetuserlogins" EntitySet="aspnetuserlogins" />
-          </AssociationSet>
-          <AssociationSet Name="aspnetusers1" Association="lolwayModel.aspnetusers1">
-            <End Role="aspnetusers" EntitySet="aspnetusers" />
-            <End Role="whishlist" EntitySet="whishlist" />
-          </AssociationSet>
-          <AssociationSet Name="aspnetuserroles" Association="lolwayModel.aspnetuserroles">
-            <End Role="aspnetusers" EntitySet="aspnetusers" />
-            <End Role="aspnetroles" EntitySet="aspnetroles" />
-          </AssociationSet>
-          <EntitySet Name="build" EntityType="lolwayModel.build" />
-          <AssociationSet Name="users1" Association="lolwayModel.users1">
-            <End Role="aspnetusers" EntitySet="aspnetusers" />
-            <End Role="build" EntitySet="build" />
-          </AssociationSet>
-          <AssociationSet Name="champions1" Association="lolwayModel.champions1">
-            <End Role="champion" EntitySet="champion" />
-            <End Role="build" EntitySet="build" />
-          </AssociationSet>
-          <AssociationSet Name="masteries1" Association="lolwayModel.masteries1">
-            <End Role="mastery" EntitySet="mastery" />
-            <End Role="build" EntitySet="build" />
-          </AssociationSet>
-          <AssociationSet Name="itembuild" Association="lolwayModel.itembuild">
-            <End Role="build" EntitySet="build" />
-            <End Role="item" EntitySet="item" />
-          </AssociationSet>
-          <AssociationSet Name="runebuild" Association="lolwayModel.runebuild">
-            <End Role="build" EntitySet="build" />
-            <End Role="rune" EntitySet="rune" />
-          </AssociationSet>
-        </EntityContainer>
         <EntityType Name="whishlist">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="userId" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="userId" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="championId" Type="Int32" Nullable="false" />
           <Property Name="owned" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="champion" Relationship="lolwayModel.champion1" FromRole="whishlist" ToRole="champion" />
-          <NavigationProperty Name="aspnetusers" Relationship="lolwayModel.aspnetusers1" FromRole="whishlist" ToRole="aspnetusers" />
           <Property Name="rank" Type="Int64" Nullable="false" />
-        </EntityType>
-        <Association Name="champion1">
-          <End Type="lolwayModel.champion" Role="champion" Multiplicity="1" />
-          <End Type="lolwayModel.whishlist" Role="whishlist" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="champion">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="whishlist">
-              <PropertyRef Name="championId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="aspnetroles">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="aspnetusers" Relationship="lolwayModel.aspnetuserroles" FromRole="aspnetroles" ToRole="aspnetusers" />
-        </EntityType>
-        <EntityType Name="aspnetuserclaims">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
-          <Property Name="ClaimType" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
-          <Property Name="ClaimValue" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="aspnetusers" Relationship="lolwayModel.ApplicationUser_Claims" FromRole="aspnetuserclaims" ToRole="aspnetusers" />
-        </EntityType>
-        <EntityType Name="aspnetuserlogins">
-          <Key>
-            <PropertyRef Name="LoginProvider" />
-            <PropertyRef Name="ProviderKey" />
-            <PropertyRef Name="UserId" />
-          </Key>
-          <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
-          <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
-          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="aspnetusers" Relationship="lolwayModel.ApplicationUser_Logins" FromRole="aspnetuserlogins" ToRole="aspnetusers" />
-        </EntityType>
-        <EntityType Name="aspnetusers">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
-          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
-          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
-          <Property Name="PasswordHash" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
-          <Property Name="SecurityStamp" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
-          <Property Name="PhoneNumber" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
-          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
-          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
-          <Property Name="LockoutEndDateUtc" Type="DateTime" />
-          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
-          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
-          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="aspnetuserclaims" Relationship="lolwayModel.ApplicationUser_Claims" FromRole="aspnetusers" ToRole="aspnetuserclaims" />
-          <NavigationProperty Name="aspnetuserlogins" Relationship="lolwayModel.ApplicationUser_Logins" FromRole="aspnetusers" ToRole="aspnetuserlogins" />
-          <NavigationProperty Name="whishlist" Relationship="lolwayModel.aspnetusers1" FromRole="aspnetusers" ToRole="whishlist" />
-          <NavigationProperty Name="aspnetroles" Relationship="lolwayModel.aspnetuserroles" FromRole="aspnetusers" ToRole="aspnetroles" />
-          <NavigationProperty Name="build" Relationship="lolwayModel.users1" FromRole="aspnetusers" ToRole="build" />
+          <NavigationProperty Name="aspnetusers" Relationship="Self.aspnetusers1" FromRole="whishlist" ToRole="aspnetusers" />
+          <NavigationProperty Name="champion" Relationship="Self.champion1" FromRole="whishlist" ToRole="champion" />
         </EntityType>
         <Association Name="ApplicationUser_Claims">
-          <End Type="lolwayModel.aspnetusers" Role="aspnetusers" Multiplicity="1">
+          <End Role="aspnetusers" Type="Self.aspnetusers" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="lolwayModel.aspnetuserclaims" Role="aspnetuserclaims" Multiplicity="*" />
+          <End Role="aspnetuserclaims" Type="Self.aspnetuserclaims" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="aspnetusers">
               <PropertyRef Name="Id" />
@@ -593,10 +443,10 @@ FROM `runebuild` AS `runebuild`</DefiningQuery>
           </ReferentialConstraint>
         </Association>
         <Association Name="ApplicationUser_Logins">
-          <End Type="lolwayModel.aspnetusers" Role="aspnetusers" Multiplicity="1">
+          <End Role="aspnetusers" Type="Self.aspnetusers" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="lolwayModel.aspnetuserlogins" Role="aspnetuserlogins" Multiplicity="*" />
+          <End Role="aspnetuserlogins" Type="Self.aspnetuserlogins" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="aspnetusers">
               <PropertyRef Name="Id" />
@@ -607,8 +457,8 @@ FROM `runebuild` AS `runebuild`</DefiningQuery>
           </ReferentialConstraint>
         </Association>
         <Association Name="aspnetusers1">
-          <End Type="lolwayModel.aspnetusers" Role="aspnetusers" Multiplicity="1" />
-          <End Type="lolwayModel.whishlist" Role="whishlist" Multiplicity="*" />
+          <End Role="aspnetusers" Type="Self.aspnetusers" Multiplicity="1" />
+          <End Role="whishlist" Type="Self.whishlist" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="aspnetusers">
               <PropertyRef Name="Id" />
@@ -618,29 +468,9 @@ FROM `runebuild` AS `runebuild`</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="aspnetuserroles">
-          <End Type="lolwayModel.aspnetusers" Role="aspnetusers" Multiplicity="*" />
-          <End Type="lolwayModel.aspnetroles" Role="aspnetroles" Multiplicity="*" />
-        </Association>
-        <EntityType Name="build">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="userId" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="championId" Type="Int32" Nullable="false" />
-          <Property Name="masteryId" Type="Int32" Nullable="false" />
-          <Property Name="modificationDate" Type="DateTime" Nullable="false" />
-          <Property Name="notes" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="aspnetusers" Relationship="lolwayModel.users1" FromRole="build" ToRole="aspnetusers" />
-          <NavigationProperty Name="champion" Relationship="lolwayModel.champions1" FromRole="build" ToRole="champion" />
-          <NavigationProperty Name="mastery" Relationship="lolwayModel.masteries1" FromRole="build" ToRole="mastery" />
-          <NavigationProperty Name="item" Relationship="lolwayModel.itembuild" FromRole="build" ToRole="item" />
-          <NavigationProperty Name="rune" Relationship="lolwayModel.runebuild" FromRole="build" ToRole="rune" />
-        </EntityType>
-        <Association Name="users1">
-          <End Type="lolwayModel.aspnetusers" Role="aspnetusers" Multiplicity="1" />
-          <End Type="lolwayModel.build" Role="build" Multiplicity="*" />
+        <Association Name="users">
+          <End Role="aspnetusers" Type="Self.aspnetusers" Multiplicity="1" />
+          <End Role="build" Type="Self.build" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="aspnetusers">
               <PropertyRef Name="Id" />
@@ -650,9 +480,9 @@ FROM `runebuild` AS `runebuild`</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="champions1">
-          <End Type="lolwayModel.champion" Role="champion" Multiplicity="1" />
-          <End Type="lolwayModel.build" Role="build" Multiplicity="*" />
+        <Association Name="champions">
+          <End Role="champion" Type="Self.champion" Multiplicity="1" />
+          <End Role="build" Type="Self.build" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="champion">
               <PropertyRef Name="id" />
@@ -662,9 +492,9 @@ FROM `runebuild` AS `runebuild`</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="masteries1">
-          <End Type="lolwayModel.mastery" Role="mastery" Multiplicity="1" />
-          <End Type="lolwayModel.build" Role="build" Multiplicity="*" />
+        <Association Name="masteries">
+          <End Role="mastery" Type="Self.mastery" Multiplicity="1" />
+          <End Role="build" Type="Self.build" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="mastery">
               <PropertyRef Name="id" />
@@ -674,20 +504,132 @@ FROM `runebuild` AS `runebuild`</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="itembuild">
-          <End Type="lolwayModel.build" Role="build" Multiplicity="*" />
-          <End Type="lolwayModel.item" Role="item" Multiplicity="*" />
+        <Association Name="champion1">
+          <End Role="champion" Type="Self.champion" Multiplicity="1" />
+          <End Role="whishlist" Type="Self.whishlist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="champion">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="whishlist">
+              <PropertyRef Name="championId" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
-        <Association Name="runebuild">
-          <End Type="lolwayModel.build" Role="build" Multiplicity="*" />
-          <End Type="lolwayModel.rune" Role="rune" Multiplicity="*" />
+        <Association Name="aspnetuserroles">
+          <End Role="aspnetusers" Type="Self.aspnetusers" Multiplicity="*" />
+          <End Role="aspnetroles" Type="Self.aspnetroles" Multiplicity="*" />
         </Association>
+        <EntityContainer Name="lolwayEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="aspnetroles" EntityType="Self.aspnetroles" />
+          <EntitySet Name="aspnetuserclaims" EntityType="Self.aspnetuserclaims" />
+          <EntitySet Name="aspnetuserlogins" EntityType="Self.aspnetuserlogins" />
+          <EntitySet Name="aspnetusers" EntityType="Self.aspnetusers" />
+          <EntitySet Name="build" EntityType="Self.build" />
+          <EntitySet Name="champion" EntityType="Self.champion" />
+          <EntitySet Name="item" EntityType="Self.item" />
+          <EntitySet Name="mastery" EntityType="Self.mastery" />
+          <EntitySet Name="rune" EntityType="Self.rune" />
+          <EntitySet Name="spell" EntityType="Self.spell" />
+          <EntitySet Name="whishlist" EntityType="Self.whishlist" />
+          <AssociationSet Name="ApplicationUser_Claims" Association="Self.ApplicationUser_Claims">
+            <End Role="aspnetusers" EntitySet="aspnetusers" />
+            <End Role="aspnetuserclaims" EntitySet="aspnetuserclaims" />
+          </AssociationSet>
+          <AssociationSet Name="ApplicationUser_Logins" Association="Self.ApplicationUser_Logins">
+            <End Role="aspnetusers" EntitySet="aspnetusers" />
+            <End Role="aspnetuserlogins" EntitySet="aspnetuserlogins" />
+          </AssociationSet>
+          <AssociationSet Name="aspnetusers1" Association="Self.aspnetusers1">
+            <End Role="aspnetusers" EntitySet="aspnetusers" />
+            <End Role="whishlist" EntitySet="whishlist" />
+          </AssociationSet>
+          <AssociationSet Name="users" Association="Self.users">
+            <End Role="aspnetusers" EntitySet="aspnetusers" />
+            <End Role="build" EntitySet="build" />
+          </AssociationSet>
+          <AssociationSet Name="champions" Association="Self.champions">
+            <End Role="champion" EntitySet="champion" />
+            <End Role="build" EntitySet="build" />
+          </AssociationSet>
+          <AssociationSet Name="masteries" Association="Self.masteries">
+            <End Role="mastery" EntitySet="mastery" />
+            <End Role="build" EntitySet="build" />
+          </AssociationSet>
+          <AssociationSet Name="champion1" Association="Self.champion1">
+            <End Role="champion" EntitySet="champion" />
+            <End Role="whishlist" EntitySet="whishlist" />
+          </AssociationSet>
+          <AssociationSet Name="aspnetuserroles" Association="Self.aspnetuserroles">
+            <End Role="aspnetusers" EntitySet="aspnetusers" />
+            <End Role="aspnetroles" EntitySet="aspnetroles" />
+          </AssociationSet>
+        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="lolwayModelStoreContainer" CdmEntityContainer="lolwayEntities">
+          <EntitySetMapping Name="aspnetroles">
+            <EntityTypeMapping TypeName="lolwayModel.aspnetroles">
+              <MappingFragment StoreEntitySet="aspnetroles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="aspnetuserclaims">
+            <EntityTypeMapping TypeName="lolwayModel.aspnetuserclaims">
+              <MappingFragment StoreEntitySet="aspnetuserclaims">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="aspnetuserlogins">
+            <EntityTypeMapping TypeName="lolwayModel.aspnetuserlogins">
+              <MappingFragment StoreEntitySet="aspnetuserlogins">
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="aspnetusers">
+            <EntityTypeMapping TypeName="lolwayModel.aspnetusers">
+              <MappingFragment StoreEntitySet="aspnetusers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="build">
+            <EntityTypeMapping TypeName="lolwayModel.build">
+              <MappingFragment StoreEntitySet="build">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="championId" ColumnName="championId" />
+                <ScalarProperty Name="masteryId" ColumnName="masteryId" />
+                <ScalarProperty Name="modificationDate" ColumnName="modificationDate" />
+                <ScalarProperty Name="notes" ColumnName="notes" />
+                <ScalarProperty Name="runes" ColumnName="runes" />
+                <ScalarProperty Name="items" ColumnName="items" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="champion">
             <EntityTypeMapping TypeName="lolwayModel.champion">
               <MappingFragment StoreEntitySet="champion">
@@ -744,96 +686,23 @@ FROM `runebuild` AS `runebuild`</DefiningQuery>
           <EntitySetMapping Name="whishlist">
             <EntityTypeMapping TypeName="lolwayModel.whishlist">
               <MappingFragment StoreEntitySet="whishlist">
-                <ScalarProperty Name="rank" ColumnName="rank" />
-                <ScalarProperty Name="owned" ColumnName="owned" />
-                <ScalarProperty Name="championId" ColumnName="championId" />
-                <ScalarProperty Name="userId" ColumnName="userId" />
                 <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="aspnetroles">
-            <EntityTypeMapping TypeName="lolwayModel.aspnetroles">
-              <MappingFragment StoreEntitySet="aspnetroles">
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="aspnetuserclaims">
-            <EntityTypeMapping TypeName="lolwayModel.aspnetuserclaims">
-              <MappingFragment StoreEntitySet="aspnetuserclaims">
-                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
-                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="aspnetuserlogins">
-            <EntityTypeMapping TypeName="lolwayModel.aspnetuserlogins">
-              <MappingFragment StoreEntitySet="aspnetuserlogins">
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
-                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="aspnetusers">
-            <EntityTypeMapping TypeName="lolwayModel.aspnetusers">
-              <MappingFragment StoreEntitySet="aspnetusers">
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
-                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
-                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
-                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
-                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
-                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
-                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="championId" ColumnName="championId" />
+                <ScalarProperty Name="owned" ColumnName="owned" />
+                <ScalarProperty Name="rank" ColumnName="rank" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <AssociationSetMapping Name="aspnetuserroles" TypeName="lolwayModel.aspnetuserroles" StoreEntitySet="aspnetuserroles">
-            <EndProperty Name="aspnetroles">
-              <ScalarProperty Name="Id" ColumnName="RoleId" />
-            </EndProperty>
             <EndProperty Name="aspnetusers">
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
-          </AssociationSetMapping>
-          <EntitySetMapping Name="build">
-            <EntityTypeMapping TypeName="lolwayModel.build">
-              <MappingFragment StoreEntitySet="build">
-                <ScalarProperty Name="notes" ColumnName="notes" />
-                <ScalarProperty Name="modificationDate" ColumnName="modificationDate" />
-                <ScalarProperty Name="masteryId" ColumnName="masteryId" />
-                <ScalarProperty Name="championId" ColumnName="championId" />
-                <ScalarProperty Name="userId" ColumnName="userId" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <AssociationSetMapping Name="itembuild" TypeName="lolwayModel.itembuild" StoreEntitySet="itembuild">
-            <EndProperty Name="item">
-              <ScalarProperty Name="id" ColumnName="itemNumber" />
-            </EndProperty>
-            <EndProperty Name="build">
-              <ScalarProperty Name="id" ColumnName="buildNumber" />
+            <EndProperty Name="aspnetroles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
             </EndProperty>
           </AssociationSetMapping>
-          <AssociationSetMapping Name="runebuild" TypeName="lolwayModel.runebuild" StoreEntitySet="runebuild">
-            <EndProperty Name="rune">
-              <ScalarProperty Name="id" ColumnName="runeNumber" />
-            </EndProperty>
-            <EndProperty Name="build">
-              <ScalarProperty Name="id" ColumnName="buildNumber" />
-            </EndProperty>
-          </AssociationSetMapping>
-          </EntityContainerMapping>
+        </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

@@ -20,7 +20,7 @@ namespace LoLWay.Models
         public bool owned { get; set; }
         public long rank { get; set; }
     
-        public virtual champion champion { get; set; }
         public virtual aspnetusers aspnetusers { get; set; }
+        public virtual champion champion { get; set; }
     }
 }
