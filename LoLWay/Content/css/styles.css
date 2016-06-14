@@ -17,6 +17,11 @@ table, th, td {
     width: 100%;
 }
 
+.liveGame {
+    width: 100%;
+    text-align: center !important;
+}
+
 th {
     color: #f5f5f5;
 }

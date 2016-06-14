@@ -20,6 +20,7 @@ namespace LoLWay.Helpers
             return gameBanList;
         }
 
+        //gather informations about current game
         public static CurrentMatchModel GetLiveGameStats(ref List<CurrentGameBan> gameBanList, ref List<SummonerInfo> summonerList, string nickname, string region)
         {
             lolwayEntities db = new lolwayEntities();
@@ -33,6 +34,7 @@ namespace LoLWay.Helpers
                 gameBanListToCreate = GetBanList(currentGame.bannedChampions, db);
             }).Start();
 
+            var summonersLeagueDatas = RiotAPI.Summoner.GetSummonersRankStats(summonerIds, region);
             foreach (var summonerId in summonerIds)
             {
                 var summonerStats = Summoner.GetSummonerStats(summonerId, region);
@@ -41,7 +43,9 @@ namespace LoLWay.Helpers
                 string spell1Img = RiotImageHelper.GetImageUrl("spell", db.spell.FirstOrDefault(x => x.id == summoner.spell1Id).image);
                 string spell2Img = RiotImageHelper.GetImageUrl("spell", db.spell.FirstOrDefault(x => x.id == summoner.spell2Id).image);
                 string championImg = RiotImageHelper.GetImageUrl("champion", db.champion.FirstOrDefault(x => x.id == summoner.championId).image);
-                string division = "BRAK";
+                var summonerLeagueData = summonersLeagueDatas.FirstOrDefault(x => x.Key == int.Parse(summonerId));
+
+                string division = summonerLeagueData.Value == null ? "Niesklasyfikowany" : summonerLeagueData.Value.First().tier + " " + summonerLeagueData.Value.First().entries.First().division;
                 var summonerMasteries = summoner.masteries.Select(x => x.masteryId).ToList();
                 int masteryId = masteriesList.FirstOrDefault(x => summonerMasteries.Contains(x));
                 string mastery = RiotImageHelper.GetImageUrl("mastery", db.mastery.FirstOrDefault(x => x.id == masteryId).image);
@@ -68,7 +72,7 @@ namespace LoLWay.Helpers
             return currentGame;
         }
 
-
+        // gather informations about a summoner
         public static SummonerModel GetSummonerStats(string nickname, string region)
         {
             region = region.ToLower();
@@ -85,7 +89,9 @@ namespace LoLWay.Helpers
             var championStats = Summoner.GetSummonerStats(summonerData.id.ToString(), region).champions;
             var championStatsModel = championStats.Where(x => x.id != 0).OrderByDescending(x => x.stats.totalSessionsPlayed).FirstOrDefault();
             var totalStats = championStats.FirstOrDefault(x => x.id == 0);
-            return new SummonerModel(summonerData.id, summonerData.name, summonerData.summonerLevel, "DREWNO 5", championStatsModel, totalStats, matchDetailsList);
+            var summonerRank = RiotAPI.Summoner.GetSummonerRankStats(summonerData.id.ToString(), region);
+            var summonerDivision = summonerRank.tier + " " + summonerRank.entries.FirstOrDefault().division;
+            return new SummonerModel(summonerData.id, summonerData.name, summonerData.summonerLevel, summonerDivision, championStatsModel, totalStats, matchDetailsList);
         }
     }
 }

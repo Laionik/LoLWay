@@ -276,8 +276,6 @@
     <Content Include="Content\images\build\edit.png" />
     <Content Include="Content\images\build\back.png" />
     <Content Include="Content\images\build\save.png" />
-    <Content Include="Content\images\match\lose.png" />
-    <Content Include="Content\images\match\win.png" />
     <Content Include="Content\images\prettyPhoto\dark_rounded\btnNext.png" />
     <Content Include="Content\images\prettyPhoto\dark_rounded\btnPrevious.png" />
     <Content Include="Content\images\prettyPhoto\dark_rounded\contentPattern.png" />

@@ -62,7 +62,7 @@ else
         <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-6">
-                <table class="tableNormal">
+                <table class="liveGame">
                     <thead>
                         <tr class="default">
                             <th>Długosć</th>
@@ -85,7 +85,7 @@ else
         <!--Team 1-->
         <div class="row">
             <div class="col-sm-12 table_container">
-                <table class="tableNormal">
+                <table class="liveGame">
                     <thead>
                         <tr class="default">
                             <th class="summonerName">Przywoływacz</th>
@@ -105,7 +105,7 @@ else
                                 <td class="summonerName">@player.summonerName</td>
                                 <td class="champSpell"><img src="@summoner.champion" class="champ_live" /></td>
                                 <td class="champSpell"><img src="@summoner.spell1" class="spell_live" /> <img src="@summoner.spell2" class="spell_live" /></td>
-                                <td class="rank"></td>
+                                <td class="rank">@summoner.division</td>
                                 <td class="kda">@summoner.averageKills / @summoner.averageDeaths / @summoner.averageAssists</td>
                                 <td class="runes">@player.runes.Count</td>
                                 <td class="masteries"><img src="@summoner.mastery" class="mastery_live" /></td>
@@ -133,7 +133,7 @@ else
         <!--Team 2-->
         <div class="row">
             <div class="col-sm-12 table_container">
-                <table class="tableNormal">
+                <table class="liveGame">
                     <thead>
                         <tr class="default">
                             <th class="summonerName">Przywoływacz</th>
@@ -153,7 +153,7 @@ else
                                 <td class="summonerName">@player.summonerName</td>
                                 <td class="champSpell"><img src="@summoner.champion" class="champ_live" /></td>
                                 <td class="champSpell"><img src="@summoner.spell1" class="spell_live" /> <img src="@summoner.spell2" class="spell_live" /></td>
-                                <td class="rank"></td>
+                                <td class="rank">@summoner.division</td>
                                 <td class="kda">@summoner.averageKills / @summoner.averageDeaths / @summoner.averageAssists</td>
                                 <td class="runes">@player.runes.Count</td>
                                 <td class="masteries"><img src="@summoner.mastery" class="mastery_live" /></td>

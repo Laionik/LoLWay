@@ -246,11 +246,11 @@ namespace RiotAPI
                 #region request part
                 var httpRequest = new StringBuilder();
                 //server part
-                httpRequest.Append("https://").Append(server).Append(".api.pvp.net/api/lol/").Append(server).Append("/v2.5/league/by-summoner/");
+                httpRequest.Append("https://").Append(server.ToLower()).Append(".api.pvp.net/api/lol/").Append(server.ToLower()).Append("/v2.5/league/by-summoner/");
                 //summoner part
                 foreach (var param in summonersIds)
                 {
-                    httpRequest.Append(param).Append(", ");
+                    httpRequest.Append(param).Append(",");
                 }
                 httpRequest.Remove(httpRequest.Length - 2, 2);
                 //api part
