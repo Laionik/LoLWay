@@ -1,0 +1,51 @@
+﻿@model LoLWay.Models.SummonerMatchStats
+@if (Model.matchResult)
+{
+    <div class="match win">
+        <div class="team col-sm-5" id="team1">
+            @foreach (var player in Model.summonerList.Where(x => x.team == "100"))
+                {
+                <img src="@player.champion" class="matchList" /> @player.summonerName<br />
+            }
+        </div>
+        <div class="team col-sm-5" id="team2">
+            @foreach (var player in Model.summonerList.Where(x => x.team == "200"))
+                {
+                <img src="@player.champion" class="matchList" /> @player.summonerName<br />
+            }
+        </div>
+        <div class="summoner col-sm-2">
+            <img src="@Model.summonerList.FirstOrDefault(x => x.summonerId == ViewBag.summonerId).champion" class="summonerChamp" />  <br />
+            Linia: @Model.lane<br />
+            Rola: @Model.role<br />
+            Data meczu: @Model.matchDate<br />
+            Długość meczu: @Model.matchTime<br />
+
+        </div>
+    </div>
+}
+else
+{
+    <div class="match lose">
+        <div class="team col-sm-5" id="team1">
+            @foreach (var player in Model.summonerList.Where(x => x.team == "100"))
+            {
+                <img src="@player.champion" class="matchList" /> @player.summonerName<br />
+            }
+        </div>
+        <div class="team col-sm-5" id="team2">
+            @foreach (var player in Model.summonerList.Where(x => x.team == "200"))
+            {
+                <img src="@player.champion" class="matchList" /> @player.summonerName<br />
+            }
+        </div>
+        <div class="summoner col-sm-2">
+            <img src="@Model.summonerList.FirstOrDefault(x => x.summonerId == ViewBag.summonerId).champion" class="summonerChamp" />  <br />
+            <b>Linia:</b> @Model.lane<br />
+            <b>Rola:</b> @Model.role<br />
+            <b>Długość meczu:</b> @Model.matchTime<br />
+
+        </div>
+    </div>
+}
+

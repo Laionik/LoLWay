@@ -17,7 +17,7 @@ namespace LoLWay.Controllers
 
         // GET: whishlists
         [Authorize]
-        public ActionResult Whishlist()
+        public ActionResult Index()
         {
             var userId = User.Identity.GetUserId();
             var whishList = db.whishlist.Include(w => w.champion).Include(w => w.aspnetusers).ToList();

@@ -54,7 +54,7 @@ else
 {
     var gameStartTime = new DateTime(1970, 1, 1, 0, 0, 0).AddMilliseconds(Convert.ToDouble(Model.gameStartTime)).ToLocalTime().ToShortTimeString();
     var gameLength = TimeSpan.FromSeconds(Model.gameLength).ToString(@"hh\:mm\:ss");
-    List<LoLWay.Models.SummonerStats> summonerList = ViewBag.Participants;
+    List<LoLWay.Models.SummonerInfo> summonerList = ViewBag.Participants;
     List<LoLWay.Models.CurrentGameBan> banList = ViewBag.BanList;
 
     <section id="live-game-stats" class="container">

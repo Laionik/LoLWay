@@ -137,7 +137,7 @@ img.icon {
     width: auto;
 }
 
-td.imaage{
+td.imaage {
     width: 10% !important;
 }
 
@@ -154,7 +154,40 @@ img.details {
     height: auto !important;
 }
 
-img.masteryDetails{
+img.masteryDetails {
     width: 20%;
     height: auto;
+}
+
+
+/* matchhistory
+=================================*/
+
+div.match {
+    width: 100%;
+    border: 5px solid #ddd;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    padding-top: 10px;
+    padding-bottom: 5px;
+}
+
+div.win {
+    background: linear-gradient(green, white);
+    overflow: hidden;
+}
+
+div.lose{
+    background: linear-gradient(red, white);
+    overflow: hidden;
+}
+
+img.matchList {
+    width: 10% !important;
+    height: auto !important;
+}
+
+img.summonerChamp {
+    width: 60% !important;
+    height: auto !important;
 }

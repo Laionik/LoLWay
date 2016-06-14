@@ -30,15 +30,11 @@
                             <li>@Html.ActionLink("Kontakt", "Contact", "Home")</li>
                         </ul>
                     </li>
+                    <li>@Html.ActionLink("Przywoływacz", "Index", "Summoner")</li>
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <li>@Html.ActionLink("Lista życzeń", "Whishlist", "Whishlist")</li>
+                        <li>@Html.ActionLink("Lista życzeń", "Index", "Whishlist")</li>
                         <li>@Html.ActionLink("Buildy", "Index", "Build")</li>
-                    }
-
-                    @if (User.IsInRole("Admin"))
-                    {
-                        <li>@Html.ActionLink("Admin", "Index", "Admin")</li>
                     }
                     @Html.Partial("_LoginPartial")
                 </ul>

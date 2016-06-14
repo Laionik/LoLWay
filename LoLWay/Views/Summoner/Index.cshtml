@@ -1,0 +1,55 @@
+﻿@model LoLWay.Models.SummonerModel
+
+<head>
+    <title>Przywoływacz | LoLWay</title>
+</head>
+
+<section id="title" class="emerald">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h1>Wyszukaj przywoływacza</h1>
+                <p>Podaj nick, wybierz serwer i szukaj statystyk dotyczących gracza!</p>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="summoner-search" class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="center gap">
+                <h3>Wyszukaj przywoływacza</h3>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        @using (Ajax.BeginForm("SummonerLoad", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "summoner", InsertionMode = InsertionMode.Replace }))
+            {
+            <div class="row">
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="Nickname" required="required" placeholder="Nazwa przywoływacza">
+                </div>
+                <div class="col-sm-3">
+                    <select class="form-control" id="Region" name="Region" required="required">
+                        <option value="BR">BR</option>
+                        <option value="EUNE">EUNE</option>
+                        <option value="EUW">EUW</option>
+                        <option value="JP">JP</option>
+                        <option value="KR">KR</option>
+                        <option value="LAN">LAN</option>
+                        <option value="LAS">LAS</option>
+                        <option value="NA">NA</option>
+                        <option value="OCE">OCE</option>
+                        <option value="RU">RU</option>
+                        <option value="TR">TR</option>
+                    </select>
+                </div>
+                <div class="col-sm-3">
+                    <button type="submit" class="btn-primary btn-sm">Szukaj</button>
+                </div>
+            </div>
+        }
+    </div>
+
+</section>
+@Html.Partial("_Summoner", Model)

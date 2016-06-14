@@ -1,10 +1,7 @@
 ﻿using System.Web.Mvc;
-using RiotAPI;
 using System.Collections.Generic;
-using System.Linq;
 using System;
 using LoLWay.Models;
-using System.Threading;
 using LoLWay.Helpers;
 
 namespace LoLWay.Controllers
@@ -22,9 +19,9 @@ namespace LoLWay.Controllers
             try
             {
                 List<CurrentGameBan> gameBanList = new List<CurrentGameBan>();
-                List<SummonerStats> summonerList = new List<SummonerStats>();
+                List<SummonerInfo> summonerList = new List<SummonerInfo>();
 
-                var currentGame = LiveStatsHelper.GetLiveGameStats(ref gameBanList, ref summonerList, nickname, region);
+                var currentGame = StatsHelper.GetLiveGameStats(ref gameBanList, ref summonerList, nickname, region);
 
                 ViewBag.BanList = gameBanList;
                 ViewBag.Participants = summonerList;

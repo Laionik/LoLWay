@@ -1,11 +1,8 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace RiotAPI
 {
@@ -18,7 +15,6 @@ namespace RiotAPI
                 #region request part
                 var apiKey = Helpers.KeyHelper.GetApiKey();
                 var httpRequest = new StringBuilder();
-
                 httpRequest.Append("https://").Append(server).Append(".api.pvp.net/api/lol/").Append(server).Append("/v2.2/matchlist/by-summoner/");
                 httpRequest.Append(summonerID).Append("?api_key=").Append(apiKey);
 

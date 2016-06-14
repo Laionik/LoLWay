@@ -1,16 +1,14 @@
 ﻿using LoLWay.Models;
 using RiotAPI;
-using RiotAPI.Models;
 using RiotAPI.Models.CurrentGame;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using System.Web;
 
 namespace LoLWay.Helpers
 {
-    public static class LiveStatsHelper
+    public static class StatsHelper
     {
         private static List<CurrentGameBan> GetBanList(List<RiotAPI.Models.CurrentGame.BannedChampionModel> bans, lolwayEntities db)
         {
@@ -22,7 +20,7 @@ namespace LoLWay.Helpers
             return gameBanList;
         }
 
-        public static CurrentMatchModel GetLiveGameStats(ref List<CurrentGameBan> gameBanList, ref List<SummonerStats> summonerList, string nickname, string region)
+        public static CurrentMatchModel GetLiveGameStats(ref List<CurrentGameBan> gameBanList, ref List<SummonerInfo> summonerList, string nickname, string region)
         {
             lolwayEntities db = new lolwayEntities();
             var currentGame = CurrentGame.GetCurrentGame(Summoner.GetSummonerByName(nickname, region).id, region);
@@ -48,7 +46,7 @@ namespace LoLWay.Helpers
                 int masteryId = masteriesList.FirstOrDefault(x => summonerMasteries.Contains(x));
                 string mastery = RiotImageHelper.GetImageUrl("mastery", db.mastery.FirstOrDefault(x => x.id == masteryId).image);
 
-                SummonerStats cls = new SummonerStats(summonerStats.summonerId, summoner.summonerName, spell1Img, spell2Img, championImg, division, mastery);
+                SummonerInfo cls = new SummonerInfo(summonerStats.summonerId, summoner.summonerName, spell1Img, spell2Img, championImg, division, mastery);
                 if (summonerStats.champions == null || summonerStats.champions.FirstOrDefault(x => x.id == summoner.championId) == null)
                 {
                     cls.averageKills = 0;
@@ -68,6 +66,26 @@ namespace LoLWay.Helpers
             }
             gameBanList = gameBanListToCreate;
             return currentGame;
+        }
+
+
+        public static SummonerModel GetSummonerStats(string nickname, string region)
+        {
+            region = region.ToLower();
+            var summonerData = Summoner.GetSummonerByName(nickname, region);
+            //matches
+            var matchList = Match.GetMatchListBySummonerName(nickname, region).matches.Take(2);
+            List<SummonerMatchStats> matchDetailsList = new List<SummonerMatchStats>();
+            foreach (var match in matchList)
+            {
+                matchDetailsList.Add(new SummonerMatchStats(Match.GetMatchById(match.matchId.ToString(), region), summonerData.id, match.role, match.lane));
+            }
+
+            //champions
+            var championStats = Summoner.GetSummonerStats(summonerData.id.ToString(), region).champions;
+            var championStatsModel = championStats.Where(x => x.id != 0).OrderByDescending(x => x.stats.totalSessionsPlayed).FirstOrDefault();
+            var totalStats = championStats.FirstOrDefault(x => x.id == 0);
+            return new SummonerModel(summonerData.id, summonerData.name, summonerData.summonerLevel, "DREWNO 5", championStatsModel, totalStats, matchDetailsList);
         }
     }
 }

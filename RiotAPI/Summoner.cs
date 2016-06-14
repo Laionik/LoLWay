@@ -6,7 +6,6 @@ using System.Net;
 using System.Text;
 using RiotAPI.Types;
 using RiotAPI.Models.Summoner;
-using RiotAPI.Helpers;
 
 namespace RiotAPI
 {

@@ -1,0 +1,105 @@
+﻿@model RiotAPI.Models.Summoner.ChampionStatsModel
+<section id="champion-stats" class="container">
+    @if (Model != null)
+            {
+        <h3>Najczęściej grany bohater: <b>@ViewBag.champion</b></h3>
+        <table class="tableNormal">
+            <thead>
+                <tr class="default">
+                    <th>Statystyka</th>
+                    <th>Wynik</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="notfirst">
+                    <td>Liczba meczów</td>
+                    <td>@Model.stats.totalSessionsPlayed</td>
+                </tr>
+                <tr class="notfirst">
+                    <td>Liczba wygranych</td>
+                    <td>@Model.stats.totalSessionsWon</td>
+                </tr>
+                <tr class="notfirst">
+                    <td>Liczba przegranych</td>
+                    <td>@Model.stats.totalSessionsLost</td>
+                </tr>
+                <tr class="notfirst">
+                    <td>Liczba zabójstw bohaterów</td>
+                    <td>@Model.stats.totalChampionKills</td>
+                </tr>
+                <tr class="notfirst">
+                    <td>Liczba asyst</td>
+                    <td>@Model.stats.totalAssists</td>
+                </tr>
+                <tr class="notfirst">
+                    <td>Liczba śmierci</td>
+                    <td>@Model.stats.totalDeathsPerSession</td>
+                </tr>
+                <tr class="notfirst">
+                    <td>Zadane obrażenia</td>
+                    <td>@Model.stats.totalDamageDealt</td>
+                </tr>
+                <tr class="notfirst">
+                    <td>Otrzymane obrażenia</td>
+                    <td>@Model.stats.totalDamageTaken</td>
+                </tr>
+                <tr class="notfirst">
+                    <td>Najwięcej zabitych bohaterów</td>
+                    <td>@Model.stats.mostChampionKillsPerSession</td>
+                </tr>
+                <tr class="notfirst">
+                    <td>Liczba zabitych minionów</td>
+                    <td>@Model.stats.totalMinionKills</td>
+                </tr>
+                <tr class="notfirst">
+                    <td>Liczba podówjnych zabójstw</td>
+                    <td>@Model.stats.totalDoubleKills</td>
+                </tr>
+                <tr class="notfirst">
+                    <td>Liczba potrójnych zabójstw</td>
+                    <td>@Model.stats.totalTripleKills</td>
+                </tr>
+                <tr class="notfirst">
+                    <td>Liczba poczwórnych zabójstw</td>
+                    <td>@Model.stats.totalQuadraKills</td>
+                </tr>
+                <tr class="notfirst">
+                    <td>Liczba pentakilli</td>
+                    <td>@Model.stats.totalPentaKills</td>
+                </tr>
+                <tr class="notfirst">
+                    <td>Liczba unrealkills</td>
+                    <td>@Model.stats.totalUnrealKills</td>
+                </tr>
+                <tr class="notfirst">
+                    <td>Zarobione złoto</td>
+                    <td>@Model.stats.totalGoldEarned</td>
+                </tr>
+                <tr class="notfirst">
+                    <td>Liczba zniszczonych wież</td>
+                    <td>@Model.stats.totalTurretsKilled</td>
+                </tr>
+                <tr class="notfirst">
+                    <td>Zadane psychiczne obrażenia</td>
+                    <td>@Model.stats.totalPhysicalDamageDealt</td>
+                </tr>
+                <tr class="notfirst">
+                    <td>Zadane magiczne obrażenia</td>
+                    <td>@Model.stats.totalMagicDamageDealt</td>
+                </tr>
+                <tr class="notfirst">
+                    <td>Liczba pierwszych krwi</td>
+                    <td>@Model.stats.totalFirstBlood</td>
+                </tr>
+                <tr class="notfirst">
+                    <td>Maksymalna liczba zabitych bohaterów</td>
+                    <td>@Model.stats.maxChampionsKilled</td>
+                </tr>
+                <tr class="notfirst">
+                    <td>Maksymalna liczba śmierci</td>
+                    <td>@Model.stats.maxNumDeaths</td>
+                </tr>
+            </tbody>
+        </table>
+    }
+</section>

@@ -194,12 +194,13 @@
     <Compile Include="Controllers\BuildController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\SummonerController.cs" />
     <Compile Include="Controllers\WhishlistController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\BuildHelper.cs" />
-    <Compile Include="Helpers\LiveStatsHelper.cs" />
+    <Compile Include="Helpers\StatsHelper.cs" />
     <Compile Include="Helpers\RiotImageHelper.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\MySqlHistoryContext.cs" />
@@ -275,6 +276,8 @@
     <Content Include="Content\images\build\edit.png" />
     <Content Include="Content\images\build\back.png" />
     <Content Include="Content\images\build\save.png" />
+    <Content Include="Content\images\match\lose.png" />
+    <Content Include="Content\images\match\win.png" />
     <Content Include="Content\images\prettyPhoto\dark_rounded\btnNext.png" />
     <Content Include="Content\images\prettyPhoto\dark_rounded\btnPrevious.png" />
     <Content Include="Content\images\prettyPhoto\dark_rounded\contentPattern.png" />
@@ -416,7 +419,7 @@
     <Content Include="Views\Account\RegisterInfo.cshtml" />
     <Content Include="Views\Emails\RegEmail.cshtml" />
     <Content Include="Views\Emails\PasswordReset.cshtml" />
-    <Content Include="Views\Whishlist\Whishlist.cshtml" />
+    <Content Include="Views\Whishlist\Index.cshtml" />
     <Content Include="Views\Whishlist\_Whishlist.cshtml" />
     <Content Include="Views\Whishlist\Edit.cshtml" />
     <Content Include="Views\Build\Create.cshtml" />
@@ -424,6 +427,11 @@
     <Content Include="Views\Build\Details.cshtml" />
     <Content Include="Views\Build\Edit.cshtml" />
     <Content Include="Views\Build\Index.cshtml" />
+    <Content Include="Views\Summoner\Index.cshtml" />
+    <Content Include="Views\Summoner\_Summoner.cshtml" />
+    <Content Include="Views\Summoner\_ChampionStats.cshtml" />
+    <Content Include="Views\Summoner\_MatchList.cshtml" />
+    <Content Include="Views\Summoner\_SummonerStats.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

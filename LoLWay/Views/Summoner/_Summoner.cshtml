@@ -1,0 +1,42 @@
+﻿@model LoLWay.Models.SummonerModel
+<section id="summoner" class="container">
+    <div class="col-md-12" id="summoner">
+        @if (Model != null)
+        {
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>@Model.name</h1>
+                    <h3>Dywijza: @Model.summonerDivision</h3>
+                    <h5>Poziom przywoływacza: @Model.summonerLevel </h5>
+                </div>
+            </div>
+            <hr />
+
+            <section id="match-list" class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="matchList">
+                            @foreach (var match in Model.matchStatsLsist)
+                            {
+                                @Html.Partial("_MatchList", match)
+                            }
+                        </div>
+                    </div>
+                </div>
+            </section>
+                <hr />
+                <div class="row">
+                    <div class="col-md-6">
+                        @Html.Partial("_ChampionStats", Model.mostPlayedChampion)
+                    </div>
+                    <div class="col-md-6">
+                        @Html.Partial("_SummonerStats", Model.totalStats)
+                    </div>
+                </div>
+        }
+        else if (ViewBag.summonerStatus != null)
+        {
+            <span> Nie udało się znaleźc takiego przywoływacza.Spróbuj ponownie</span>
+        }
+    </div>
+</section>
