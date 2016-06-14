@@ -85,6 +85,9 @@
     <Compile Include="Models\Summoner\StatsModel.cs" />
     <Compile Include="Models\Summoner\SummonerModel.cs" />
     <Compile Include="Models\Summoner\SummonerMysteryPagesModel.cs" />
+    <Compile Include="Models\Summoner\SummonerRankEntryModel.cs" />
+    <Compile Include="Models\Summoner\SummonerRankMiniSeriesModel.cs" />
+    <Compile Include="Models\Summoner\SummonerRankModel.cs" />
     <Compile Include="Models\Summoner\SummonerRunesPagesModel.cs" />
     <Compile Include="Models\Summoner\SummonerStatsModel.cs" />
     <Compile Include="StaticData.cs" />

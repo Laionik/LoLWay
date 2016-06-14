@@ -6,6 +6,7 @@ using System.Net;
 using System.Text;
 using RiotAPI.Types;
 using RiotAPI.Models.Summoner;
+using System.Linq;
 
 namespace RiotAPI
 {
@@ -234,6 +235,70 @@ namespace RiotAPI
                     summoner.summonerId = int.Parse(summonerId);
                     return summoner;
                 }
+                throw e;
+            }
+        }
+
+        static public Dictionary<int, List<SummonerRankModel>> GetSummonersRankStats(List<String> summonersIds, String server)
+        {
+            try {
+                var apiKey = Helpers.KeyHelper.GetApiKey();
+                #region request part
+                var httpRequest = new StringBuilder();
+                //server part
+                httpRequest.Append("https://").Append(server).Append(".api.pvp.net/api/lol/").Append(server).Append("/v2.5/league/by-summoner/");
+                //summoner part
+                foreach (var param in summonersIds)
+                {
+                    httpRequest.Append(param).Append(", ");
+                }
+                httpRequest.Remove(httpRequest.Length - 2, 2);
+                //api part
+                httpRequest.Append("/entry?api_key=").Append(apiKey);
+
+                var request = WebRequest.Create(httpRequest.ToString()) as WebRequest;
+                request.Method = "GET";
+                var response = request.GetResponse() as HttpWebResponse;
+                #endregion
+
+                var responseObject = JsonConvert.DeserializeObject<Dictionary<int, List<SummonerRankModel>>>(new StreamReader(response.GetResponseStream(), Encoding.UTF8).ReadToEnd());
+
+                return responseObject;
+            }
+            catch (Exception e)
+            {
+               
+                throw e;
+            }
+        }
+
+        static public SummonerRankModel GetSummonerRankStats(String summonerId, String server)
+        {
+            try {
+                var apiKey = Helpers.KeyHelper.GetApiKey();
+                #region request part
+                var httpRequest = new StringBuilder();
+                //server part
+                httpRequest.Append("https://").Append(server).Append(".api.pvp.net/api/lol/").Append(server).Append("/v2.5/league/by-summoner/");
+                //summoner part
+                httpRequest.Append(summonerId);
+                //api part
+                httpRequest.Append("/entry?api_key=").Append(apiKey);
+
+                var request = WebRequest.Create(httpRequest.ToString()) as WebRequest;
+                request.Method = "GET";
+                var response = request.GetResponse() as HttpWebResponse;
+                #endregion
+
+                var responseObject = JsonConvert.DeserializeObject<Dictionary<int, List<SummonerRankModel>>>(new StreamReader(response.GetResponseStream(), Encoding.UTF8).ReadToEnd());
+                var item = new List<SummonerRankModel>();
+                var tmp = responseObject.TryGetValue(Convert.ToInt32(summonerId), out item);
+
+                return item.First();
+
+            }
+            catch (Exception e)
+            {
                 throw e;
             }
         }
