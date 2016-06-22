@@ -20,21 +20,21 @@
                     @Html.HiddenFor(model => model.championId)
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.userId, "userId", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <label class="control-label col-md-2">Użytkownik</label>
                         <div class="col-md-10">
                             @Model.AspNetUsers.Email
                         </div>
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.championId, "championId", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <label class="control-label col-md-2">Bohater</label>
                         <div class="col-md-10">
                             @Model.champion.name
                         </div>
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.owned, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <label class="control-label col-md-2">Kupiony?</label>
                         <div class="col-md-10">
                             @Html.EditorFor(model => model.owned)
                             @Html.ValidationMessageFor(model => model.owned, "", new { @class = "text-danger" })
@@ -42,7 +42,7 @@
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.rank, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <label class="control-label col-md-2">Ocena</label>
                         <div class="col-md-10">
                             @Html.EditorFor(model => model.rank, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.rank, "", new { @class = "text-danger" })

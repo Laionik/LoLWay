@@ -409,11 +409,18 @@
     <Content Include="Views\Whishlist\Index.cshtml" />
     <Content Include="Views\Whishlist\_Whishlist.cshtml" />
     <Content Include="Views\Shared\MainError.cshtml" />
+    <Content Include="Views\Build\Create.cshtml" />
+    <Content Include="Views\Build\Delete.cshtml" />
+    <Content Include="Views\Build\Details.cshtml" />
+    <Content Include="Views\Build\Edit.cshtml" />
+    <Content Include="Views\Build\Index.cshtml" />
+    <Content Include="Views\Emails\PasswordReset.cshtml" />
+    <Content Include="Views\Emails\RegEmail.cshtml" />
+    <Content Include="Views\Emails\Web.config" />
+    <Content Include="Views\Emails\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Build\" />
-    <Folder Include="Views\Emails\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

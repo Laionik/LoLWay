@@ -22,7 +22,7 @@
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     <div class="form-group">
                         <label class="control-label col-md-2">Bohater</label>
-                        <div class="col-md-10">
+                        <div class="col-md-8">
                             @Html.DropDownList("championId", null, htmlAttributes: new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.championId, "", new { @class = "text-danger" })
                         </div>
@@ -30,14 +30,14 @@
 
                     <div class="form-group">
                         <label class="control-label col-md-2">Specjalizacja</label>
-                        <div class="col-md-10">
+                        <div class="col-md-8">
                             @Html.DropDownList("masteryId", null, htmlAttributes: new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.masteryId, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-2">Przedmioty</label>
-                        <div class="col-md-10">
+                        <div class="col-md-8">
                             @foreach (var item in ViewBag.items.elements)
                             {
                                 var title = itemsList.FirstOrDefault(x => x.id.ToString() == item.Value).name;
@@ -50,7 +50,7 @@
 
                     <div class="form-group">
                         <label class="control-label col-md-2">Znaki</label>
-                        <div class="col-md-10">
+                        <div class="col-md-8">
                             @foreach (var item in ViewBag.marks.elements)
                             {
                                 var title = runesList.FirstOrDefault(x => x.id.ToString() == item.Value).name;
@@ -63,7 +63,7 @@
 
                     <div class="form-group">
                         <label class="control-label col-md-2">Pieczęcie</label>
-                        <div class="col-md-10">
+                        <div class="col-md-8">
                             @foreach (var item in ViewBag.seals.elements)
                             {
                                 var title = runesList.FirstOrDefault(x => x.id.ToString() == item.Value).name;
@@ -76,7 +76,7 @@
 
                     <div class="form-group">
                         <label class="control-label col-md-2">Glify</label>
-                        <div class="col-md-10">
+                        <div class="col-md-8">
                             @foreach (var item in ViewBag.glyphs.elements)
                             {
                                 var title = runesList.FirstOrDefault(x => x.id.ToString() == item.Value).name;
@@ -89,7 +89,7 @@
 
                     <div class="form-group">
                         <label class="control-label col-md-2">Esencje</label>
-                        <div class="col-md-10">
+                        <div class="col-md-8">
                             @foreach (var item in ViewBag.quins.elements)
                             {
                                 var title = runesList.FirstOrDefault(x => x.id.ToString() == item.Value).name;
@@ -103,7 +103,7 @@
                     <div class="form-group">
                         <label class="control-label col-md-2">Notatki</label>
 
-                        <div class="col-md-10">
+                        <div class="col-md-8">
                             @Html.EditorFor(model => model.notes, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.notes, "", new { @class = "text-danger" })
                         </div>

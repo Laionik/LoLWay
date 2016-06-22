@@ -29,18 +29,18 @@
                     [
                     @if (Model.HasPassword)
             {
-                        @Html.ActionLink("Change your password", "ChangePassword")
+                        @Html.ActionLink("Zmień hasło", "ChangePassword")
                     }
                     else
                     {
-                        @Html.ActionLink("Create", "SetPassword")
+                        @Html.ActionLink("Ustaw hasło", "SetPassword")
                     }
                     ]
                 </dd>
                 <dt>Konta społecznościowe:</dt>
                 <dd>
                     @Model.Logins.Count [
-                    @Html.ActionLink("Manage", "ManageLogins") ]
+                    @Html.ActionLink("Zarządzaj", "ManageLogins") ]
                 </dd>
             </dl>
         </div>
