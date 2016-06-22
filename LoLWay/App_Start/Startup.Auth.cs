@@ -35,7 +35,7 @@ namespace LoLWay
                         validateInterval: TimeSpan.FromMinutes(30),
                         regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager))
                 }
-            });            
+            });
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
             // Enables the application to temporarily store user information when they are verifying the second factor in the two-factor authentication process.
@@ -48,42 +48,23 @@ namespace LoLWay
 
             // Uncomment the following lines to enable logging in with third party login providers
             // Uncomment the following lines to enable logging in with third party login providers
-            app.UseMicrosoftAccountAuthentication(
-                clientId: "048fa336-afa7-4ee4-9086-46849080617c",
-                clientSecret: "AO0oYPLqgpjrjbSBqDoJ8eF");
+            //app.UseMicrosoftAccountAuthentication(
+            //    clientId: "048fa336-afa7-4ee4-9086-46849080617c",
+            //    clientSecret: "AO0oYPLqgpjrjbSBqDoJ8eF");
 
-            //app.UseTwitterAuthentication(
-            //   consumerKey: "9fzgJrAF0GYJDkojknzPydxJE	",
-            //   consumerSecret: "9KaBO3lRuFXZ4cM21pkbSI7JiRHiaAP0ZFVDuIbNU9K8ILKu9");
-
-            app.UseTwitterAuthentication(new TwitterAuthenticationOptions
-            {
-                ConsumerKey = "9fzgJrAF0GYJDkojknzPydxJE",
-                ConsumerSecret = "9KaBO3lRuFXZ4cM21pkbSI7JiRHiaAP0ZFVDuIbNU9K8ILKu9",
-                BackchannelCertificateValidator = new Microsoft.Owin.Security.CertificateSubjectKeyIdentifierValidator(new[]
-                    {
-                        "A5EF0B11CEC04103A34A659048B21CE0572D7D47", // VeriSign Class 3 Secure Server CA - G2
-                        "0D445C165344C1827E1D20AB25F40163D8BE79A5", // VeriSign Class 3 Secure Server CA - G3
-                        "7FD365A7C2DDECBBF03009F34339FA02AF333133", // VeriSign Class 3 Public Primary Certification Authority - G5
-                        "39A55D933676616E73A761DFA16A7E59CDE66FAD", // Symantec Class 3 Secure Server CA - G4
-                        "‎add53f6680fe66e383cbac3e60922e3b4c412bed", // Symantec Class 3 EV SSL CA - G3
-                        "4eb6d578499b1ccf5f581ead56be3d9b6744a5e5", // VeriSign Class 3 Primary CA - G5
-                        "5168FF90AF0207753CCCD9656462A212B859723B", // DigiCert SHA2 High Assurance Server C‎A 
-                        "B13EC36903F8BF4701D498261A0802EF63642BC3" // DigiCert High Assurance EV Root CA
-                    })
-            });
-
-
+            app.UseTwitterAuthentication(
+               consumerKey: "9fzgJrAF0GYJDkojknzPydxJE	",
+               consumerSecret: "9KaBO3lRuFXZ4cM21pkbSI7JiRHiaAP0ZFVDuIbNU9K8ILKu9");
 
             app.UseFacebookAuthentication(
                appId: "1760553390831603",
                appSecret: "3ccaddb6a907c005a185fae0a4a51954");
 
-            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            {
-                ClientId = "202328785230-gn3qeagf3u4bsb7942rjae3fed0jmh86.apps.googleusercontent.com",
-                ClientSecret = "emohYF2xMMj2duQIlWlQimCi"
-            });
+            //    app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            //    {
+            //        ClientId = "202328785230-gn3qeagf3u4bsb7942rjae3fed0jmh86.apps.googleusercontent.com",
+            //        ClientSecret = "emohYF2xMMj2duQIlWlQimCi"
+            //    });
         }
     }
 }
