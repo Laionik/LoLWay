@@ -1,0 +1,58 @@
+﻿@model List<LoLWay.Models.build>
+<head>
+    <link href="~/Content/css/font-awesome.min.css" rel="stylesheet">
+    <link href="~/Content/css/prettyPhoto.css" rel="stylesheet">
+    <link href="~/Content/css/animate.css" rel="stylesheet">
+    <title>Buildy | LoLWay</title>
+</head>
+
+<section id="portfolio" class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <a href='@Url.Action("Create", "Build")'>
+                <img src="~/Content/images/build/add.png" class="icon" align="right" />
+            </a>
+
+            <ul class="portfolio-filter">
+                <li><a class="btn btn-default active" href="#" data-filter="*">Wszyscy bohaterowie</a></li>
+                @{ foreach (var champion in ViewBag.championFilter)
+                    {
+                        var dataFilter = ".champion" + champion.champion.id;
+                        <li><a class="btn btn-default" href="#" data-filter="@dataFilter">@champion.champion.name</a></li>
+                    }
+                }
+
+            </ul><!--/#portfolio-filter-->
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <ul class="portfolio-items col-5">
+                @{foreach (var build in Model)
+                    {
+                        var liClass = "champion" + build.championId.ToString();
+                        <li class="portfolio-item @liClass">
+                            <div class="item-inner">
+                                    <img src="@build.champion.image" class="champPortfolio">
+                               <h5>@build.champion.name</h5>
+                                <b>Data modyfikacji:</b><br />
+                                @build.modificationDate
+                                <div class="overlay">
+                                    <a class="preview btn btn-danger" href="@Url.Action("Details", new { id = build.id })"><i class="icon-eye-open"></i></a>
+
+                                </div>
+                            </div>
+                        </li><!--/.portfolio-item-->
+                    }
+                }
+            </ul>
+         
+        </div>
+    </div>
+</section><!--/#portfolio-->
+
+
+<script src="~/Scripts/jquery.js"></script>
+<script src="~/Scripts/jquery.prettyPhoto.js"></script>
+<script src="~/Scripts/jquery.isotope.min.js"></script>
+<script src="~/Scripts/main.js"></script>

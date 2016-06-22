@@ -1,0 +1,162 @@
+﻿@model LoLWay.Models.build
+@using LoLWay.Models;
+<head>
+    <link href="~/Content/css/font-awesome.min.css" rel="stylesheet">
+    <link href="~/Content/css/prettyPhoto.css" rel="stylesheet">
+    <link href="~/Content/css/animate.css" rel="stylesheet">
+    <title>Edytujesz build | LoLWay</title>
+</head>
+@{
+    List<item> itemsList = ViewBag.itemsDescription;
+    List<rune> runesList = ViewBag.runes;
+}
+<section id="build-edit" class="container">
+    <!--Main table-->
+    <div class="row">
+        <div class="col-md-12">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Bohater</label>
+                        <div class="col-md-10">
+                            @Html.DropDownList("championId", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.championId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Specjalizacja</label>
+                        <div class="col-md-10">
+                            @Html.DropDownList("masteryId", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.masteryId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Przedmioty</label>
+                        <div class="col-md-10">
+                            @foreach (var item in ViewBag.items.elements)
+                            {
+                                var title = itemsList.FirstOrDefault(x => x.id.ToString() == item.Value).name;
+                                int id = int.Parse(item.Value);
+                                <div class="col-sm-2">
+                                    @if (ViewBag.items.selectedElements.Contains(id))
+                                    {
+                                        <input type="checkbox" name="items" value="@item.Value" checked><img src="@item.Text" class="buildList" title="@title" />
+                                    }
+                                    else
+                                    {
+                                        <input type="checkbox" name="items" value="@item.Value"><img src="@item.Text" class="buildList" title="@title" />
+                                    }
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Znaki</label>
+                        <div class="col-md-10">
+                            @foreach (var item in ViewBag.marks.elements)
+                            {
+                                var title = runesList.FirstOrDefault(x => x.id.ToString() == item.Value).name;
+                                int id = int.Parse(item.Value);
+                                <div class="col-sm-2">
+                                    @if (ViewBag.marks.selectedElements.Contains(id))
+                                    {
+                                        <input type="checkbox" name="marks" value="@item.Value" checked><img src="@item.Text" class="buildList" title="@title" />
+                                    }
+                                    else
+                                    {
+                                        <input type="checkbox" name="marks" value="@item.Value"><img src="@item.Text" class="buildList" title="@title" />
+                                    }
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Pieczęcie</label>
+                        <div class="col-md-10">
+                            @foreach (var item in ViewBag.seals.elements)
+                            {
+                                var title = runesList.FirstOrDefault(x => x.id.ToString() == item.Value).name;
+                                int id = int.Parse(item.Value);
+                                <div class="col-sm-2">
+                                    @if (ViewBag.seals.selectedElements.Contains(id))
+                                    {
+                                        <input type="checkbox" name="seals" value="@item.Value" checked><img src="@item.Text" class="buildList" title="@title" />
+                                    }
+                                    else
+                                    {
+                                        <input type="checkbox" name="seals" value="@item.Value"><img src="@item.Text" class="buildList" title="@title" />
+                                    }
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Glify</label>
+                        <div class="col-md-10">
+                            @foreach (var item in ViewBag.glyphs.elements)
+                            {
+                                var title = runesList.FirstOrDefault(x => x.id.ToString() == item.Value).name;
+                                int id = int.Parse(item.Value);
+                                <div class="col-sm-2">
+                                    @if (ViewBag.glyphs.selectedElements.Contains(id))
+                                    {
+                                        <input type="checkbox" name="glyphs" value="@item.Value" checked><img src="@item.Text" class="buildList" title="@title" />
+                                    }
+                                    else
+                                    {
+                                        <input type="checkbox" name="glyphs" value="@item.Value"><img src="@item.Text" class="buildList" title="@title" />
+                                    }
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Esencje</label>
+                        <div class="col-md-10">
+                            @foreach (var item in ViewBag.quins.elements)
+                            {
+                                var title = runesList.FirstOrDefault(x => x.id.ToString() == item.Value).name;
+                                int id = int.Parse(item.Value);
+                                <div class="col-sm-2">
+                                    @if (ViewBag.quins.selectedElements.Contains(id))
+                                    {
+                                        <input type="checkbox" name="quins" value="@item.Value" checked><img src="@item.Text" class="buildList" title="@title" />
+                                    }
+                                    else
+                                    {
+                                        <input type="checkbox" name="quins" value="@item.Value"><img src="@item.Text" class="buildList" title="@title" />
+                                    }
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Notatki</label>
+
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.notes, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.notes, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Zapisz" class="btn btn-default" />
+                            @Html.ActionLink("Powrót", "Index", null, new { @class = "btn btn-default btn-return" })
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>

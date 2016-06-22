@@ -1,0 +1,94 @@
+﻿@model LoLWay.Models.BuildDetails
+<head>
+    <title>Usuń build | LoLWay</title>
+</head>
+<section id="buildDetails" class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <a href='@Url.Action("Index", "Build")'>
+                <img src="~/Content/images/build/back.png" class="icon" align="right" title="Powrót" />
+            </a>
+            <h1>Na pewno chcesz usunać ten build?</h1>
+            <h2>@Model.champion.name</h2>
+            <h6>@Html.DisplayFor(model => model.modificationDate)</h6>
+            <hr />
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <h5>Specjalizacja</h5>
+                <img src="@Model.mastery.image" class="masteryDetails" title="@Model.mastery.name" />
+            </div>
+            <div class="col-sm-6">
+                <h5>Notatki</h5>
+                @Html.DisplayFor(model => model.notes)
+            </div>
+        </div>
+
+        <div class="row">
+            @if (Model.itemList.Count > 0)
+            {
+                <div class="col-sm-6">
+                    <h5>Przedmioty</h5>
+                    <table class="tableNormal">
+                        <thead>
+                            <tr class="default">
+                                <th></th>
+                                <th>Przedmiot</th>
+                                <th>Opis</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.itemList)
+                            {
+                                <tr class="notfirst">
+                                    <td class="image"><img src="@item.image" class="details inTable" /></td>
+                                    <td class="item">@item.name</td>
+                                    <td class="plaintext">@item.plaintext</td>
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            @if (Model.runeList.Count > 0)
+            {
+                <div class="col-sm-6">
+                    <h5>Runy</h5>
+                    <table class="tableNormal">
+                        <thead>
+                            <tr class="default">
+                                <th></th>
+                                <th>Runa</th>
+                                <th>Opis</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.runeList)
+                            {
+                                <tr class="notfirst">
+                                    <td class="image"><img src="@item.image" class="details inTable" /></td>
+                                    <td class="item">@item.name</td>
+                                    <td class="plaintext">@item.description</td>
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(model => model.id)
+                <div class="form-actions no-color">
+                    <input type="submit" value="Usuń" class="btn btn-default" />
+                </div>
+            }
+        </div>
+    </div>
+</section>
