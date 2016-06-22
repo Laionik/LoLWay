@@ -23,7 +23,7 @@ namespace LoLWay.Models
         public string runes { get; set; }
         public string items { get; set; }
     
-        public virtual aspnetusers aspnetusers { get; set; }
+        public virtual AspNetUsers AspNetUsers { get; set; }
         public virtual champion champion { get; set; }
         public virtual mastery mastery { get; set; }
     }

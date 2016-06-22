@@ -20,7 +20,7 @@ namespace LoLWay.Controllers
         public ActionResult Index()
         {
             var userId = User.Identity.GetUserId();
-            var builds = db.build.Where(x => x.aspnetusers.Id == userId).Include(b => b.aspnetusers).Include(b => b.champion).Include(b => b.mastery).ToList();
+            var builds = db.build.Where(x => x.AspNetUsers.Id == userId).Include(b => b.AspNetUsers).Include(b => b.champion).Include(b => b.mastery).ToList();
             ViewBag.championFilter = builds.DistinctBy(x => x.championId).ToList();
 
             builds = RiotImageHelper.GetChampionImages(builds);
@@ -48,7 +48,7 @@ namespace LoLWay.Controllers
         [Authorize]
         public ActionResult Create()
         {
-            ViewBag.userId = new SelectList(db.aspnetusers, "Id", "Email");
+            ViewBag.userId = new SelectList(db.AspNetUsers, "Id", "Email");
             ViewBag.championId = new SelectList(db.champion, "id", "name");
             ViewBag.masteryId = new SelectList(db.mastery, "id", "name");
 
@@ -87,7 +87,7 @@ namespace LoLWay.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.userId = new SelectList(db.aspnetusers, "Id", "Email", newBuild.userId);
+            ViewBag.userId = new SelectList(db.AspNetUsers, "Id", "Email", newBuild.userId);
             ViewBag.championId = new SelectList(db.champion, "id", "name", newBuild.championId);
             ViewBag.masteryId = new SelectList(db.mastery, "id", "name", newBuild.masteryId);
 
@@ -119,7 +119,7 @@ namespace LoLWay.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.userId = new SelectList(db.aspnetusers, "Id", "Email", builds.userId);
+            ViewBag.userId = new SelectList(db.AspNetUsers, "Id", "Email", builds.userId);
             ViewBag.championId = new SelectList(db.champion, "id", "name", builds.championId);
             ViewBag.masteryId = new SelectList(db.mastery, "id", "name", builds.masteryId);
 
@@ -157,7 +157,7 @@ namespace LoLWay.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.userId = new SelectList(db.aspnetusers, "Id", "Email", newBuild.userId);
+            ViewBag.userId = new SelectList(db.AspNetUsers, "Id", "Email", newBuild.userId);
             ViewBag.championId = new SelectList(db.champion, "id", "name", newBuild.championId);
             ViewBag.masteryId = new SelectList(db.mastery, "id", "name", newBuild.masteryId);
 

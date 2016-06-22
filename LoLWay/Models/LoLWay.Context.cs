@@ -25,10 +25,10 @@ namespace LoLWay.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<aspnetroles> aspnetroles { get; set; }
-        public virtual DbSet<aspnetuserclaims> aspnetuserclaims { get; set; }
-        public virtual DbSet<aspnetuserlogins> aspnetuserlogins { get; set; }
-        public virtual DbSet<aspnetusers> aspnetusers { get; set; }
+        public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
+        public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
+        public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
+        public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         public virtual DbSet<build> build { get; set; }
         public virtual DbSet<champion> champion { get; set; }
         public virtual DbSet<item> item { get; set; }

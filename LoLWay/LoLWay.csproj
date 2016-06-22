@@ -9,7 +9,7 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{F999CD9A-CA68-4741-83FD-01B19AD1618B}</ProjectGuid>
+    <ProjectGuid>{E64955F6-B73F-4F12-A33D-AE3D27009923}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -44,14 +44,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -61,8 +53,6 @@
       <HintPath>..\packages\morelinq.1.4.0\lib\net35\MoreLinq.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="MySql.Data, Version=6.9.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
-    <Reference Include="MySql.Data.Entity.EF6, Version=6.9.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -78,10 +68,6 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
@@ -144,6 +130,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
@@ -200,64 +192,61 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\BuildHelper.cs" />
-    <Compile Include="Helpers\StatsHelper.cs" />
     <Compile Include="Helpers\RiotImageHelper.cs" />
-    <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Migrations\MySqlHistoryContext.cs" />
-    <Compile Include="Models\aspnetroles.cs">
-      <DependentUpon>LoLWayModel.tt</DependentUpon>
+    <Compile Include="Helpers\StatsHelper.cs" />
+    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AspNetRoles.cs">
+      <DependentUpon>LoLWay.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\aspnetuserclaims.cs">
-      <DependentUpon>LoLWayModel.tt</DependentUpon>
+    <Compile Include="Models\AspNetUserClaims.cs">
+      <DependentUpon>LoLWay.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\aspnetuserlogins.cs">
-      <DependentUpon>LoLWayModel.tt</DependentUpon>
+    <Compile Include="Models\AspNetUserLogins.cs">
+      <DependentUpon>LoLWay.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\aspnetusers.cs">
-      <DependentUpon>LoLWayModel.tt</DependentUpon>
+    <Compile Include="Models\AspNetUsers.cs">
+      <DependentUpon>LoLWay.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\build.cs">
-      <DependentUpon>LoLWayModel.tt</DependentUpon>
+      <DependentUpon>LoLWay.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\BuildModels.cs" />
     <Compile Include="Models\champion.cs">
-      <DependentUpon>LoLWayModel.tt</DependentUpon>
+      <DependentUpon>LoLWay.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\item.cs">
-      <DependentUpon>LoLWayModel.tt</DependentUpon>
+      <DependentUpon>LoLWay.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\LoLWayModel.Context.cs">
+    <Compile Include="Models\LoLWay.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>LoLWayModel.Context.tt</DependentUpon>
+      <DependentUpon>LoLWay.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\LoLWayModel.cs">
+    <Compile Include="Models\LoLWay.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>LoLWayModel.tt</DependentUpon>
+      <DependentUpon>LoLWay.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\LoLWayModel.Designer.cs">
+    <Compile Include="Models\LoLWay.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>LoLWayModel.edmx</DependentUpon>
+      <DependentUpon>LoLWay.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\mastery.cs">
-      <DependentUpon>LoLWayModel.tt</DependentUpon>
+      <DependentUpon>LoLWay.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\rune.cs">
-      <DependentUpon>LoLWayModel.tt</DependentUpon>
+      <DependentUpon>LoLWay.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\spell.cs">
-      <DependentUpon>LoLWayModel.tt</DependentUpon>
+      <DependentUpon>LoLWay.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SummonerStats.cs" />
     <Compile Include="Models\whishlist.cs">
-      <DependentUpon>LoLWayModel.tt</DependentUpon>
+      <DependentUpon>LoLWay.tt</DependentUpon>
     </Compile>
-    <Compile Include="MySqlInitializer.cs" />
-    <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -273,8 +262,8 @@
     <Content Include="Content\images\about\sosinski.jpg" />
     <Content Include="Content\images\about\sycz.jpg" />
     <Content Include="Content\images\build\add.png" />
-    <Content Include="Content\images\build\edit.png" />
     <Content Include="Content\images\build\back.png" />
+    <Content Include="Content\images\build\edit.png" />
     <Content Include="Content\images\build\save.png" />
     <Content Include="Content\images\prettyPhoto\dark_rounded\btnNext.png" />
     <Content Include="Content\images\prettyPhoto\dark_rounded\btnPrevious.png" />
@@ -326,18 +315,18 @@
     <Content Include="Content\images\rate\8.png" />
     <Content Include="Content\images\rate\9.png" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Models\LoLWayModel.Context.tt">
+    <Content Include="Models\LoLWay.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>LoLWayModel.edmx</DependentUpon>
-      <LastGenOutput>LoLWayModel.Context.cs</LastGenOutput>
+      <DependentUpon>LoLWay.edmx</DependentUpon>
+      <LastGenOutput>LoLWay.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\LoLWayModel.tt">
+    <Content Include="Models\LoLWay.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>LoLWayModel.edmx</DependentUpon>
-      <LastGenOutput>LoLWayModel.cs</LastGenOutput>
+      <DependentUpon>LoLWay.edmx</DependentUpon>
+      <LastGenOutput>LoLWay.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\fonts\fontawesome-webfont.eot" />
     <Content Include="Content\fonts\fontawesome-webfont.ttf" />
@@ -346,14 +335,13 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
-    <EntityDeploy Include="Models\LoLWayModel.edmx">
+    <EntityDeploy Include="Models\LoLWay.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>LoLWayModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>LoLWay.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\LoLWayModel.edmx.diagram">
-      <DependentUpon>LoLWayModel.edmx</DependentUpon>
+    <Content Include="Models\LoLWay.edmx.diagram">
+      <DependentUpon>LoLWay.edmx</DependentUpon>
     </Content>
-    <None Include="Properties\PublishProfiles\LoLWay.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\customFunctions.js" />
     <Content Include="Scripts\html5shiv.js" />
@@ -373,11 +361,10 @@
     <Content Include="Scripts\MicrosoftAjax.debug.js" />
     <Content Include="Scripts\MicrosoftAjax.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config">
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -411,33 +398,23 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Home\sendemail.php" />
-    <Content Include="Views\Emails\_ViewStart.cshtml" />
-    <Content Include="Views\Emails\Web.config" />
     <Content Include="Views\Account\RegisterInfo.cshtml" />
-    <Content Include="Views\Emails\RegEmail.cshtml" />
-    <Content Include="Views\Emails\PasswordReset.cshtml" />
-    <Content Include="Views\Whishlist\Index.cshtml" />
-    <Content Include="Views\Whishlist\_Whishlist.cshtml" />
-    <Content Include="Views\Whishlist\Edit.cshtml" />
-    <Content Include="Views\Build\Create.cshtml" />
-    <Content Include="Views\Build\Delete.cshtml" />
-    <Content Include="Views\Build\Details.cshtml" />
-    <Content Include="Views\Build\Edit.cshtml" />
-    <Content Include="Views\Build\Index.cshtml" />
+    <Content Include="Views\Home\sendemail.php" />
     <Content Include="Views\Summoner\Index.cshtml" />
-    <Content Include="Views\Summoner\_Summoner.cshtml" />
     <Content Include="Views\Summoner\_ChampionStats.cshtml" />
     <Content Include="Views\Summoner\_MatchList.cshtml" />
+    <Content Include="Views\Summoner\_Summoner.cshtml" />
     <Content Include="Views\Summoner\_SummonerStats.cshtml" />
+    <Content Include="Views\Whishlist\Edit.cshtml" />
+    <Content Include="Views\Whishlist\Index.cshtml" />
+    <Content Include="Views\Whishlist\_Whishlist.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Build\" />
+    <Folder Include="Views\Emails\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
@@ -467,7 +444,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>54885</DevelopmentServerPort>
+          <DevelopmentServerPort>52220</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:54885/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>

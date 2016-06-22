@@ -20,12 +20,12 @@ namespace LoLWay.Controllers
         public ActionResult Index()
         {
             var userId = User.Identity.GetUserId();
-            var whishList = db.whishlist.Include(w => w.champion).Include(w => w.aspnetusers).ToList();
+            var whishList = db.whishlist.Include(w => w.champion).Include(w => w.AspNetUsers).ToList();
             if (whishList.FirstOrDefault(x => x.userId == userId) == null)
             {
                 WhisListInitialize(userId);
             }
-            whishList = RiotImageHelper.GetChampionImages(whishList);
+            whishList = RiotImageHelper.GetChampionImages(whishList.Where(x => x.userId == userId).ToList());
             return View(whishList);
         }
 
@@ -60,7 +60,8 @@ namespace LoLWay.Controllers
         [Authorize]
         public ActionResult WhishlistTable(bool? owned, bool? championSort, bool? statusSort, bool? rankSort)
         {
-            var query = db.whishlist.Include(w => w.champion).Include(w => w.aspnetusers) as IQueryable<whishlist>;
+            var userId = User.Identity.GetUserId();
+            var query = db.whishlist.Include(w => w.champion).Include(w => w.AspNetUsers).Where(x => x.userId == userId) as IQueryable<whishlist>;
 
             // building a query
             if (owned.HasValue)
@@ -119,13 +120,13 @@ namespace LoLWay.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var userId = User.Identity.GetUserId();
-            whishlist whishlist = db.whishlist.Where(x => x.userId == userId).FirstOrDefault(x => x.championId == id);
+            whishlist whishlist = db.whishlist.Where(x => x.userId == userId).FirstOrDefault(x => x.id == id);
             if (whishlist == null)
             {
                 return HttpNotFound();
             }
             ViewBag.championId = new SelectList(db.champion, "id", "name", whishlist.championId);
-            ViewBag.userId = new SelectList(db.aspnetusers, "Id", "Email", whishlist.userId);
+            ViewBag.userId = new SelectList(db.AspNetUsers, "Id", "Email", whishlist.userId);
             return View(whishlist);
         }
 
@@ -139,10 +140,10 @@ namespace LoLWay.Controllers
             {
                 db.Entry(whishlist).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Whishlist");
+                return RedirectToAction("Index");
             }
             ViewBag.championId = new SelectList(db.champion, "id", "name", whishlist.championId);
-            ViewBag.userId = new SelectList(db.aspnetusers, "Id", "Email", whishlist.userId);
+            ViewBag.userId = new SelectList(db.AspNetUsers, "Id", "Email", whishlist.userId);
             return View(whishlist);
         }
 

@@ -12,18 +12,18 @@ namespace LoLWay.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class aspnetroles
+    public partial class AspNetRoles
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public aspnetroles()
+        public AspNetRoles()
         {
-            this.aspnetusers = new HashSet<aspnetusers>();
+            this.AspNetUsers = new HashSet<AspNetUsers>();
         }
     
         public string Id { get; set; }
         public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<aspnetusers> aspnetusers { get; set; }
+        public virtual ICollection<AspNetUsers> AspNetUsers { get; set; }
     }
 }

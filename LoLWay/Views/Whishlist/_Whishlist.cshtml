@@ -39,10 +39,10 @@
                 {
                     <tr class="notfirst">
                         <td class="championWhish">
-                            <a href='@Url.Action("Edit", "Whishlist", new { id = item.championId })'>
+                            <a href='@Url.Action("Edit", "Whishlist", new { id = item.id })'>
                                 <img src="@item.champion.image" class="champ_live" />
                             </a>
-                            @Html.ActionLink(@item.champion.name, "Edit", new { id = item.championId })
+                            @Html.ActionLink(@item.champion.name, "Edit", new { id = item.id })
                         </td>
                         <td class="statusWhish">
                             @if (item.owned)
