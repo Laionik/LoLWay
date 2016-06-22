@@ -1,5 +1,4 @@
-﻿using System.Web;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 
 namespace LoLWay
 {
@@ -8,10 +7,10 @@ namespace LoLWay
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
-            bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
+            bundles.Add(new ScriptBundle("~/Scripts/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
+            bundles.Add(new ScriptBundle("~/Scripts/jqueryval").Include(
                         "~/Scripts/jquery.validate*",
                         "~/Scripts/jquery.unobtrusive*"));
 
@@ -20,7 +19,7 @@ namespace LoLWay
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
+            bundles.Add(new ScriptBundle("~/Scripts/bootstrap").Include(
                       "~/Scripts/bootstrap.min.js",
                       "~/Scripts/respond.min.js"));
 
