@@ -408,6 +408,7 @@
     <Content Include="Views\Whishlist\Edit.cshtml" />
     <Content Include="Views\Whishlist\Index.cshtml" />
     <Content Include="Views\Whishlist\_Whishlist.cshtml" />
+    <Content Include="Views\Shared\MainError.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
