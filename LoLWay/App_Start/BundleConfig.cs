@@ -16,7 +16,7 @@ namespace LoLWay
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
-            bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
+            bundles.Add(new ScriptBundle("~/Scripts/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/Scripts/bootstrap").Include(
@@ -27,8 +27,10 @@ namespace LoLWay
                       "~/Content/css/bootstrap.css",
                       "~/Content/css/main.css",
                       "~/Content/css/styles.css",
-                      "~/Content/css/prettyPhoto.css",
-                      "~/Content/css/font-awesome.min.css"));
+                      "~/Content/css/prettyPhoto.css"));
+
+            bundles.Add(new StyleBundle("~/Content/fonts/font").Include(
+                      "~/Content/fonts/font-awesome.min.css"));
         }
     }
 }
