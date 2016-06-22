@@ -23,7 +23,7 @@ namespace LoLWay
                       "~/Scripts/bootstrap.min.js",
                       "~/Scripts/respond.min.js"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include(
+            bundles.Add(new StyleBundle("~/Content/css/bootstrap").Include(
                       "~/Content/css/bootstrap.css",
                       "~/Content/css/main.css",
                       "~/Content/css/styles.css",
